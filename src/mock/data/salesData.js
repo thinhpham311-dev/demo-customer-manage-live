@@ -13,7 +13,7 @@ export const salesDashboardData = {
             growShrink: 5.7
         },
     },
-    salesReportData: {
+    customersReportData: {
         series: [
             {
                 name: "Online Sales",
@@ -24,18 +24,18 @@ export const salesDashboardData = {
                 data: [20, 26, 23, 24, 22, 29, 27, 36, 32, 35, 32, 38]
             }
         ],
-        categories:[
-            '01 Jan', 
-            '02 Jan', 
-            '03 Jan', 
-            '04 Jan', 
-            '05 Jan', 
-            '06 Jan', 
-            '07 Jan', 
-            '08 Jan', 
+        categories: [
+            '01 Jan',
+            '02 Jan',
+            '03 Jan',
+            '04 Jan',
+            '05 Jan',
+            '06 Jan',
+            '07 Jan',
+            '08 Jan',
             '09 Jan',
-            '10 Jan', 
-            '11 Jan', 
+            '10 Jan',
+            '11 Jan',
             '12 Jan'
         ]
     },
@@ -143,7 +143,7 @@ export const salesDashboardData = {
 }
 
 export const productsData = [
-	{
+    {
         id: '12',
         name: 'Luminaire Giotto Headphones',
         productCode: 'BIS-012',
@@ -598,7 +598,7 @@ export const orderDetailsData = [
             deliveryFees: 15,
             estimatedMin: 1,
             estimatedMax: 3,
-            shippingLogo:  '/img/others/img-11.jpg',
+            shippingLogo: '/img/others/img-11.jpg',
             shippingVendor: 'FedEx'
         },
         activity: [

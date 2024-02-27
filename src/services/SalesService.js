@@ -1,6 +1,6 @@
 import ApiService from "./ApiService"
 
-export async function apiGetSalesDashboardData (data) {
+export async function apiGetCustomerDashboardData(data) {
     return ApiService.fetchData({
         url: '/sales/dashboard',
         method: 'post',
@@ -8,7 +8,7 @@ export async function apiGetSalesDashboardData (data) {
     })
 }
 
-export async function apiGetSalesProducts (data) {
+export async function apiGetCustomerList(data) {
     return ApiService.fetchData({
         url: '/sales/products',
         method: 'post',
@@ -16,7 +16,7 @@ export async function apiGetSalesProducts (data) {
     })
 }
 
-export async function apiDeleteSalesProducts (data) {
+export async function apiDeleteCustomer(data) {
     return ApiService.fetchData({
         url: '/sales/products/delete',
         method: 'delete',
@@ -24,7 +24,7 @@ export async function apiDeleteSalesProducts (data) {
     })
 }
 
-export async function apiGetSalesProduct (params) {
+export async function apiGetCustomer(params) {
     return ApiService.fetchData({
         url: '/sales/product',
         method: 'get',
@@ -32,7 +32,7 @@ export async function apiGetSalesProduct (params) {
     })
 }
 
-export async function apiPutSalesProduct (data) {
+export async function apiPutCustomer(data) {
     return ApiService.fetchData({
         url: '/sales/products/update',
         method: 'put',
@@ -40,7 +40,7 @@ export async function apiPutSalesProduct (data) {
     })
 }
 
-export async function apiCreateSalesProduct (data) {
+export async function apiCreateCustomer(data) {
     return ApiService.fetchData({
         url: '/sales/products/create',
         method: 'post',
@@ -48,7 +48,7 @@ export async function apiCreateSalesProduct (data) {
     })
 }
 
-export async function apiGetSalesOrders (params) {
+export async function apiGetCustomersOrders(params) {
     return ApiService.fetchData({
         url: '/sales/orders',
         method: 'get',
@@ -56,7 +56,7 @@ export async function apiGetSalesOrders (params) {
     })
 }
 
-export async function apiDeleteSalesOrders (data) {
+export async function apiDeleteCustomersOrders(data) {
     return ApiService.fetchData({
         url: '/sales/orders/delete',
         method: 'delete',
@@ -64,7 +64,7 @@ export async function apiDeleteSalesOrders (data) {
     })
 }
 
-export async function apiGetSalesOrderDetails (params) {
+export async function apiGetCustomersOrderDetails(params) {
     return ApiService.fetchData({
         url: '/sales/orders-details',
         method: 'get',
