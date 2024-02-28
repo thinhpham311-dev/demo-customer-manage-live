@@ -14,7 +14,7 @@ export const themeConfig = {
     cardBordered: true,
     panelExpand: false,
     controlSize: 'md',
-    navMode: THEME_ENUM.NAV_MODE_DARK,
+    navMode: THEME_ENUM.NAV_MODE_THEMED,
     layout: {
         type: THEME_ENUM.LAYOUT_TYPE_MODERN,
         sideNavCollapse: false,
