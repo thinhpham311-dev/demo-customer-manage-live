@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from 'components/template/Header'
-import SidePanel from 'components/template/SidePanel'
+// import SidePanel from 'components/template/SidePanel'
 import UserDropdown from 'components/template/UserDropdown'
-import LanguageSelector from 'components/template/LanguageSelector'
-import Notification from 'components/template/Notification'
+// import LanguageSelector from 'components/template/LanguageSelector'
+// import Notification from 'components/template/Notification'
 import MobileNav from 'components/template/MobileNav'
 import Search from 'components/template/Search'
 import StackedSideNav from 'components/template/StackedSideNav'
@@ -21,9 +21,9 @@ const HeaderActionsStart = () => {
 const HeaderActionsEnd = () => {
 	return (
 		<>
-			<LanguageSelector />
-			<Notification />
-			<SidePanel />
+			{/* <LanguageSelector /> */}
+			{/* <Notification />
+			<SidePanel /> */}
 			<UserDropdown hoverable={false} />
 		</>
 	)
@@ -35,10 +35,10 @@ const StackedSideLayout = () => {
 			<div className="flex flex-auto min-w-0">
 				<StackedSideNav />
 				<div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full">
-					<Header 
+					<Header
 						className="shadow dark:shadow-2xl"
 						headerStart={<HeaderActionsStart />}
-						headerEnd={<HeaderActionsEnd />} 
+						headerEnd={<HeaderActionsEnd />}
 					/>
 					<div className="h-full flex flex-auto flex-col">
 						<View />

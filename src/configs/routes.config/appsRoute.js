@@ -6,19 +6,19 @@ const appsRoute = [
 
     {
         key: 'appsCustomers.customerdashboard',
-        path: `${APP_PREFIX_PATH}/customers/dashboard`,
+        path: `${APP_PREFIX_PATH}/dashboard`,
         component: React.lazy(() => import('views/Customers/Dashboard')),
         authority: [ADMIN, USER],
     },
     {
         key: 'appsCustomers.customerList',
-        path: `${APP_PREFIX_PATH}/customers/list`,
+        path: `${APP_PREFIX_PATH}/list`,
         component: React.lazy(() => import('views/Customers/List')),
         authority: [ADMIN, USER],
     },
     {
         key: 'appsCustomers.customerNew',
-        path: `${APP_PREFIX_PATH}/customers/new`,
+        path: `${APP_PREFIX_PATH}/new`,
         component: React.lazy(() => import('views/Customers/New')),
         authority: [ADMIN, USER],
         meta: {
@@ -27,7 +27,7 @@ const appsRoute = [
     },
     {
         key: 'appsSales.productEdit',
-        path: `${APP_PREFIX_PATH}/customers/edit/:customerId`,
+        path: `${APP_PREFIX_PATH}/edit/:customerId`,
         component: React.lazy(() => import('views/Customers/Edit')),
         authority: [ADMIN, USER],
         meta: {

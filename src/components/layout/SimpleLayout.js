@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from 'components/template/Header'
-import SidePanel from 'components/template/SidePanel'
+// import SidePanel from 'components/template/SidePanel'
 import UserDropdown from 'components/template/UserDropdown'
-import LanguageSelector from 'components/template/LanguageSelector'
-import Notification from 'components/template/Notification'
+// import LanguageSelector from 'components/template/LanguageSelector'
+// import Notification from 'components/template/Notification'
 import HeaderLogo from 'components/template/HeaderLogo'
 import Search from 'components/template/Search'
 import MobileNav from 'components/template/MobileNav'
@@ -23,9 +23,9 @@ const HeaderActionsEnd = () => {
 	return (
 		<>
 			<Search />
-			<LanguageSelector />
-			<Notification />
-			<SidePanel />
+			{/* <LanguageSelector /> */}
+			{/* <Notification />
+			<SidePanel /> */}
 			<UserDropdown hoverable={false} />
 		</>
 	)
@@ -41,7 +41,7 @@ const SimpleLayout = () => {
 						className="shadow dark:shadow-2xl"
 						headerStart={<HeaderActionsStart />}
 						headerMiddle={<HorizontalNav />}
-						headerEnd={<HeaderActionsEnd />} 
+						headerEnd={<HeaderActionsEnd />}
 					/>
 					<View pageContainerType="contained" />
 				</div>

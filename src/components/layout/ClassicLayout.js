@@ -2,9 +2,9 @@ import React from 'react'
 import Header from 'components/template/Header'
 import SideNavToggle from 'components/template/SideNavToggle'
 import Search from 'components/template/Search'
-import LanguageSelector from 'components/template/LanguageSelector'
-import Notification from 'components/template/Notification'
-import SidePanel from 'components/template/SidePanel'
+// import LanguageSelector from 'components/template/LanguageSelector'
+// import Notification from 'components/template/Notification'
+// import SidePanel from 'components/template/SidePanel'
 import MobileNav from 'components/template/MobileNav'
 import UserDropdown from 'components/template/UserDropdown'
 import SideNav from 'components/template/SideNav'
@@ -23,9 +23,9 @@ const HeaderActionsStart = () => {
 const HeaderActionsEnd = () => {
 	return (
 		<>
-			<LanguageSelector />
-			<Notification />
-			<SidePanel />
+			{/* <LanguageSelector /> */}
+			{/* <Notification />
+			<SidePanel /> */}
 			<UserDropdown hoverable={false} />
 		</>
 	)
@@ -37,13 +37,13 @@ const ClassicLayout = props => {
 			<div className="flex flex-auto min-w-0">
 				<SideNav />
 				<div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full">
-					<Header 
+					<Header
 						className="shadow dark:shadow-2xl"
 						headerStart={<HeaderActionsStart />}
-						headerEnd={<HeaderActionsEnd />} 
+						headerEnd={<HeaderActionsEnd />}
 					/>
 					<div className="h-full flex flex-auto flex-col">
-						<View {...props}/>
+						<View {...props} />
 					</div>
 				</div>
 			</div>

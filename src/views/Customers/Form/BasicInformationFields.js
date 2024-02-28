@@ -1,7 +1,11 @@
 import React from 'react'
-import { AdaptableCard, RichTextEditor } from 'components/shared'
-import { Input, FormItem } from 'components/ui'
+import {
+	AdaptableCard,
+	// RichTextEditor
+} from 'components/shared'
+import { Input, FormItem, Select } from 'components/ui'
 import { Field } from 'formik'
+import CreatableSelect from 'react-select/creatable'
 
 export const categories = [
 	{ label: 'Bags', value: 'bags' },
@@ -17,10 +21,9 @@ const BasicInformationFields = props => {
 
 	return (
 		<AdaptableCard className="mb-4" divider>
-			<h5 className="mb-5">Basic Information</h5>
 
 			<FormItem
-				label="Product Name"
+				label="Name"
 				invalid={errors.name && touched.name}
 				errorMessage={errors.name}
 			>
@@ -33,32 +36,60 @@ const BasicInformationFields = props => {
 				/>
 			</FormItem>
 			<FormItem
-				label="Code"
-				invalid={errors.productCode && touched.productCode}
-				errorMessage={errors.productCode}
+				label="Zalo"
+				invalid={errors.zalo && touched.zalo}
+				errorMessage={errors.zalo}
 			>
 				<Field
 					type="text"
 					autoComplete="off"
-					name="productCode"
-					placeholder="Code"
+					name="zalo"
+					placeholder="Zalo"
 					component={Input}
 				/>
 			</FormItem>
 			<FormItem
-				label="Description"
-				labelClass="!justify-start"
-				invalid={errors.description && touched.description}
-				errorMessage={errors.description}
+				label="Product"
+				invalid={errors.product && touched.product}
+				errorMessage={errors.product}
 			>
-				<Field name="description">
+				<Field
+					type="text"
+					autoComplete="off"
+					name="product"
+					placeholder="Product"
+					component={Input}
+				/>
+			</FormItem>
+			<FormItem
+				label="Active"
+				invalid={errors.active && touched.active}
+				errorMessage={errors.active}
+			>
+				<Field name="active">
 					{({ field, form }) => (
-						<RichTextEditor
-							value={field.value}
-							onChange={val => form.setFieldValue(field.name, val)}
+						<Select
+							componentAs={CreatableSelect}
+							isMulti
+							field={field}
+							form={form}
+							onChange={option => form.setFieldValue(field.name, option)}
 						/>
 					)}
 				</Field>
+			</FormItem>
+			<FormItem
+				label="Order"
+				invalid={errors.order && touched.order}
+				errorMessage={errors.order}
+			>
+				<Field
+					type="text"
+					autoComplete="off"
+					name="order"
+					placeholder="Order"
+					component={Input}
+				/>
 			</FormItem>
 		</AdaptableCard>
 	)

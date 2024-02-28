@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik'
 import BasicInformationFields from './BasicInformationFields'
 // import PricingFields from './PricingFields'
 // import OrganizationFields from './OrganizationFields'
-import ProductImages from './ProductImages'
+// import ProductImages from './ProductImages'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
@@ -96,15 +96,16 @@ const ProductForm = forwardRef((props, ref) => {
 				{({ values, touched, errors, isSubmitting }) => (
 					<Form>
 						<FormContainer>
-							<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+							<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
 								<div className="lg:col-span-2">
 									<BasicInformationFields touched={touched} errors={errors} values={values} />
-									{/* <PricingFields touched={touched} errors={errors} values={values} />
-									<OrganizationFields touched={touched} errors={errors} values={values} /> */}
+									{/* <PricingFields touched={touched} errors={errors} values={values} /> */}
+									{/* <OrganizationFields touched={touched} errors={errors} values={values} /> */}
 								</div>
-								<div className="lg:col-span-1">
+
+								{/* <div className="lg:col-span-1">
 									<ProductImages touched={touched} errors={errors} values={values} />
-								</div>
+								</div> */}
 							</div>
 							<StickyFooter
 								className="-mx-8 px-8 flex items-center justify-between py-4"

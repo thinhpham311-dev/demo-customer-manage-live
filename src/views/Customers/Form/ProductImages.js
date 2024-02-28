@@ -39,7 +39,7 @@ const ImageList = (props) => {
 		onImageDelete?.(selectedImg)
 		setDeleteConfirmationOpen(false)
 	}
-	
+
 
 	return (
 		<>
@@ -93,23 +93,23 @@ const ProductImages = props => {
 	const { values } = props
 
 	const beforeUpload = (file) => {
-        let valid = true
+		let valid = true
 
-        const allowedFileType = ['image/jpeg', 'image/png']
-        const maxFileSize = 500000
+		const allowedFileType = ['image/jpeg', 'image/png']
+		const maxFileSize = 500000
 
-        for (let f of file) {
+		for (let f of file) {
 			if (!allowedFileType.includes(f.type)) {
 				valid = 'Please upload a .jpeg or .png file!'
 			}
 
-            if(f.size >= maxFileSize) {
-                valid = 'Upload image cannot more then 500kb!'
-            }
+			if (f.size >= maxFileSize) {
+				valid = 'Upload image cannot more then 500kb!'
+			}
 		}
 
-        return valid
-    }
+		return valid
+	}
 
 	const onUpload = (form, field, files) => {
 		let imageId = '1-img-0'
@@ -128,16 +128,15 @@ const ProductImages = props => {
 			img: URL.createObjectURL(files[latestUpload])
 		}
 		const imageList = [...values.imgList, ...[image]]
-		console.log('imageList', imageList)
 		form.setFieldValue(field.name, imageList)
 	}
 
-	const handleImageDelete = (form, field, deletedImg)  => {
+	const handleImageDelete = (form, field, deletedImg) => {
 		let imgList = cloneDeep(values.imgList)
 		imgList = imgList.filter(img => img.id !== deletedImg.id)
 		form.setFieldValue(field.name, imgList)
 	}
-	
+
 	return (
 		<AdaptableCard className="mb-4">
 			<h5>Product Image</h5>
@@ -148,12 +147,12 @@ const ProductImages = props => {
 						if (values.imgList.length > 0) {
 							return (
 								<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-									<ImageList 
-										imgList={values.imgList} 
+									<ImageList
+										imgList={values.imgList}
 										onImageDelete={img => handleImageDelete(form, field, img)}
 									/>
-									<Upload 
-										className="min-h-fit" 
+									<Upload
+										className="min-h-fit"
 										beforeUpload={beforeUpload}
 										onChange={files => onUpload(form, field, files)}
 										showList={false}
@@ -191,7 +190,7 @@ const ProductImages = props => {
 									<p className="mt-1 opacity-60 dark:text-white">Support: jpeg, png</p>
 								</div>
 							</Upload>
-						) 
+						)
 					}}
 				</Field>
 			</FormItem>

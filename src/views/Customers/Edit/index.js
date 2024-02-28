@@ -18,8 +18,8 @@ const CustomerEdit = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
 
-	const productData = useSelector((state) => state.salesProductEdit.data.productData)
-	const loading = useSelector((state) => state.salesProductEdit.data.loading)
+	const customerData = useSelector((state) => state.customerEdit.data.customerData)
+	const loading = useSelector((state) => state.customerEdit.data.loading)
 
 	const fetchData = (data) => {
 		dispatch(getCustomer(data))
@@ -35,12 +35,12 @@ const CustomerEdit = () => {
 	}
 
 	const handleDiscard = () => {
-		navigate('/app/sales/product-list')
+		navigate('/app/list')
 	}
 
 	const handleDelete = async (setDialogOpen) => {
 		setDialogOpen(false)
-		const success = await deleteCustomer({ id: productData.id })
+		const success = await deleteCustomer({ id: customerData.id })
 		if (success) {
 			popNotification('deleted')
 		}
@@ -55,7 +55,7 @@ const CustomerEdit = () => {
 				placement: 'top-center'
 			}
 		)
-		navigate('/app/customers/list')
+		navigate('/app/list')
 	}
 
 	useEffect(() => {
@@ -68,11 +68,11 @@ const CustomerEdit = () => {
 	return (
 		<>
 			<Loading loading={loading}>
-				{!isEmpty(productData) && (
+				{!isEmpty(customerData) && (
 					<>
 						<ProductForm
 							type="edit"
-							initialData={productData}
+							initialData={customerData}
 							onFormSubmit={handleFormSubmit}
 							onDiscard={handleDiscard}
 							onDelete={handleDelete}
@@ -80,7 +80,7 @@ const CustomerEdit = () => {
 					</>
 				)}
 			</Loading>
-			{(!loading && isEmpty(productData)) && (
+			{(!loading && isEmpty(customerData)) && (
 				<div className="h-full flex flex-col items-center justify-center">
 					<DoubleSidedImage
 						src="/img/others/img-2.png"

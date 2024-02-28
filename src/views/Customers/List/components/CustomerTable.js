@@ -1,32 +1,32 @@
 import React, { useEffect, useMemo } from 'react'
-import { Avatar, Badge } from 'components/ui'
+// import { Avatar, Badge } from 'components/ui'
 import { DataTable } from 'components/shared'
-import { HiOutlineTrash } from 'react-icons/hi'
-import { FiPackage } from 'react-icons/fi'
+import { HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi'
+// import { FiPackage } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSlice'
 import { setSortedColumn, setSelectedCustomer } from '../store/stateSlice'
 import { toggleDeleteConfirmation } from '../store/stateSlice'
-// import useThemeClass from 'utils/hooks/useThemeClass'
+import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 
-const inventoryStatusColor = {
-	0: { label: 'In Stock', dotClass: 'bg-emerald-500', textClass: 'text-emerald-500' },
-	1: { label: 'Limited', dotClass: 'bg-amber-500', textClass: 'text-amber-500' },
-	2: { label: 'Out of Stock', dotClass: 'bg-red-500', textClass: 'text-red-500' },
-}
+// const inventoryStatusColor = {
+// 	0: { label: 'In Stock', dotClass: 'bg-emerald-500', textClass: 'text-emerald-500' },
+// 	1: { label: 'Limited', dotClass: 'bg-amber-500', textClass: 'text-amber-500' },
+// 	2: { label: 'Out of Stock', dotClass: 'bg-red-500', textClass: 'text-red-500' },
+// }
 
 const ActionColumn = ({ row }) => {
 
 	const dispatch = useDispatch()
-	// const { textTheme } = useThemeClass()
-	// const navigate = useNavigate()
+	const { textTheme } = useThemeClass()
+	const navigate = useNavigate()
 
-	// const onEdit = () => {
-	// 	navigate(`/app/customers/edit/${row.id}`)
-	// }
+	const onEdit = () => {
+		navigate(`/app/edit/${row.id}`)
+	}
 
 	const onDelete = () => {
 		dispatch(toggleDeleteConfirmation(true))
@@ -35,9 +35,9 @@ const ActionColumn = ({ row }) => {
 
 	return (
 		<div className="flex justify-end text-lg">
-			{/* <span className={`cursor-pointer p-2 hover:${textTheme}`} onClick={onEdit}>
+			<span className={`cursor-pointer p-2 hover:${textTheme}`} onClick={onEdit}>
 				<HiOutlinePencil />
-			</span> */}
+			</span>
 			<span className="cursor-pointer p-2 hover:text-red-500" onClick={onDelete}>
 				<HiOutlineTrash />
 			</span>
@@ -47,11 +47,11 @@ const ActionColumn = ({ row }) => {
 
 const CustomerColumn = ({ row }) => {
 
-	const avatar = row.img ? <Avatar src={row.img} /> : <Avatar icon={<FiPackage />} />
+	// const avatar = row.img ? <Avatar src={row.img} /> : <Avatar icon={<FiPackage />} />
 
 	return (
 		<div className="flex items-center">
-			{avatar}
+			{/* {avatar} */}
 			<span className={`ml-2 rtl:mr-2 font-semibold`}>
 				{row.name}
 			</span>
@@ -67,7 +67,6 @@ const CustomerTable = () => {
 	const loading = useSelector((state) => state.customerListSlice.data.loading)
 	const data = useSelector((state) => state.customerListSlice.data.customerList)
 
-	console.log(data)
 
 	useEffect(() => {
 		fetchData()
@@ -93,53 +92,43 @@ const CustomerTable = () => {
 			},
 		},
 		{
-			Header: 'Category',
-			accessor: 'category',
+			Header: 'Zalo',
+			accessor: 'zalo',
 			sortable: true,
 			Cell: props => {
 				const row = props.row.original
 				return (
-					<span className="capitalize">{row.category}</span>
+					<span className="capitalize">{row.zalo}</span>
 				)
 			},
 		},
 		{
-			Header: 'Quantity',
-			accessor: 'stock',
+			Header: 'Product',
+			accessor: 'product',
 			sortable: true,
 		},
 		{
-			Header: 'Status',
-			accessor: 'status',
+			Header: 'Email',
+			accessor: 'email',
 			sortable: true,
-			Cell: props => {
-				const { status } = props.row.original
-				return (
-					<div className="flex items-center gap-2">
-						<Badge className={inventoryStatusColor[status].dotClass} />
-						<span className={`capitalize font-semibold ${inventoryStatusColor[status].textClass}`}>
-							{inventoryStatusColor[status].label}
-						</span>
-					</div>
-				)
-			},
 		},
 		{
-			Header: 'Price',
-			accessor: 'price',
+			Header: 'Active',
+			accessor: 'active',
 			sortable: true,
-			Cell: props => {
-				const { price } = props.row.original
-				return (
-					<span>${price}</span>
-				)
-			},
+		},
+		{
+			Header: 'Order',
+			accessor: 'order',
+			sortable: true,
 		},
 		{
 			Header: '',
 			id: 'action',
 			accessor: (row) => row,
-			Cell: props => <ActionColumn row={props.row.original} />
+			Cell: props => {
+				return <ActionColumn row={props.row.original} />
+			}
 		},
 	], [])
 

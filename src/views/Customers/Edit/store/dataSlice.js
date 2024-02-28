@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiGetCustomerList, apiPutCustomer, apiDeleteCustomer } from 'services/SalesService'
+import { apiGetCustomer, apiPutCustomer, apiDeleteCustomer } from 'services/SalesService'
 
 export const getCustomer = createAsyncThunk('customerEdit/data/getCustomer', async (data) => {
-    const response = await apiGetCustomerList(data)
+    const response = await apiGetCustomer(data)
     return response.data
 })
 
@@ -20,14 +20,14 @@ const dataSlice = createSlice({
     name: 'customerEdit/data',
     initialState: {
         loading: false,
-        productData: [],
+        customerData: [],
 
     },
     reducers: {
     },
     extraReducers: {
         [getCustomer.fulfilled]: (state, action) => {
-            state.productData = action.payload
+            state.customerData = action.payload
             state.loading = false
         },
         [getCustomer.pending]: (state) => {
