@@ -58,11 +58,11 @@ export const UserDropdown = ({ className }) => {
 					</Dropdown.Item>
 				))}
 				<Dropdown.Item variant="divider" /> */}
-				<Dropdown.Item onClick={signOut} eventKey="Sign Out" className="gap-2">
+				<Dropdown.Item onClick={signOut} eventKey="Đăng xuất" className="gap-2">
 					<span className="text-xl opacity-50">
 						<HiOutlineLogout />
 					</span>
-					<span>Sign Out</span>
+					<span>Đăng xuất</span>
 				</Dropdown.Item>
 			</Dropdown>
 		</div>

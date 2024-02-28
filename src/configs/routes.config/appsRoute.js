@@ -22,16 +22,16 @@ const appsRoute = [
         component: React.lazy(() => import('views/Customers/New')),
         authority: [ADMIN, USER],
         meta: {
-            header: 'Add New Customer',
+            header: 'Thêm khách hàng',
         }
     },
     {
-        key: 'appsSales.productEdit',
+        key: 'appsCustomers.customerList',
         path: `${APP_PREFIX_PATH}/edit/:customerId`,
         component: React.lazy(() => import('views/Customers/Edit')),
         authority: [ADMIN, USER],
         meta: {
-            header: 'Edit Customer',
+            header: 'Sửa khách hàng',
         }
     },
 ]

@@ -94,8 +94,8 @@ const ProductForm = forwardRef((props, ref) => {
 				}}
 			>
 				{({ values, touched, errors, isSubmitting }) => (
-					<Form>
-						<FormContainer>
+					<Form className="h-full">
+						<FormContainer className="h-full flex flex-col justify-between">
 							<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
 								<div className="lg:col-span-2">
 									<BasicInformationFields touched={touched} errors={errors} values={values} />
@@ -108,7 +108,7 @@ const ProductForm = forwardRef((props, ref) => {
 								</div> */}
 							</div>
 							<StickyFooter
-								className="-mx-8 px-8 flex items-center justify-between py-4"
+								className="-mx-8 px-8 flex items-center justify-between  py-4"
 								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
 							>
 								<div>
@@ -121,7 +121,7 @@ const ProductForm = forwardRef((props, ref) => {
 										onClick={() => onDiscard?.()}
 										type="button"
 									>
-										Discard
+										Quay lại
 									</Button>
 									<Button
 										size="sm"
@@ -130,7 +130,7 @@ const ProductForm = forwardRef((props, ref) => {
 										icon={<AiOutlineSave />}
 										type="submit"
 									>
-										Save
+										Lưu
 									</Button>
 								</div>
 							</StickyFooter>

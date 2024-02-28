@@ -9,10 +9,10 @@ const Header = props => {
 
 	return (
 		<header className={classNames('header', className)}>
-			<div 
+			<div
 				className={
 					classNames(
-						'header-wrapper', 
+						'header-wrapper',
 						HEADER_HEIGHT_CLASS,
 						container && 'container mx-auto'
 					)

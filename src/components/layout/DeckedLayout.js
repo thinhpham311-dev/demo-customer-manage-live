@@ -7,7 +7,7 @@ import UserDropdown from 'components/template/UserDropdown'
 import HeaderLogo from 'components/template/HeaderLogo'
 import SecondaryHeader from 'components/template/SecondaryHeader'
 import MobileNav from 'components/template/MobileNav'
-import Search from 'components/template/Search'
+// import Search from 'components/template/Search'
 import View from 'views'
 
 const HeaderActionsStart = () => {
@@ -22,10 +22,10 @@ const HeaderActionsStart = () => {
 const HeaderActionsEnd = () => {
 	return (
 		<>
-			<Search />
+			{/* <Search /> */}
 			{/* <LanguageSelector /> */}
-			{/* <Notification />
-			<SidePanel /> */}
+			{/* <Notification /> */}
+			{/* <SidePanel /> */}
 			<UserDropdown hoverable={false} />
 		</>
 	)

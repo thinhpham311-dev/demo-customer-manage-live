@@ -45,19 +45,6 @@ const ActionColumn = ({ row }) => {
 	)
 }
 
-const CustomerColumn = ({ row }) => {
-
-	// const avatar = row.img ? <Avatar src={row.img} /> : <Avatar icon={<FiPackage />} />
-
-	return (
-		<div className="flex items-center">
-			{/* {avatar} */}
-			<span className={`ml-2 rtl:mr-2 font-semibold`}>
-				{row.name}
-			</span>
-		</div>
-	)
-}
 
 const CustomerTable = () => {
 
@@ -83,27 +70,12 @@ const CustomerTable = () => {
 
 	const columns = useMemo(() => [
 		{
-			Header: 'Name',
+			Header: 'Tên khách hàng',
 			accessor: 'name',
 			sortable: true,
-			Cell: props => {
-				const row = props.row.original
-				return <CustomerColumn row={row} />
-			},
 		},
 		{
-			Header: 'Zalo',
-			accessor: 'zalo',
-			sortable: true,
-			Cell: props => {
-				const row = props.row.original
-				return (
-					<span className="capitalize">{row.zalo}</span>
-				)
-			},
-		},
-		{
-			Header: 'Product',
+			Header: 'Sản phẩm',
 			accessor: 'product',
 			sortable: true,
 		},
@@ -113,12 +85,17 @@ const CustomerTable = () => {
 			sortable: true,
 		},
 		{
-			Header: 'Active',
+			Header: 'ID',
+			accessor: 'id_client',
+			sortable: true,
+		},
+		{
+			Header: 'Key Active',
 			accessor: 'active',
 			sortable: true,
 		},
 		{
-			Header: 'Order',
+			Header: 'Đơn hàng',
 			accessor: 'order',
 			sortable: true,
 		},

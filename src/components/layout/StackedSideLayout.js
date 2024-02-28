@@ -5,7 +5,7 @@ import UserDropdown from 'components/template/UserDropdown'
 // import LanguageSelector from 'components/template/LanguageSelector'
 // import Notification from 'components/template/Notification'
 import MobileNav from 'components/template/MobileNav'
-import Search from 'components/template/Search'
+// import Search from 'components/template/Search'
 import StackedSideNav from 'components/template/StackedSideNav'
 import View from 'views'
 
@@ -13,7 +13,7 @@ const HeaderActionsStart = () => {
 	return (
 		<>
 			<MobileNav />
-			<Search />
+			{/* <Search /> */}
 		</>
 	)
 }
@@ -22,8 +22,8 @@ const HeaderActionsEnd = () => {
 	return (
 		<>
 			{/* <LanguageSelector /> */}
-			{/* <Notification />
-			<SidePanel /> */}
+			{/* <Notification /> */}
+			{/* <SidePanel /> */}
 			<UserDropdown hoverable={false} />
 		</>
 	)

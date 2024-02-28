@@ -1,13 +1,13 @@
 import React from 'react'
 import navigationIcon from 'configs/navigation-icon.config'
 
-export const Icon = ({component: Component}) => {
+export const Icon = ({ component: Component }) => {
 	return <><Component /></>
 }
 
-const VerticalMenuIcon = ({icon, gutter}) => {
+const VerticalMenuIcon = ({ icon, gutter }) => {
 
-	if(typeof icon !== 'string' && !icon) {
+	if (typeof icon !== 'string' && !icon) {
 		return <></>
 	}
 

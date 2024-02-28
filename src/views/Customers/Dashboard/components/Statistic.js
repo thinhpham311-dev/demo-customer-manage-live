@@ -3,7 +3,7 @@ import { Card } from 'components/ui'
 import NumberFormat from 'react-number-format'
 import { GrowShrinkTag } from 'components/shared'
 import { useSelector } from 'react-redux'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
 	return (
@@ -19,7 +19,7 @@ const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
 							prefix={valuePrefix}
 						/>
 					</h3>
-					<p>vs. 3 months prior to <span className="font-semibold">{dayjs(date).format('DD MMM')}</span></p>
+					{/* <p>vs. 3 months prior to <span className="font-semibold">{dayjs(date).format('DD MMM')}</span></p> */}
 				</div>
 				<GrowShrinkTag value={data.growShrink} suffix="%" />
 			</div>
@@ -36,20 +36,20 @@ const Statistic = ({ data = {} }) => {
 			<StatisticCard
 				data={data.revenue}
 				valuePrefix="$"
-				label="Revenue"
+				label="Doanh thu"
 				tagSuffix="%"
 				date={startDate}
 			/>
 			<StatisticCard
 				data={data.orders}
-				label="Orders"
+				label="Đơn hàng"
 				tagSuffix="%"
 				date={startDate}
 			/>
 			<StatisticCard
 				data={data.purchases}
 				valuePrefix="$"
-				label="Purchases"
+				label="Mua hàng"
 				tagSuffix="%"
 				date={startDate}
 			/>

@@ -11,7 +11,7 @@ const CustomerList = () => {
 	return (
 		<AdaptableCard className="h-full" bodyClass="h-full">
 			<div className="lg:flex items-center justify-between mb-4">
-				<h3 className="mb-4 lg:mb-0">Customers</h3>
+				<h3 className="mb-4 lg:mb-0">Danh sách khách hàng</h3>
 				<CustomerTableTools />
 			</div>
 			<CustomerTable />

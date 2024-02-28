@@ -7,7 +7,7 @@ const appsNavigationConfig = [
 	{
 		key: 'appsCustomers.customerdashboard',
 		path: `${APP_PREFIX_PATH}/dashboard`,
-		title: 'Dashboard',
+		title: 'Thống kê',
 		translateKey: 'nav.appsCustomers.dashboard',
 		icon: 'chart',
 		type: NAV_ITEM_TYPE_ITEM,
@@ -17,7 +17,7 @@ const appsNavigationConfig = [
 	{
 		key: 'appsCustomers.customerList',
 		path: `${APP_PREFIX_PATH}/list`,
-		title: 'Customers List',
+		title: 'Danh sách khách hàng',
 		translateKey: 'nav.appsCustomers.customerList',
 		icon: 'users',
 		type: NAV_ITEM_TYPE_ITEM,
@@ -27,7 +27,7 @@ const appsNavigationConfig = [
 	{
 		key: 'appsCustomers.customerNew',
 		path: `${APP_PREFIX_PATH}/new`,
-		title: 'New Customer',
+		title: 'Tạo khách hàng',
 		translateKey: 'nav.appsCustomers.customerNew',
 		icon: 'add',
 		type: NAV_ITEM_TYPE_ITEM,

@@ -67,7 +67,7 @@ const SignInForm = props => {
 					<Form>
 						<FormContainer>
 							<FormItem
-								label="User Name"
+								label="Tên đăng nhập"
 								invalid={errors.userName && touched.userName}
 								errorMessage={errors.userName}
 							>
@@ -75,19 +75,19 @@ const SignInForm = props => {
 									type="text"
 									autoComplete="off"
 									name="userName"
-									placeholder="User Name"
+									placeholder="Nhập tên đăng nhập"
 									component={Input}
 								/>
 							</FormItem>
 							<FormItem
-								label="Password"
+								label="Mật khẫu"
 								invalid={errors.password && touched.password}
 								errorMessage={errors.password}
 							>
 								<Field
 									autoComplete="off"
 									name="password"
-									placeholder="Password"
+									placeholder="Nhập mất khẩu"
 									component={PasswordInput}
 								/>
 							</FormItem>
@@ -98,7 +98,7 @@ const SignInForm = props => {
 								</ActionLink>
 							</div> */}
 							<Button block loading={isSubmitting} variant="solid" type="submit">
-								{isSubmitting ? 'Signing in...' : 'Sign In'}
+								{isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
 							</Button>
 							{/* <div className="mt-4 text-center">
 								<span>Don't have an account yet? </span>
