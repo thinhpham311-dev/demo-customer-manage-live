@@ -52,21 +52,28 @@ app.post('/api/customer/create', async (req, res) => {
 
 app.delete(`/api/customer/:id`, async (req, res) => {
   const { id } = req.params
-  const customerDelete = await prisma.customer.delete({
-    where: {
-      id: Number(id),
-    },
-  })
-  res.json(customerDelete)
+  try {
+    const customerDelete = await prisma.customer.delete({
+      where: {
+        id: Number(id),
+      },
+    })
+    res.json(customerDelete)
+  } catch (error) {
+    res.json({ error: `Customer with ID does not exist in the database` })
+  }
 })
 
 app.get(`/api/customer/:id`, async (req, res) => {
   const { id } = req.params
-
-  const customer = await prisma.customer.findUnique({
-    where: { id: Number(id) },
-  })
-  res.json(customer)
+  try {
+    const customer = await prisma.customer.findUnique({
+      where: { id: Number(id) },
+    })
+    res.json(customer)
+  } catch (error) {
+    res.json({ error: `Customer with ID does not exist in the database` })
+  }
 })
 
 app.put(`/api/customer/:id`, async (req, res) => {
