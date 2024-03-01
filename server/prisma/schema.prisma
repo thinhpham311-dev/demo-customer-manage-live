@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Customer {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  product   String?
-  email     String   @unique
-  id_client String?
-  active    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String?
+  product     String?
+  email       String?
+  id_client   String?
+  active      String?
+  total_order Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

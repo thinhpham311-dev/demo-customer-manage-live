@@ -8,21 +8,24 @@ const customerData = [
     product: 'product A',
     email: 'alice@prisma.io',
     id_client: 'abc',
-    active: 'abc'
+    active: 'abc',
+    total_order: 12000
   },
   {
     name: 'Peter',
     product: 'product B',
     email: 'peter@prisma.io',
     id_client: 'abc',
-    active: 'abc'
+    active: 'abc',
+    total_order: 12000
   },
   {
     name: 'Daniel',
     product: 'product C',
     email: 'daniel@prisma.io',
     id_client: 'abc',
-    active: 'abc'
+    active: 'abc',
+    total_order: 12000
   }
 ]
 
