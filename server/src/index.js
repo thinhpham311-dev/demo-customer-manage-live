@@ -3,11 +3,17 @@ const { PrismaClient } = require('@prisma/client')
 const wildCardSearch = require('./utils/wildCardSearch')
 const sortBy = require('./utils/sortBy')
 const paginate = require('./utils/paginate')
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const prisma = new PrismaClient()
 const app = express()
+app.use(cors());
 
 app.use(express.json())
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.get('/api/customers', async (req, res) => {
 //   const customers = await prisma.customer.findMany()
@@ -39,33 +45,38 @@ app.post('/api/customers', async (req, res) => {
     data: data,
     total: total
   }
-  // console.log(responseData, pageIndex, pageSize, query)
-
   res.json(responseData)
 })
 
 app.post('/api/customer/create', async (req, res) => {
   const data = req.body
-  const customerAdd = await prisma.customer.create({ data })
-  res.json(customerAdd)
+  console.log(data)
+  await prisma.customer.create({
+    data: {
+      ...data,
+      total_order: Number(data.total_order)
+    }
+  })
+  res.json(true)
 })
 
 app.delete(`/api/customer/:id`, async (req, res) => {
   const { id } = req.params
   try {
-    const customerDelete = await prisma.customer.delete({
+    await prisma.customer.delete({
       where: {
         id: Number(id),
       },
     })
-    res.json(customerDelete)
+    res.json(true)
   } catch (error) {
-    res.json({ error: `Customer with ID does not exist in the database` })
+    res.json({ error: `ID Customer does not exist in the database` })
   }
 })
 
 app.get(`/api/customer/:id`, async (req, res) => {
   const { id } = req.params
+  console.log(id)
   try {
     const customer = await prisma.customer.findUnique({
       where: { id: Number(id) },
@@ -79,14 +90,16 @@ app.get(`/api/customer/:id`, async (req, res) => {
 app.put(`/api/customer/:id`, async (req, res) => {
   const data = req.body
   const { id } = req.params
-
   try {
-    const customer = await prisma.customer.update({
+    await prisma.customer.update({
       where: { id: Number(id) },
-      data
+      data: {
+        ...data,
+        total_order: Number(data.total_order)
+      }
     })
 
-    res.json(customer)
+    res.json(true)
   } catch (error) {
     res.json({ error: `Customer with ID does not exist in the database` })
   }

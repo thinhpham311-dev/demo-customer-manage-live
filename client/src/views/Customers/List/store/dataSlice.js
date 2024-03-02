@@ -22,12 +22,6 @@ export const initialTableData = {
     }
 }
 
-export const initialFilterData = {
-    name: '',
-    category: ['bags', 'cloths', 'devices', 'shoes', 'watches'],
-    status: [0, 1, 2],
-    customerStatus: 0,
-}
 
 const dataSlice = createSlice({
     name: 'customerListSlice/data',
@@ -35,7 +29,7 @@ const dataSlice = createSlice({
         loading: false,
         customerList: [],
         tableData: initialTableData,
-        filterData: initialFilterData,
+
     },
     reducers: {
         updateCustomerList: (state, action) => {
@@ -43,9 +37,6 @@ const dataSlice = createSlice({
         },
         setTableData: (state, action) => {
             state.tableData = action.payload
-        },
-        setFilterData: (state, action) => {
-            state.filterData = action.payload
         },
     },
     extraReducers: {

@@ -6,13 +6,6 @@ import {
 import { Input, FormItem } from 'components/ui'
 import { Field } from 'formik'
 
-export const categories = [
-	{ label: 'Bags', value: 'bags' },
-	{ label: 'Cloths', value: 'cloths' },
-	{ label: 'Devices', value: 'devices' },
-	{ label: 'Shoes', value: 'shoes' },
-	{ label: 'Watches', value: 'watches' }
-]
 
 const BasicInformationFields = props => {
 
@@ -20,7 +13,6 @@ const BasicInformationFields = props => {
 
 	return (
 		<AdaptableCard className="mb-4" >
-
 			<FormItem
 				label="Tên khách hàng"
 				invalid={errors.name && touched.name}
@@ -61,6 +53,19 @@ const BasicInformationFields = props => {
 				/>
 			</FormItem>
 			<FormItem
+				label="ID"
+				invalid={errors.email && touched.email}
+				errorMessage={errors.email}
+			>
+				<Field
+					type="text"
+					autoComplete="off"
+					name="id_client"
+					placeholder="Nhập ID"
+					component={Input}
+				/>
+			</FormItem>
+			<FormItem
 				label="Key Active"
 				invalid={errors.active && touched.active}
 				errorMessage={errors.active}
@@ -75,13 +80,14 @@ const BasicInformationFields = props => {
 			</FormItem>
 			<FormItem
 				label="Đơn hàng"
-				invalid={errors.order && touched.order}
-				errorMessage={errors.order}
+				invalid={errors.total_order && touched.total_order}
+				errorMessage={errors.total_order}
 			>
 				<Field
-					type="text"
+					type="number"
+					min="0"
 					autoComplete="off"
-					name="order"
+					name="total_order"
 					placeholder="Nhập đơn hàng"
 					component={Input}
 				/>

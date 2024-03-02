@@ -21,7 +21,6 @@ const dataSlice = createSlice({
     initialState: {
         loading: false,
         customerData: [],
-
     },
     reducers: {
     },

@@ -6,9 +6,6 @@ export const getCustomersDashboardData = createAsyncThunk('customersDashboard/da
     return response.data
 })
 
-export const initialFilterData = {
-    status: '',
-}
 
 const dataSlice = createSlice({
     name: 'customerDashboard/data',

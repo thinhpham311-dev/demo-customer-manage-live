@@ -50,7 +50,6 @@ const CustomerTable = () => {
 
 	const dispatch = useDispatch()
 	const { pageIndex, pageSize, sort, query, total } = useSelector((state) => state.customerListSlice.data.tableData)
-	const filterData = useSelector((state) => state.customerListSlice.data.filterData)
 	const loading = useSelector((state) => state.customerListSlice.data.loading)
 	const data = useSelector((state) => state.customerListSlice.data.customerList)
 
@@ -65,7 +64,7 @@ const CustomerTable = () => {
 		[pageIndex, pageSize, sort, query, total])
 
 	const fetchData = () => {
-		dispatch(getCustomers({ pageIndex, pageSize, sort, query, filterData }))
+		dispatch(getCustomers({ pageIndex, pageSize, sort, query }))
 	}
 
 	const columns = useMemo(() => [
@@ -96,7 +95,7 @@ const CustomerTable = () => {
 		},
 		{
 			Header: 'Đơn hàng',
-			accessor: 'order',
+			accessor: 'total_order',
 			sortable: true,
 		},
 		{

@@ -14,10 +14,12 @@ import * as Yup from 'yup'
 const { useUniqueId } = hooks
 
 const validationSchema = Yup.object().shape({
-	name: Yup.string().required('Product Name Required'),
-	price: Yup.number().required('Price Required'),
-	stock: Yup.number().required('SKU Required'),
-	category: Yup.string().required('Category Required'),
+	name: Yup.string().required('Tên khách hàng không được để trống'),
+	product: Yup.string().required('Vui lòng chọn sản phẩm'),
+	email: Yup.string().required('Email không được để trống').email("Email không đúng định dạng"),
+	id_client: Yup.string().required('ID không được để trống'),
+	active: Yup.string().required('Key active không được để trống'),
+	total_order: Yup.number().required('Total order không được để trống')
 })
 
 const DeleteProductButton = ({ onDelete }) => {
@@ -70,7 +72,7 @@ const ProductForm = forwardRef((props, ref) => {
 
 	const { type, initialData, onFormSubmit, onDiscard, onDelete } = props
 
-	const newId = useUniqueId('product-')
+	// const newId = useUniqueId('product-')
 
 	return (
 		<>
@@ -78,18 +80,18 @@ const ProductForm = forwardRef((props, ref) => {
 				innerRef={ref}
 				initialValues={{
 					...initialData,
-					tags: initialData?.tags ? initialData.tags.map(value => ({ label: value, value })) : []
+					// tags: initialData?.tags ? initialData.tags.map(value => ({ label: value, value })) : []
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
-					formData.tags = formData.tags.map(tag => tag.value)
-					if (type === 'new') {
-						formData.id = newId
-						if (formData.imgList.length > 0) {
-							formData.img = formData.imgList[0].img
-						}
-					}
+					// formData.tags = formData.tags.map(tag => tag.value)
+					// if (type === 'new') {
+					// 	formData.id = newId
+					// 	if (formData.imgList.length > 0) {
+					// 		formData.img = formData.imgList[0].img
+					// 	}
+					// }
 					onFormSubmit?.(formData, setSubmitting)
 				}}
 			>
@@ -145,22 +147,12 @@ const ProductForm = forwardRef((props, ref) => {
 ProductForm.defaultProps = {
 	type: 'edit',
 	initialData: {
-		id: '',
 		name: '',
-		productCode: '',
-		img: '',
-		imgList: [],
-		category: '',
-		price: 0,
-		stock: 0,
-		status: 0,
-		costPerItem: 0,
-		bulkDiscountPrice: 0,
-		taxRate: 6,
-		tags: [],
-		brand: '',
-		vendor: '',
-		description: '',
+		product: '',
+		email: '',
+		id_client: '',
+		active: '',
+		total_order: 0
 	}
 }
 
