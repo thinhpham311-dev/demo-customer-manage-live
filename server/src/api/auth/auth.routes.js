@@ -39,10 +39,12 @@ router.post('/register', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: user.id });
 
     res.json({
-      email,
-      username,
-      avatar,
-      authority,
+      user: {
+        email,
+        username,
+        avatar,
+        authority,
+      },
       accessToken,
       refreshToken
     });
@@ -79,10 +81,12 @@ router.post('/login', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: existingUser.id });
 
     res.json({
-      email,
-      username,
-      avatar,
-      authority,
+      user: {
+        email,
+        username,
+        avatar,
+        authority,
+      },
       accessToken,
       refreshToken
     });
