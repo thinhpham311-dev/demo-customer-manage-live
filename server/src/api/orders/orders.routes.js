@@ -82,8 +82,8 @@ router.post('/detail', isAuthenticated, async (req, res, next) => {
   try {
     const { id } = req.body;
     const { userId } = req.payload
-    const product = await findOrderById({ id, userId });
-    res.json(product)
+    const order = await findOrderById({ id, userId });
+    res.json(order)
   } catch (err) {
     next(err)
   }
