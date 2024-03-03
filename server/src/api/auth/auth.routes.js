@@ -39,14 +39,16 @@ router.post('/sign-up', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: user.id });
 
     res.json({
-      user: {
-        email,
-        username,
-        avatar,
-        authority,
-      },
-      accessToken,
-      refreshToken
+      data: {
+        user: {
+          email,
+          username,
+          avatar,
+          authority,
+        },
+        accessToken,
+        refreshToken
+      }
     });
   } catch (err) {
     next(err);
@@ -81,14 +83,16 @@ router.post('/sign-in', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: existingUser.id });
 
     res.json({
-      user: {
-        email,
-        username,
-        avatar,
-        authority,
-      },
-      accessToken,
-      refreshToken
+      data: {
+        user: {
+          email,
+          username,
+          avatar,
+          authority,
+        },
+        accessToken,
+        refreshToken
+      }
     });
   } catch (err) {
     next(err);
@@ -128,8 +132,10 @@ router.post('/refreshToken', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken: newRefreshToken, userId: user.id });
 
     res.json({
-      accessToken,
-      refreshToken: newRefreshToken
+      data: {
+        accessToken,
+        refreshToken: newRefreshToken
+      }
     });
   } catch (err) {
     next(err);

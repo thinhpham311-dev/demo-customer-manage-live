@@ -19,7 +19,7 @@ import {
 
 export const UserDropdown = ({ className }) => {
 
-	const { avatar, userName, authority,
+	const { avatar, username, authority,
 		// email
 	} = useSelector((state) => state.auth.user)
 
@@ -31,7 +31,7 @@ export const UserDropdown = ({ className }) => {
 			<Avatar size={32} shape="circle" src={avatar} />
 			<div className="hidden md:block">
 				<div className="text-xs capitalize">{authority[0] || 'guest'}</div>
-				<div className="font-bold">{userName}</div>
+				<div className="font-bold">{username}</div>
 			</div>
 		</div>
 	)

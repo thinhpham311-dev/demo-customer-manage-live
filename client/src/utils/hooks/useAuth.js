@@ -24,12 +24,12 @@ function useAuth() {
 		try {
 			const resp = await apiSignIn(values)
 			if (resp.data) {
-				const { token } = resp.data
-				dispatch(onSignInSuccess(token))
+				const { accessToken } = resp.data
+				dispatch(onSignInSuccess(accessToken))
 				if (resp.data.user) {
 					dispatch(setUser(resp.data.user || {
 						avatar: '',
-						userName: 'Anonymous',
+						username: 'Anonymous',
 						authority: ['USER'],
 						email: ''
 					}))
