@@ -18,7 +18,7 @@ const { hashToken } = require('../../utils/hashToken');
 
 const router = express.Router();
 
-router.post('/register', async (req, res, next) => {
+router.post('/sign-up', async (req, res, next) => {
   try {
     const { email, username, password, authority, avatar } = req.body;
     if (!username || !password) {
@@ -53,7 +53,7 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/sign-in', async (req, res, next) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {

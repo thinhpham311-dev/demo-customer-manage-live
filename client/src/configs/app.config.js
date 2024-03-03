@@ -1,4 +1,5 @@
 const appConfig = {
+    apiVersion: '/v1',
     apiPrefix: '/api',
     authenticatedEntryPath: '/app/dashboard',
     unAuthenticatedEntryPath: '/sign-in',
