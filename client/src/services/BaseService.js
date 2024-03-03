@@ -11,7 +11,6 @@ const unauthorizedCode = [401]
 const host_API = process.env.REACT_APP_API_KEY
 
 const baseUrl = `${host_API}${appConfig.apiPrefix}${appConfig.apiVersion}`
-console.log(baseUrl)
 
 const BaseService = axios.create({
     timeout: 60000,
