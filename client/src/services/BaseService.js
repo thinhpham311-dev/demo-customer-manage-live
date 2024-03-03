@@ -10,10 +10,9 @@ const unauthorizedCode = [401]
 
 const baseUrl = process.env.REACT_APP_API_KEY
 
-
 const BaseService = axios.create({
     timeout: 60000,
-    baseURL: baseUrl,
+    baseURL: appConfig.apiPrefix,
     headers: {
         'Content-Type': 'application/json'
     },

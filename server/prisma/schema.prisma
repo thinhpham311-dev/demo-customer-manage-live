@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,14 +10,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String         @id @unique @default(uuid())
+  email         String         @unique
+  username      String         @unique
+  password      String
+  avatar        String?
+  authority     String[]
+  refreshTokens RefreshToken[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  Customer      Customer[]
+  Product       Product[]
+  Order         Order[]
+}
+
+model RefreshToken {
+  id          String   @id @unique @default(uuid())
+  hashedToken String
+  userId      String
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Customer {
   id          Int      @id @default(autoincrement())
   name        String?
-  product     String?
+  products    String?
   email       String?
   id_client   String?
   active      String?
   total_order Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  orders      Order[]
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  price     Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+model Order {
+  id          Int       @id @default(autoincrement())
+  total_price Int?
+  pay_date    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    String?
+  User        User?     @relation(fields: [userId], references: [id])
+  userId      String?
+  Customer    Customer? @relation(fields: [customerId], references: [id])
+  customerId  Int?
 }

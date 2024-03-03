@@ -16,7 +16,7 @@ import useAuth from 'utils/hooks/useAuth'
 const validationSchema = Yup.object().shape({
 	userName: Yup.string().required('Please enter your user name'),
 	password: Yup.string().required('Please enter your password'),
-	rememberMe: Yup.bool()
+	// rememberMe: Yup.bool()
 })
 
 const SignInForm = props => {
@@ -52,7 +52,7 @@ const SignInForm = props => {
 				initialValues={{
 					userName: 'admin',
 					password: '123Qwe',
-					rememberMe: true
+					// rememberMe: true
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {

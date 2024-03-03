@@ -1,5 +1,8 @@
 import React, { forwardRef, useState } from 'react'
-import { FormContainer, Button, hooks } from 'components/ui'
+import {
+	FormContainer, Button,
+	// hooks
+} from 'components/ui'
 import { StickyFooter, ConfirmDialog } from 'components/shared'
 import { Form, Formik } from 'formik'
 import BasicInformationFields from './BasicInformationFields'
@@ -11,7 +14,7 @@ import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
 import * as Yup from 'yup'
 
-const { useUniqueId } = hooks
+// const { useUniqueId } = hooks
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required('Tên khách hàng không được để trống'),
