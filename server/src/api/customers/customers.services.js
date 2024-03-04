@@ -8,7 +8,7 @@ function findManyCustomers() {
 
 function findCustomerById({ id, userId }) {
   return db.customer.findFirst({
-    where: { id, userId },
+    where: { id: Number(id), userId },
   })
 }
 
@@ -17,7 +17,8 @@ function createCustomer({ data, userId }) {
     {
       data: {
         ...data,
-        userId
+        userId,
+        total_order: Number(data.total_order)
       }
     }
   )
@@ -29,7 +30,7 @@ function updateCustomer({ data, userId }) {
   const { id } = data
   return db.customer.update(
     {
-      where: { id },
+      where: { id: Number(id) },
       data: {
         ...data,
         userId,
@@ -44,7 +45,7 @@ function deleteCustomer({ data }) {
   return db.customer.delete(
     {
       where: {
-        id
+        id: Number(id)
       }
     }
   )

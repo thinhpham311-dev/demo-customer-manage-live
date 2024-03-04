@@ -25,7 +25,6 @@ function useAuth() {
 			const resp = await apiSignIn(values)
 			if (resp.data) {
 				const { accessToken } = resp.data
-				console.log(resp.data.data.user)
 				dispatch(onSignInSuccess(accessToken))
 				if (resp.data.user) {
 					dispatch(setUser(resp.data.user || {

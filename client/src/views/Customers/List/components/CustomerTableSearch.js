@@ -41,7 +41,7 @@ const CustomerTableSearch = () => {
 	return (
 		<Input
 			ref={searchInput}
-			className="max-w-md md:w-52 md:mb-0 mb-4"
+			className=" md:w-full md:mb-0 mb-4"
 			size="sm"
 			placeholder="Tìm kiếm khách hàng..."
 			prefix={<HiOutlineSearch className="text-lg" />}

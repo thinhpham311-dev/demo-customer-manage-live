@@ -7,6 +7,53 @@ const paginate = require('../../utils/paginate')
 
 const router = express.Router();
 
+
+router.post('/dashboard', isAuthenticated, async (req, res, next) => {
+  try {
+    res.json({
+      statisticData: {
+        revenue: {
+          value: 21827.13,
+          growShrink: 11.4
+        },
+        orders: {
+          value: 1758,
+          growShrink: -3.2
+        },
+        purchases: {
+          value: 7249.31,
+          growShrink: 5.7
+        },
+      },
+      customersReportData: {
+        series: [
+          {
+            name: "Online Sales",
+            data: [24, 33, 29, 36, 34, 43, 40, 47, 45, 48, 46, 55]
+          }
+        ],
+        categories: [
+          '1/1',
+          '2/1',
+          '3/1',
+          '4/1',
+          '5/1',
+          '6/1',
+          '7/1',
+          '8/1',
+          '9/1',
+          '10/1',
+          '11/1',
+          '12/1'
+        ]
+      }
+    })
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
 router.post('/list', isAuthenticated, async (req, res, next) => {
   try {
     const { pageIndex, pageSize, sort, query } = req.body
@@ -16,7 +63,7 @@ router.post('/list', isAuthenticated, async (req, res, next) => {
     let data = sanitizeCustomers
     let total = customers.length
 
-    if ((key === 'name' || key === 'product' || key === 'email' || key === 'total_order') && order) {
+    if ((key === 'name' || key === 'products' || key === 'email' || key === 'total_order') && order) {
       data.sort(sortBy(key, order === 'desc', (a) => a.toUpperCase()))
     } else {
       data.sort(sortBy(key, order === 'desc', parseInt))

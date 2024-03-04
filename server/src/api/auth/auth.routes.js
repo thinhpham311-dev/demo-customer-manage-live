@@ -95,6 +95,15 @@ router.post('/sign-in', async (req, res, next) => {
   }
 });
 
+router.post('/sign-out', async (req, res, next) => {
+  try {
+    res.json(true)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
 router.post('/refreshToken', async (req, res, next) => {
   try {
     const { refreshToken } = req.body;

@@ -2,7 +2,7 @@ import ApiService from "./ApiService"
 
 export async function apiGetCustomerDashboardData(data) {
     return ApiService.fetchData({
-        url: '/sales/dashboard',
+        url: '/customers/dashboard',
         method: 'post',
         data
     })
@@ -10,7 +10,7 @@ export async function apiGetCustomerDashboardData(data) {
 
 export async function apiGetCustomerList(data) {
     return ApiService.fetchData({
-        url: '/sales/products',
+        url: '/customers/list',
         method: 'post',
         data
     })
@@ -18,21 +18,23 @@ export async function apiGetCustomerList(data) {
 
 export async function apiDeleteCustomer(data) {
     return ApiService.fetchData({
-        url: `/api/customer/${data.id}`,
+        url: `/customers/delete`,
         method: 'delete',
+        data
     })
 }
 
 export async function apiGetCustomer(data) {
     return ApiService.fetchData({
-        url: `/api/customer/${data.id}`,
-        method: 'get',
+        url: `/customers/detail`,
+        method: 'post',
+        data
     })
 }
 
 export async function apiPutCustomer(data) {
     return ApiService.fetchData({
-        url: `/api/customer/${data.id}`,
+        url: `/customers/update`,
         method: 'put',
         data
     })
@@ -40,7 +42,7 @@ export async function apiPutCustomer(data) {
 
 export async function apiCreateCustomer(data) {
     return ApiService.fetchData({
-        url: '/api/customer/create',
+        url: '/customers/create',
         method: 'post',
         data
     })

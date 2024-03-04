@@ -62,6 +62,7 @@ model Product {
 
 model Order {
   id          Int       @id @default(autoincrement())
+  code        String
   total_price Int?
   pay_date    String?
   createdAt   DateTime  @default(now())

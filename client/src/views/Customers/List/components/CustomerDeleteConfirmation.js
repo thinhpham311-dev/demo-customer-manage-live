@@ -39,15 +39,13 @@ const CustomerDeleteConfirmation = () => {
 			onClose={onDialogClose}
 			onRequestClose={onDialogClose}
 			type="danger"
-			title="Delete Customer"
+			title="Xoá Khách hàng"
 			onCancel={onDialogClose}
 			onConfirm={onDelete}
 			confirmButtonColor="red-600"
 		>
 			<p>
-				Are you sure you want to delete this customer?
-				All record related to this customer will be deleted as well.
-				This action cannot be undone.
+				Bạn có chắc chắn muốn xóa khách hàng này? Tất cả hồ sơ liên quan đến khách hàng này cũng sẽ bị xóa. Hành động này không thể được hoàn tác.
 			</p>
 		</ConfirmDialog>
 	)

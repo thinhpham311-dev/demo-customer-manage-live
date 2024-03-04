@@ -1,28 +1,23 @@
 import React, { forwardRef, useState } from 'react'
 import {
 	FormContainer, Button,
-	// hooks
 } from 'components/ui'
 import { StickyFooter, ConfirmDialog } from 'components/shared'
 import { Form, Formik } from 'formik'
 import BasicInformationFields from './BasicInformationFields'
-// import PricingFields from './PricingFields'
-// import OrganizationFields from './OrganizationFields'
-// import ProductImages from './ProductImages'
+import ProductsList from './ProductsList'
+import OrdersList from './OrdersList'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
 import * as Yup from 'yup'
 
-// const { useUniqueId } = hooks
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required('Tên khách hàng không được để trống'),
-	product: Yup.string().required('Vui lòng chọn sản phẩm'),
+	products: Yup.string().required('Vui lòng chọn sản phẩm'),
 	email: Yup.string().required('Email không được để trống').email("Email không đúng định dạng"),
 	id_client: Yup.string().required('ID không được để trống'),
-	active: Yup.string().required('Key active không được để trống'),
-	total_order: Yup.number().required('Total order không được để trống')
 })
 
 const DeleteProductButton = ({ onDelete }) => {
@@ -83,12 +78,13 @@ const ProductForm = forwardRef((props, ref) => {
 				innerRef={ref}
 				initialValues={{
 					...initialData,
-					// tags: initialData?.tags ? initialData.tags.map(value => ({ label: value, value })) : []
+					// products: initialData?.products ? initialData.products.map(value => ({ label: value, value })) : []
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
-					// formData.tags = formData.tags.map(tag => tag.value)
+					console.log(formData)
+					// formData.products = formData.products.map(product => product.value)
 					// if (type === 'new') {
 					// 	formData.id = newId
 					// 	if (formData.imgList.length > 0) {
@@ -101,16 +97,15 @@ const ProductForm = forwardRef((props, ref) => {
 				{({ values, touched, errors, isSubmitting }) => (
 					<Form className="h-full">
 						<FormContainer className="h-full flex flex-col justify-between">
-							<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-								<div className="lg:col-span-2">
-									<BasicInformationFields touched={touched} errors={errors} values={values} />
-									{/* <PricingFields touched={touched} errors={errors} values={values} /> */}
-									{/* <OrganizationFields touched={touched} errors={errors} values={values} /> */}
-								</div>
+							<BasicInformationFields touched={touched} errors={errors} values={values} />
+							<div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
-								{/* <div className="lg:col-span-1">
-									<ProductImages touched={touched} errors={errors} values={values} />
-								</div> */}
+								<div className="lg:col-span-2">
+									<ProductsList />
+								</div>
+								<div className="lg:col-span-3">
+									<OrdersList />
+								</div>
 							</div>
 							<StickyFooter
 								className="-mx-8 px-8 flex items-center justify-between  py-4"
@@ -151,7 +146,7 @@ ProductForm.defaultProps = {
 	type: 'edit',
 	initialData: {
 		name: '',
-		product: '',
+		products: '',
 		email: '',
 		id_client: '',
 		active: '',

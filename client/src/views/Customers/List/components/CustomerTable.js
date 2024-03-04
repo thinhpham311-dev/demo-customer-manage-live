@@ -75,7 +75,7 @@ const CustomerTable = () => {
 		},
 		{
 			Header: 'Sản phẩm',
-			accessor: 'product',
+			accessor: 'products',
 			sortable: true,
 		},
 		{
@@ -86,17 +86,14 @@ const CustomerTable = () => {
 		{
 			Header: 'ID',
 			accessor: 'id_client',
-			sortable: true,
 		},
 		{
 			Header: 'Key Active',
 			accessor: 'active',
-			sortable: true,
 		},
 		{
 			Header: 'Đơn hàng',
 			accessor: 'total_order',
-			sortable: true,
 		},
 		{
 			Header: '',

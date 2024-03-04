@@ -126,7 +126,7 @@ const FilterForm = forwardRef(({ onSubmitComplete }, ref) => {
 const DrawerFooter = ({ onSaveClick, onCancel }) => {
 	return (
 		<div className="text-right w-full">
-			<Button size="sm" className="mr-2" onClick={onCancel}>Cancel</Button>
+			<Button size="sm" className="mr-2" onClick={onCancel}>Huỷ</Button>
 			<Button size="sm" variant="solid" onClick={onSaveClick}>Query</Button>
 		</div>
 	)
