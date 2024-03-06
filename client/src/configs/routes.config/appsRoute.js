@@ -12,13 +12,14 @@ const appsRoute = [
     },
     {
         key: 'appsCustomers.customerList',
-        path: `${APP_PREFIX_PATH}/list`,
+        path: `${APP_PREFIX_PATH}/customers/list`,
         component: React.lazy(() => import('views/Customers/List')),
         authority: [ADMIN, USER],
+
     },
     {
         key: 'appsCustomers.customerNew',
-        path: `${APP_PREFIX_PATH}/new`,
+        path: `${APP_PREFIX_PATH}/customers/new`,
         component: React.lazy(() => import('views/Customers/New')),
         authority: [ADMIN, USER],
         meta: {
@@ -27,11 +28,50 @@ const appsRoute = [
     },
     {
         key: 'appsCustomers.customerList',
-        path: `${APP_PREFIX_PATH}/edit/:customerId`,
+        path: `${APP_PREFIX_PATH}/customers/edit/:customerId`,
         component: React.lazy(() => import('views/Customers/Edit')),
         authority: [ADMIN, USER],
         meta: {
             header: 'Sửa khách hàng',
+        }
+    },
+    {
+        key: 'appsOrders.orderList',
+        path: `${APP_PREFIX_PATH}/orders/list`,
+        component: React.lazy(() => import('views/Orders/List')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'appsOrders.orderList',
+        path: `${APP_PREFIX_PATH}/orders/edit/:orderId`,
+        component: React.lazy(() => import('views/Orders/Edit')),
+        authority: [ADMIN, USER],
+        meta: {
+            header: 'Sửa đơn hàng',
+        }
+    },
+    {
+        key: 'appsProducts.productList',
+        path: `${APP_PREFIX_PATH}/products/list`,
+        component: React.lazy(() => import('views/Products/List')),
+        authority: [ADMIN, USER],
+    },
+    {
+        key: 'appsProducts.productNew',
+        path: `${APP_PREFIX_PATH}/products/new`,
+        component: React.lazy(() => import('views/Products/New')),
+        authority: [ADMIN, USER],
+        meta: {
+            header: 'Thêm sản phẩm',
+        }
+    },
+    {
+        key: 'appsProducts.productList',
+        path: `${APP_PREFIX_PATH}/products/edit/:productId`,
+        component: React.lazy(() => import('views/Products/Edit')),
+        authority: [ADMIN, USER],
+        meta: {
+            header: 'Sửa sản phẩm',
         }
     },
 ]

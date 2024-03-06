@@ -1,11 +1,12 @@
 import React from 'react'
-import { FaChartBar, FaUsers, FaUserPlus } from "react-icons/fa";
-
+import { FaChartBar, FaUsers, FaStickyNote } from "react-icons/fa";
+import { SiJirasoftware } from "react-icons/si";
 
 const navigationIcon = {
     chart: <FaChartBar />,
     users: <FaUsers />,
-    add: <FaUserPlus />
+    products: <SiJirasoftware />,
+    orders: <FaStickyNote />
 }
 
 export default navigationIcon

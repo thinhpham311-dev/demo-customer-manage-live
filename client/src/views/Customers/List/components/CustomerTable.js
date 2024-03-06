@@ -12,11 +12,6 @@ import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
 import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 
-// const inventoryStatusColor = {
-// 	0: { label: 'In Stock', dotClass: 'bg-emerald-500', textClass: 'text-emerald-500' },
-// 	1: { label: 'Limited', dotClass: 'bg-amber-500', textClass: 'text-amber-500' },
-// 	2: { label: 'Out of Stock', dotClass: 'bg-red-500', textClass: 'text-red-500' },
-// }
 
 const ActionColumn = ({ row }) => {
 
@@ -25,7 +20,7 @@ const ActionColumn = ({ row }) => {
 	const navigate = useNavigate()
 
 	const onEdit = () => {
-		navigate(`/app/edit/${row.id}`)
+		navigate(`/app/customers/edit/${row.id}`)
 	}
 
 	const onDelete = () => {
@@ -74,22 +69,9 @@ const CustomerTable = () => {
 			sortable: true,
 		},
 		{
-			Header: 'Sản phẩm',
-			accessor: 'products',
-			sortable: true,
-		},
-		{
 			Header: 'Email',
 			accessor: 'email',
 			sortable: true,
-		},
-		{
-			Header: 'ID',
-			accessor: 'id_client',
-		},
-		{
-			Header: 'Key Active',
-			accessor: 'active',
 		},
 		{
 			Header: 'Đơn hàng',
@@ -106,23 +88,29 @@ const CustomerTable = () => {
 	], [])
 
 	const onPaginationChange = page => {
-		const newTableData = cloneDeep(tableData)
-		newTableData.pageIndex = page
-		dispatch(setTableData(newTableData))
+		if (tableData) {
+			const newTableData = cloneDeep(tableData)
+			newTableData.pageIndex = page
+			dispatch(setTableData(newTableData))
+		}
 	}
 
 	const onSelectChange = value => {
-		const newTableData = cloneDeep(tableData)
-		newTableData.pageSize = Number(value)
-		newTableData.pageIndex = 1
-		dispatch(setTableData(newTableData))
+		if (tableData) {
+			const newTableData = cloneDeep(tableData)
+			newTableData.pageSize = Number(value)
+			newTableData.pageIndex = 1
+			dispatch(setTableData(newTableData))
+		}
 	}
 
 	const onSort = (sort, sortingColumn) => {
-		const newTableData = cloneDeep(tableData)
-		newTableData.sort = sort
-		dispatch(setTableData(newTableData))
-		dispatch(setSortedColumn(sortingColumn))
+		if (tableData) {
+			const newTableData = cloneDeep(tableData)
+			newTableData.sort = sort
+			dispatch(setTableData(newTableData))
+			dispatch(setSortedColumn(sortingColumn))
+		}
 	}
 
 	return (
@@ -133,6 +121,7 @@ const CustomerTable = () => {
 				skeletonAvatarColumns={[0]}
 				skeletonAvatarProps={{ className: 'rounded-md' }}
 				loading={loading}
+				isPaginate={true}
 				pagingData={tableData}
 				onPaginationChange={onPaginationChange}
 				onSelectChange={onSelectChange}

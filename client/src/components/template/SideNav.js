@@ -82,7 +82,7 @@ const SideNav = () => {
 						)
 					}
 				>
-					<div className="side-nav-header ">
+					<div className="side-nav-header">
 						<Logo
 							mode={logoMode()}
 							type={sideNavCollapse ? 'streamline' : 'full'}

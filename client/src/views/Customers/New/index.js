@@ -1,43 +1,43 @@
 import React from 'react'
-import ProductForm from 'views/Customers/Form'
+import CustomerForm from 'views/Customers/Form'
 import { toast, Notification } from 'components/ui'
 import { useNavigate } from 'react-router-dom'
 import { apiCreateCustomer } from 'services/CustomersService'
 
-const ProductNew = () => {
-
+const CustomerNew = () => {
 	const navigate = useNavigate()
 
-	const addProduct = async (data) => {
+
+	const addCustomer = async (data) => {
 		const response = await apiCreateCustomer(data)
 		return response.data
 	}
 
 	const handleFormSubmit = async (values, setSubmitting) => {
 		setSubmitting(true)
-		const success = await addProduct(values)
+		const success = await addCustomer(values)
 		setSubmitting(false)
 		if (success) {
 			toast.push(
-				<Notification title={'Successfuly added'} type="success" duration={2500}>
-					Product successfuly added
+				<Notification title={'Đã thêm thành công'} type="success" duration={2500}>
+					Đã thêm khách hàng thành công
 				</Notification>
 				, {
 					placement: 'top-center'
 				}
 			)
-			navigate('/app/list')
+			navigate('/app/customers/list')
 		}
 
 	}
 
 	const handleDiscard = () => {
-		navigate('/app/list')
+		navigate('/app/customers/list')
 	}
 
 	return (
 		<>
-			<ProductForm
+			<CustomerForm
 				type="new"
 				onFormSubmit={handleFormSubmit}
 				onDiscard={handleDiscard}
@@ -46,4 +46,4 @@ const ProductNew = () => {
 	)
 }
 
-export default ProductNew
+export default CustomerNew

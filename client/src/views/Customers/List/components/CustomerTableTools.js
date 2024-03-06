@@ -1,6 +1,9 @@
 import React from 'react'
 import { Button } from 'components/ui'
-import { HiDownload, HiPlusCircle } from 'react-icons/hi'
+import {
+	// HiDownload,
+	HiPlusCircle
+} from 'react-icons/hi'
 import CustomerTableSearch from './CustomerTableSearch'
 // import CustomerFilter from './CustomerFilter'
 import { Link } from 'react-router-dom'
@@ -26,7 +29,7 @@ const CustomerTableTools = () => {
 			</Link> */}
 			<Link
 				className="block lg:inline-block md:mb-0 mb-4"
-				to="/app/new"
+				to="/app/customers/new"
 			>
 				<Button
 					block

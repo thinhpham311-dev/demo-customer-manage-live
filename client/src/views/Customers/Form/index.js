@@ -1,26 +1,23 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useState, useMemo } from 'react'
 import {
 	FormContainer, Button,
 } from 'components/ui'
 import { StickyFooter, ConfirmDialog } from 'components/shared'
 import { Form, Formik } from 'formik'
-import BasicInformationFields from './BasicInformationFields'
-import ProductsList from './ProductsList'
-import OrdersList from './OrdersList'
+import BasicInformationFields from './components/BasicInformationFields'
+import OrderTable from './components/OrderTable'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
 import * as Yup from 'yup'
-
+import isEmpty from 'lodash/isEmpty'
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required('Tên khách hàng không được để trống'),
-	products: Yup.string().required('Vui lòng chọn sản phẩm'),
 	email: Yup.string().required('Email không được để trống').email("Email không đúng định dạng"),
-	id_client: Yup.string().required('ID không được để trống'),
 })
 
-const DeleteProductButton = ({ onDelete }) => {
+const DeleteCustomerButton = ({ onDelete }) => {
 
 	const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -66,11 +63,16 @@ const DeleteProductButton = ({ onDelete }) => {
 	)
 }
 
-const ProductForm = forwardRef((props, ref) => {
+const CustomerForm = forwardRef((props, ref) => {
 
-	const { type, initialData, onFormSubmit, onDiscard, onDelete } = props
+	const { type, initialData, onFormSubmit, onDiscard, onDelete,
+		dataOrderList, loadingOrder, dataProductList, loadingProduct
+	} = props
 
-	// const newId = useUniqueId('product-')
+	// const _sum = useMemo(() => dataOrderList?.map((item) => item.total_price)?.reduce(
+	// 	(accumulator, currentValue) => accumulator + currentValue, initialData.total_order
+	// ), [dataOrderList, initialData.total_order])
+
 
 	return (
 		<>
@@ -78,41 +80,29 @@ const ProductForm = forwardRef((props, ref) => {
 				innerRef={ref}
 				initialValues={{
 					...initialData,
-					// products: initialData?.products ? initialData.products.map(value => ({ label: value, value })) : []
+					// total_order: type === "edit" && _sum > 0 ? _sum : 0
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
-					console.log(formData)
-					// formData.products = formData.products.map(product => product.value)
-					// if (type === 'new') {
-					// 	formData.id = newId
-					// 	if (formData.imgList.length > 0) {
-					// 		formData.img = formData.imgList[0].img
-					// 	}
-					// }
 					onFormSubmit?.(formData, setSubmitting)
 				}}
 			>
 				{({ values, touched, errors, isSubmitting }) => (
 					<Form className="h-full">
 						<FormContainer className="h-full flex flex-col justify-between">
-							<BasicInformationFields touched={touched} errors={errors} values={values} />
-							<div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
 
-								<div className="lg:col-span-2">
-									<ProductsList />
-								</div>
-								<div className="lg:col-span-3">
-									<OrdersList />
-								</div>
-							</div>
+							<BasicInformationFields type={type} touched={touched} errors={errors} values={values} />
+
+							{type === 'edit' && <OrderTable dataOrderList={dataOrderList} loading={loadingOrder}
+								dataProductList={dataProductList} loadingProduct={loadingProduct}
+							/>}
 							<StickyFooter
 								className="-mx-8 px-8 flex items-center justify-between  py-4"
 								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
 							>
 								<div>
-									{type === 'edit' && <DeleteProductButton onDelete={onDelete} />}
+									{type === 'edit' && <DeleteCustomerButton onDelete={onDelete} />}
 								</div>
 								<div className="md:flex items-center">
 									<Button
@@ -142,16 +132,13 @@ const ProductForm = forwardRef((props, ref) => {
 	)
 })
 
-ProductForm.defaultProps = {
+CustomerForm.defaultProps = {
 	type: 'edit',
 	initialData: {
 		name: '',
-		products: '',
 		email: '',
-		id_client: '',
-		active: '',
 		total_order: 0
 	}
 }
 
-export default ProductForm
+export default CustomerForm
