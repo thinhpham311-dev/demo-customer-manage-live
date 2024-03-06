@@ -28,7 +28,6 @@ const BasicInformationFields = props => {
 
 	const { touched, errors, payDate, setPayDate, values, dataProductList, dataCustomerList } = props
 
-
 	const handleDatePickerChange = (date) => {
 		setPayDate(date)
 	}
@@ -84,7 +83,7 @@ const BasicInformationFields = props => {
 							{({ field, form }) => (
 								<Select
 									field={field}
-									placeholder="Chọn sản phẩm"
+									placeholder="Chọn khách hàng"
 									options={arrCustomers}
 									onChange={option => form.setFieldValue(field.name, option)}
 								/>

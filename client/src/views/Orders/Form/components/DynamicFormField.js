@@ -30,8 +30,8 @@ const DynamicFormField = (props) => {
             {
                 inputFields.map(inputField => (<div key={inputField.id}>
                     <AdaptableCard className="mb-4" divider>
-                        <div key={inputField.id} className="grid grid-cols-12 gap-4">
-                            <div className="col-span-4">
+                        <div key={inputField.id} className="grid xl:grid-cols-12 lg:grid-cols-10 gap-4">
+                            <div className="xl:col-span-4 lg:col-span-3">
                                 <label htmlFor="id_client">ID</label>
                                 <Input
                                     name="id_client"
@@ -40,7 +40,7 @@ const DynamicFormField = (props) => {
                                     onChange={event => handleChangeInput(inputField.id, event)}
                                 />
                             </div>
-                            <div className="col-span-7">
+                            <div className="xl:col-span-7 lg:col-span-6">
                                 <label htmlFor="active">Key active</label>
                                 <Input
                                     name="active"
@@ -49,8 +49,8 @@ const DynamicFormField = (props) => {
                                     onChange={event => handleChangeInput(inputField.id, event)}
                                 />
                             </div>
-                            <div className="col-span-1 flex items-end gap-4">
-                                <Button variant="twoTone" icon={<HiOutlineTrash />} disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
+                            <div className="xl:col-span-1 lg:col-span-1 flex items-end gap-4">
+                                <Button className="w-full" variant="twoTone" icon={<HiOutlineTrash />} disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                                     Xoá
                                 </Button>
                             </div>

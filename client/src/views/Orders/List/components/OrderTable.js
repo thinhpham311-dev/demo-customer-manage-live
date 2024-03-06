@@ -1,48 +1,56 @@
-import React, { useEffect, useMemo } from 'react'
-// import { Avatar, Badge } from 'components/ui'
+import React, { useEffect, useMemo, useState } from 'react'
 import { DataTable } from 'components/shared'
-// import { HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi'
-// import { FiPackage } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrders, setTableData } from '../store/dataSlice'
 import {
 	setSortedColumn,
-	//  setSelectedCustomer 
 } from '../store/stateSlice'
-// import { toggleDeleteConfirmation } from '../store/stateSlice'
-// import useThemeClass from 'utils/hooks/useThemeClass'
-// // import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
-// import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
+import moment from 'moment'
+import { Button, Drawer } from 'components/ui'
+import OrderDynamicForm from './OrderDynamicForm'
+import { MdOutlinePreview } from "react-icons/md";
 
 
-// const ActionColumn = ({ row }) => {
 
-// 	const dispatch = useDispatch()
-// 	const { textTheme } = useThemeClass()
-// 	const navigate = useNavigate()
+const OrderColumn = ({ row }) => {
+	return (
+		<div className="flex items-center">
+			{moment(row.pay_date?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)}
+		</div>
+	)
+}
 
-// 	const onEdit = () => {
-// 		navigate(`/app/orders/edit/${row.id}`)
-// 	}
+const OrderColumnPopup = ({ row }) => {
+	const [horizontalOpen, setHorizontalOpen] = useState(false)
 
-// 	const onDelete = () => {
-// 		dispatch(toggleDeleteConfirmation(true))
-// 		dispatch(setSelectedCustomer(row.id))
-// 	}
+	const activeString = row.active.split(',')
 
-// 	return (
-// 		<div className="flex justify-end text-lg">
-// 			<span className={`cursor-pointer p-2 hover:${textTheme}`} onClick={onEdit}>
-// 				<HiOutlinePencil />
-// 			</span>
-// 			<span className="cursor-pointer p-2 hover:text-red-500" onClick={onDelete}>
-// 				<HiOutlineTrash />
-// 			</span>
-// 		</div>
-// 	)
-// }
+	const onHorizontalOpen = () => {
+		setHorizontalOpen(true)
+	}
 
+	const onDrawerClose = () => {
+		setHorizontalOpen(false)
+	}
+	return (
+		<>
+			<Button variant="twoTone" icon={<MdOutlinePreview />} size="sm" onClick={() => onHorizontalOpen()}>
+				Xem Key Active
+			</Button>
+			<Drawer
+				title="Cập nhật Key Active"
+				isOpen={horizontalOpen}
+				placement="bottom"
+				height={300}
+				onClose={onDrawerClose}
+				onRequestClose={onDrawerClose}
+			>
+				<OrderDynamicForm activeStringList={activeString} row={row} />
+			</Drawer>
+		</>
+	)
+}
 
 const OrderTable = () => {
 
@@ -65,11 +73,11 @@ const OrderTable = () => {
 	}
 
 	const columns = useMemo(() => [
-		{
-			Header: 'Mã đơn hàng',
-			accessor: 'code',
-			sortable: true,
-		},
+		// {
+		// 	Header: 'Mã đơn hàng',
+		// 	accessor: 'code',
+		// 	sortable: true,
+		// },
 		{
 			Header: 'Sản phẩm',
 			accessor: 'products',
@@ -78,11 +86,23 @@ const OrderTable = () => {
 		{
 			Header: 'ID - Key active',
 			accessor: 'active',
+			Cell: props => {
+				const row = props.row.original
+				return <OrderColumnPopup row={row} />
+			},
 		},
-
+		{
+			Header: 'Ngày bán',
+			accessor: 'pay_date',
+			sortable: true,
+			Cell: props => {
+				const row = props.row.original
+				return <OrderColumn row={row} />
+			},
+		},
 		{
 			Header: 'Tên khách hàng',
-			accessor: 'customerId',
+			accessor: 'customerName',
 			sortable: true,
 		},
 		{

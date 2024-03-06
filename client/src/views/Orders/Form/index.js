@@ -69,13 +69,12 @@ const OrderForm = forwardRef((props, ref) => {
 	const [payDate, setPayDate] = useState(null)
 
 
-
-
 	const handleAddFields = () => {
 		setInputFields([...inputFields, { id: uuidv4(), id_client: '', active: '' }])
 	}
 
 	const { type, initialData, onFormSubmit, onDiscard, onDelete } = props
+
 	return (
 		<>
 			<Formik
@@ -88,6 +87,7 @@ const OrderForm = forwardRef((props, ref) => {
 				// validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
+					formData.customerName = formData.customerId.label
 					formData.customerId = formData.customerId.value
 					formData.code = uuidv4()
 					formData.products = formData.products.map(product => product.value).toString()
@@ -98,59 +98,59 @@ const OrderForm = forwardRef((props, ref) => {
 					onFormSubmit?.(formData, setSubmitting)
 				}}
 			>
-				{({ values, touched, errors, isSubmitting }) => (
-					<Form className="h-full">
-						<FormContainer className="h-full flex flex-col justify-between">
-							<div>
-								<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
+				{({ values, touched, errors, isSubmitting }) => (<Form className="h-full">
+					<FormContainer className="h-full flex flex-col justify-between">
+						<div>
+							<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
 
-								<div className="flex items-center gap-10">
-									<h5>Danh sách ID - Key active</h5>
+							<div className="flex items-center gap-10">
+								<h5>Danh sách ID - Key active</h5>
 
-									<Button
-										type="button"
-										size="sm"
-										variant="twoTone"
-										icon={<HiPlusCircle />}
-										onClick={handleAddFields}
-									>
-										Thêm
-									</Button>
-								</div>
-								<div className="grid grid-cols-1">
-									<DynamicFormField inputFields={inputFields} setInputFields={setInputFields} />
-								</div>
+								<Button
+									type="button"
+									size="sm"
+									variant="twoTone"
+									icon={<HiPlusCircle />}
+									onClick={handleAddFields}
+								>
+									Thêm
+								</Button>
 							</div>
-							<StickyFooter
-								className="-mx-8 px-8 flex items-center justify-between  py-4"
-								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-							>
-								<div>
-									{type === 'edit' && <DeleteOrderButton onDelete={onDelete} />}
-								</div>
-								<div className="md:flex items-center">
-									<Button
-										size="sm"
-										className="ltr:mr-3 rtl:ml-3"
-										onClick={() => onDiscard?.()}
-										type="button"
-									>
-										Quay lại
-									</Button>
-									<Button
-										size="sm"
-										variant="solid"
-										loading={isSubmitting}
-										icon={<AiOutlineSave />}
-										type="submit"
-									>
-										Lưu
-									</Button>
-								</div>
-							</StickyFooter>
-						</FormContainer>
-					</Form>
-				)}
+							<div className="grid grid-cols-1">
+								<DynamicFormField inputFields={inputFields} setInputFields={setInputFields} />
+							</div>
+						</div>
+						<StickyFooter
+							className="px-8 flex items-center justify-between  py-4"
+							stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+						>
+							<div>
+								{type === 'edit' && <DeleteOrderButton onDelete={onDelete} />}
+							</div>
+							<div className="md:flex items-center">
+								<Button
+									size="sm"
+									className="ltr:mr-3 rtl:ml-3"
+									onClick={() => onDiscard?.()}
+									type="button"
+								>
+									Quay lại
+								</Button>
+								<Button
+									size="sm"
+									variant="solid"
+									loading={isSubmitting}
+									icon={<AiOutlineSave />}
+									type="submit"
+								>
+									Lưu
+								</Button>
+							</div>
+						</StickyFooter>
+					</FormContainer>
+				</Form>
+				)
+				}
 			</Formik>
 		</>
 	)

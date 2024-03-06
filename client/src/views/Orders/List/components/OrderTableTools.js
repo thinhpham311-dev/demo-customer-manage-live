@@ -1,12 +1,12 @@
 import React from 'react'
-// import { Button } from 'components/ui'
-// import {
-// 	// HiDownload,
-// 	HiPlusCircle
-// } from 'react-icons/hi'
+import { Button } from 'components/ui'
+import {
+	// HiDownload,
+	HiPlusCircle
+} from 'react-icons/hi'
 import OrderTableSearch from './OrderTableSearch'
 // import CustomerFilter from './CustomerFilter'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const CustomerTableTools = () => {
 	return (
@@ -27,7 +27,7 @@ const CustomerTableTools = () => {
 					Xuất
 				</Button>
 			</Link> */}
-			{/* <Link
+			<Link
 				className="block lg:inline-block md:mb-0 mb-4"
 				to="/app/orders/new"
 			>
@@ -39,7 +39,7 @@ const CustomerTableTools = () => {
 				>
 					Thêm đơn hàng
 				</Button>
-			</Link> */}
+			</Link>
 		</div>
 	)
 }

@@ -80,11 +80,9 @@ const ProductForm = forwardRef((props, ref) => {
 				{({ values, touched, errors, isSubmitting }) => (
 					<Form className="h-full">
 						<FormContainer className="h-full flex flex-col justify-between">
-							<div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-								<div className="lg:col-span-2">
-									<BasicInformationFields touched={touched} errors={errors} values={values} />
-								</div>
-							</div>
+
+							<BasicInformationFields touched={touched} errors={errors} values={values} />
+
 							<StickyFooter
 								className="-mx-8 px-8 flex items-center justify-between  py-4"
 								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"

@@ -26,3 +26,11 @@ export async function apiCreateOrder(data) {
         data
     })
 }
+
+export async function apiPutOrder(data) {
+    return ApiService.fetchData({
+        url: `/orders/update`,
+        method: 'put',
+        data
+    })
+}

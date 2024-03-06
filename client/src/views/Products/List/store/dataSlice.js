@@ -20,7 +20,7 @@ export const initialTableData = {
     pageSize: 10,
     query: '',
     sort: {
-        order: '',
+        order: 'desc',
         key: ''
     }
 }

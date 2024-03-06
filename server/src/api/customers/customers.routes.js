@@ -123,7 +123,6 @@ router.delete('/delete', isAuthenticated, async (req, res, next) => {
   }
 })
 
-
 router.post('/detail', isAuthenticated, async (req, res, next) => {
   try {
     const { id } = req.body;

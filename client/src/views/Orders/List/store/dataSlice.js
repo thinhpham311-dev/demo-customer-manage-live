@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
     apiGetOrderList,
-    // apiDeleteCustomer
+    apiPutOrder
 } from 'services/OrdersService'
 
 export const getOrders = createAsyncThunk('orderListSlice/order/getOrders', async (data) => {
@@ -9,6 +9,11 @@ export const getOrders = createAsyncThunk('orderListSlice/order/getOrders', asyn
     return response.data
 })
 
+export const updateOrder = async (data) => {
+    console.log(data)
+    const response = await apiPutOrder(data)
+    return response.data
+}
 
 // export const deleteCustomer = async (data) => {
 //     const response = await apiDeleteCustomer(data)
@@ -21,7 +26,7 @@ export const initialTableData = {
     pageSize: 10,
     query: '',
     sort: {
-        order: '',
+        order: 'desc',
         key: ''
     }
 }

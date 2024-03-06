@@ -25,7 +25,7 @@ router.post('/list', isAuthenticated, async (req, res, next) => {
     let dataOrders = sanitizeOrders
     let total = orders.length
 
-    if ((key === 'total_price' || key === 'pay_date') && order) {
+    if ((key === 'total_price' || key === 'products' || key === 'pay_date' || key === 'customerName') && order) {
       dataOrders.sort(sortBy(key, order === 'desc', (a) => a.toUpperCase()))
     } else {
       dataOrders.sort(sortBy(key, order === 'desc', parseInt))
@@ -49,39 +49,6 @@ router.post('/list', isAuthenticated, async (req, res, next) => {
   }
 });
 
-router.post('/listByCustomerId', isAuthenticated, async (req, res, next) => {
-  try {
-    const { userId } = req.payload
-    const { pageIndex, pageSize, sort, query, data } = req.body
-    const { order, key } = sort
-    const orders = await findManyOrderByCustomerId({ id: data.id, userId })
-    const sanitizeOrders = orders.filter(elm => typeof elm !== 'function')
-    let dataOrders = sanitizeOrders
-    let total = orders.length
-
-    if ((key === 'total_price' || key === 'pay_date') && order) {
-      dataOrders.sort(sortBy(key, order === 'desc', (a) => a.toUpperCase()))
-    } else {
-      dataOrders.sort(sortBy(key, order === 'desc', parseInt))
-    }
-
-    if (query) {
-      dataOrders = wildCardSearch(dataOrders, query)
-      total = dataOrders.length
-    }
-
-    dataOrders = paginate(dataOrders, pageSize, pageIndex)
-
-    const responseData = {
-      data: dataOrders,
-      total: total
-    }
-
-    res.json(responseData);
-  } catch (err) {
-    next(err);
-  }
-});
 
 router.post('/create', isAuthenticated, async (req, res, next) => {
   try {
@@ -98,7 +65,7 @@ router.put('/update', isAuthenticated, async (req, res, next) => {
   try {
     const data = req.body;
     const { userId } = req.payload
-    const orderUpdate = await updateOrder({ data, code: uuidv4(), userId });
+    const orderUpdate = await updateOrder({ data, userId });
     res.json(orderUpdate)
   } catch (err) {
     next(err)

@@ -39,7 +39,6 @@ function updateOrder({ data, userId }) {
       data: {
         ...data,
         userId,
-        code,
         total_price: Number(data.total_price)
       }
     }

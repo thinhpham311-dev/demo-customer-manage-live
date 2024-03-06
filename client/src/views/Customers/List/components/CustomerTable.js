@@ -11,7 +11,7 @@ import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
 import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
-
+import moment from 'moment'
 
 const ActionColumn = ({ row }) => {
 
@@ -39,6 +39,15 @@ const ActionColumn = ({ row }) => {
 		</div>
 	)
 }
+
+const CustomerColumn = ({ row }) => {
+	return (
+		<div className="flex items-center">
+			{moment(row.createdAt?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)}
+		</div>
+	)
+}
+
 
 
 const CustomerTable = () => {
@@ -76,6 +85,15 @@ const CustomerTable = () => {
 		{
 			Header: 'Đơn hàng',
 			accessor: 'total_order',
+		},
+		{
+			Header: 'Ngày tạo',
+			accessor: 'createdAt',
+			sortable: true,
+			Cell: props => {
+				const row = props.row.original
+				return <CustomerColumn row={row} />
+			},
 		},
 		{
 			Header: '',

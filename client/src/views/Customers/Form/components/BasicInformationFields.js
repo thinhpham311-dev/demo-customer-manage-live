@@ -30,7 +30,7 @@ const BasicInformationFields = props => {
 	return (
 		<AdaptableCard className="mb-4" divider>
 			<h5 className="mb-3">Thông tin khách hàng</h5>
-			<div className="grid grid-cols-3 gap-4">
+			<div className="grid lg:grid-cols-3 gap-4">
 				<div className="cols-span-1">
 
 					<FormItem
