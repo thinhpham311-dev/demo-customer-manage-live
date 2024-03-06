@@ -16,6 +16,7 @@ const CustomerNew = () => {
 	const handleFormSubmit = async (values, setSubmitting) => {
 		setSubmitting(true)
 		const success = await addCustomer(values)
+
 		setSubmitting(false)
 		if (success) {
 			toast.push(

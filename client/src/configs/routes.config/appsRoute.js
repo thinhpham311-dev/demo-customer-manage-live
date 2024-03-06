@@ -42,6 +42,15 @@ const appsRoute = [
         authority: [ADMIN, USER],
     },
     {
+        key: 'appsOrders.orderNew',
+        path: `${APP_PREFIX_PATH}/orders/new`,
+        component: React.lazy(() => import('views/Orders/New')),
+        authority: [ADMIN, USER],
+        meta: {
+            header: 'Thêm đơn hàng',
+        }
+    },
+    {
         key: 'appsOrders.orderList',
         path: `${APP_PREFIX_PATH}/orders/edit/:orderId`,
         component: React.lazy(() => import('views/Orders/Edit')),

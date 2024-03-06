@@ -24,7 +24,7 @@ const NumberFormatInput = ({ onValueChange, ...rest }) => {
 }
 
 const BasicInformationFields = props => {
-	const { touched, errors, type } = props
+	const { touched, errors, type, values } = props
 
 
 	return (
@@ -76,6 +76,7 @@ const BasicInformationFields = props => {
 										<NumberFormatInput
 											form={form}
 											field={field}
+											value={values.total_order}
 											placeholder="Nhập tổng đơn hàng"
 											customInput={PriceInput}
 											onValueChange={e => {

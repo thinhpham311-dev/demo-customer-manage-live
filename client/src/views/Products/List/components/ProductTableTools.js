@@ -37,7 +37,7 @@ const ProductTableTools = () => {
 					size="sm"
 					icon={<HiPlusCircle />}
 				>
-					Sản phẩm
+					Thêm sản phẩm
 				</Button>
 			</Link>
 		</div>

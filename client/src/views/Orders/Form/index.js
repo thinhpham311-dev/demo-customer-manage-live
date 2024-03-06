@@ -1,25 +1,22 @@
-import React, {
-	forwardRef, useState,
-	//  useMemo
-} from 'react'
+import React, { forwardRef, useState } from 'react'
 import {
 	FormContainer, Button,
 } from 'components/ui'
 import { StickyFooter, ConfirmDialog } from 'components/shared'
 import { Form, Formik } from 'formik'
 import BasicInformationFields from './components/BasicInformationFields'
-// import OrderTable from './components/OrderTable'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
-import * as Yup from 'yup'
+import { v4 as uuidv4 } from 'uuid';
+import DynamicFormField from './components/DynamicFormField'
+import { HiPlusCircle } from 'react-icons/hi'
 
-const validationSchema = Yup.object().shape({
-	name: Yup.string().required('Tên khách hàng không được để trống'),
-	email: Yup.string().required('Email không được để trống').email("Email không đúng định dạng"),
-})
+// const validationSchema = Yup.object().shape({
+// 	name: Yup.string().required('Tên khách hàng không được để trống'),
+// })
 
-const DeleteCustomerButton = ({ onDelete }) => {
+const DeleteOrderButton = ({ onDelete }) => {
 
 	const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -58,43 +55,78 @@ const DeleteCustomerButton = ({ onDelete }) => {
 				confirmButtonColor="red-600"
 			>
 				<p>
-					Bạn có chắc xoá sản phẩm này không?
+					Bạn có chắc xoá đơn hàng này không?
 				</p>
 			</ConfirmDialog>
 		</>
 	)
 }
 
-const CustomerForm = forwardRef((props, ref) => {
+const OrderForm = forwardRef((props, ref) => {
+	const [inputFields, setInputFields] = useState([
+		{ id: uuidv4(), id_client: '', active: '' },
+	]);
+	const [payDate, setPayDate] = useState(null)
 
-	const { type, initialData, onFormSubmit, onDiscard, onDelete,
-	} = props
 
+
+
+	const handleAddFields = () => {
+		setInputFields([...inputFields, { id: uuidv4(), id_client: '', active: '' }])
+	}
+
+	const { type, initialData, onFormSubmit, onDiscard, onDelete } = props
 	return (
 		<>
 			<Formik
 				innerRef={ref}
 				initialValues={{
 					...initialData,
+					products: initialData?.products ? initialData.products.split().map(value => ({ label: value, value })) : [],
+					active: initialData?.active ? initialData.map(value => ({ label: value, value })) : []
 				}}
-				validationSchema={validationSchema}
+				// validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
+					formData.customerId = formData.customerId.value
+					formData.code = uuidv4()
+					formData.products = formData.products.map(product => product.value).toString()
+					formData.active = inputFields.map(active => {
+						return `${active.id_client}-${active.active}`
+					}).toString()
+					formData.pay_date = payDate.toString()
 					onFormSubmit?.(formData, setSubmitting)
 				}}
 			>
 				{({ values, touched, errors, isSubmitting }) => (
 					<Form className="h-full">
 						<FormContainer className="h-full flex flex-col justify-between">
+							<div>
+								<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
 
-							<BasicInformationFields type={type} touched={touched} errors={errors} values={values} />
+								<div className="flex items-center gap-10">
+									<h5>Danh sách ID - Key active</h5>
 
+									<Button
+										type="button"
+										size="sm"
+										variant="twoTone"
+										icon={<HiPlusCircle />}
+										onClick={handleAddFields}
+									>
+										Thêm
+									</Button>
+								</div>
+								<div className="grid grid-cols-1">
+									<DynamicFormField inputFields={inputFields} setInputFields={setInputFields} />
+								</div>
+							</div>
 							<StickyFooter
 								className="-mx-8 px-8 flex items-center justify-between  py-4"
 								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
 							>
 								<div>
-									{type === 'edit' && <DeleteCustomerButton onDelete={onDelete} />}
+									{type === 'edit' && <DeleteOrderButton onDelete={onDelete} />}
 								</div>
 								<div className="md:flex items-center">
 									<Button
@@ -124,12 +156,14 @@ const CustomerForm = forwardRef((props, ref) => {
 	)
 })
 
-CustomerForm.defaultProps = {
+OrderForm.defaultProps = {
 	type: 'edit',
 	initialData: {
-		name: '',
-		email: '',
+		code: '',
+		products: '',
+		pay_date: '',
+		total_price: 0
 	}
 }
 
-export default CustomerForm
+export default OrderForm

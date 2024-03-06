@@ -9,6 +9,7 @@ export const getOrders = createAsyncThunk('orderListSlice/order/getOrders', asyn
     return response.data
 })
 
+
 // export const deleteCustomer = async (data) => {
 //     const response = await apiDeleteCustomer(data)
 //     return response.data

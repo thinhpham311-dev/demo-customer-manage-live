@@ -61,7 +61,16 @@ const appsNavigationConfig = [
 				type: NAV_ITEM_TYPE_ITEM,
 				authority: [ADMIN, USER],
 				subMenu: []
-			}
+			},
+			{
+				key: 'appsOrders.orderNew',
+				path: `${APP_PREFIX_PATH}/orders/new`,
+				title: 'Tạo đơn hàng',
+				translateKey: 'nav.appsOrders.orderNew',
+				type: NAV_ITEM_TYPE_ITEM,
+				authority: [ADMIN, USER],
+				subMenu: []
+			},
 		]
 	},
 	{

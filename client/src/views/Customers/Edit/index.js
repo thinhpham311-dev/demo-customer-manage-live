@@ -3,7 +3,7 @@ import { Loading, DoubleSidedImage } from 'components/shared'
 import { toast, Notification } from 'components/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getCustomer, updateCustomer, deleteCustomer, getOrdersByCustomerId, getProducts } from './store/dataSlice'
+import { getCustomer, updateCustomer, deleteCustomer } from './store/dataSlice'
 import CustomerForm from 'views/Customers/Form'
 import isEmpty from 'lodash/isEmpty'
 import reducer from './store'
@@ -17,28 +17,12 @@ const CustomerEdit = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
 
-	const { pageIndex, pageSize, sort, query } = useSelector((state) => state.customerEdit.data.tableData)
-
 	const customerData = useSelector((state) => state.customerEdit.data.customerData)
 	const loading = useSelector((state) => state.customerEdit.data.loading)
-	const orderData = useSelector((state) => state.customerEdit.data.orderList)
-	const loadingOrder = useSelector((state) => state.customerEdit.data.loadingOrder)
-	const productData = useSelector((state) => state.customerEdit.data.productList)
-	const loadingProduct = useSelector((state) => state.customerEdit.data.loadingProduct)
-
 
 	const fetchData = (data) => {
 		dispatch(getCustomer(data))
 	}
-
-	const fetchDataOrderList = (data) => {
-		dispatch(getOrdersByCustomerId({ data, pageIndex, pageSize, sort, query }))
-	}
-
-	const fetchDataProductList = () => {
-		dispatch(getProducts({ pageIndex, pageSize, sort, query }))
-	}
-
 
 	const handleFormSubmit = async (values, setSubmitting) => {
 		setSubmitting(true)
@@ -74,18 +58,6 @@ const CustomerEdit = () => {
 	}
 
 	useEffect(() => {
-		fetchDataProductList()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pageIndex, pageSize, sort])
-
-	useEffect(() => {
-		const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-		const rquestParam = { id: path }
-		fetchDataOrderList(rquestParam)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pageIndex, pageSize, sort, location.pathname])
-
-	useEffect(() => {
 		const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
 		const rquestParam = { id: path }
 		fetchData(rquestParam)
@@ -100,10 +72,6 @@ const CustomerEdit = () => {
 						<CustomerForm
 							type="edit"
 							initialData={customerData}
-							loadingOrder={loadingOrder}
-							dataOrderList={orderData}
-							loadingProduct={loadingProduct}
-							dataProductList={productData}
 							onFormSubmit={handleFormSubmit}
 							onDiscard={handleDiscard}
 							onDelete={handleDelete}
