@@ -1,6 +1,7 @@
 const express = require('express');
 const { isAuthenticated } = require('../../middlewares');
 const { findManyCustomers, createCustomer, updateCustomer, findCustomerById, deleteCustomer } = require('./customers.services');
+const { deleteOrderByCustomerId } = require('../orders/orders.services')
 const wildCardSearch = require('../../utils/wildCardSearch')
 const sortBy = require('../../utils/sortBy')
 const paginate = require('../../utils/paginate')
@@ -56,9 +57,10 @@ router.post('/dashboard', isAuthenticated, async (req, res, next) => {
 
 router.post('/list', isAuthenticated, async (req, res, next) => {
   try {
+    const { userId } = req.payload
     const { pageIndex, pageSize, sort, query } = req.body
     const { order, key } = sort
-    const customers = await findManyCustomers()
+    const customers = await findManyCustomers({ userId })
     const sanitizeCustomers = customers.filter(elm => typeof elm !== 'function')
     let data = sanitizeCustomers
     let total = customers.length
@@ -114,7 +116,8 @@ router.delete('/delete', isAuthenticated, async (req, res, next) => {
     const data = req.body;
     const { userId } = req.payload
     const customerDelete = await deleteCustomer({ data, userId });
-    res.json(customerDelete)
+    const customerDeleteByCustomerId = await deleteOrderByCustomerId({ customerId: data.id })
+    res.json({ customerDelete, customerDeleteByCustomerId })
   } catch (err) {
     next(err)
   }

@@ -2,8 +2,12 @@ const bcrypt = require('bcrypt');
 const { db } = require('../../utils/db');
 
 
-function findManyProducts() {
-  return db.product.findMany();
+function findManyProducts({ userId }) {
+  return db.product.findMany({
+    where: {
+      userId
+    }
+  });
 }
 
 function findProductById({ id, userId }) {
@@ -17,6 +21,7 @@ function createProduct({ data, userId }) {
     {
       data: {
         ...data,
+        price: Number(data.price),
         userId
       }
     }

@@ -1,7 +1,15 @@
 const { db } = require('../../utils/db');
 
-function findManyOrders() {
-  return db.order.findMany();
+function findManyOrders({ userId }) {
+  return db.order.findMany({
+    where: { userId },
+  });
+}
+
+function findManyOrderByCustomerId({ id, userId }) {
+  return db.order.findMany({
+    where: { customerId: Number(id), userId },
+  });
 }
 
 function findOrderById({ id, userId }) {
@@ -10,12 +18,14 @@ function findOrderById({ id, userId }) {
   })
 }
 
-function createOrder({ data, userId }) {
+function createOrder({ data, userId, code }) {
   return db.order.create(
     {
       data: {
         ...data,
-        userId
+        userId,
+        code,
+        total_price: Number(data.total_price)
       }
     }
   )
@@ -29,12 +39,14 @@ function updateOrder({ data, userId }) {
       data: {
         ...data,
         userId,
+        code,
+        total_price: Number(data.total_price)
       }
     }
   )
 }
 
-function deleteOrder({ data, userId }) {
+function deleteOrder({ data }) {
   const { id } = data
   return db.order.delete(
     {
@@ -43,8 +55,19 @@ function deleteOrder({ data, userId }) {
   )
 }
 
+function deleteOrderByCustomerId({ customerId }) {
+  return db.order.deleteMany({
+    where: {
+      customerId
+    },
+  }
+  )
+}
+
 module.exports = {
   findManyOrders,
+  findManyOrderByCustomerId,
+  deleteOrderByCustomerId,
   createOrder,
   updateOrder,
   deleteOrder,

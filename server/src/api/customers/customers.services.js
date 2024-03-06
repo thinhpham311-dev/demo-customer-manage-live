@@ -2,8 +2,10 @@ const bcrypt = require('bcrypt');
 const { db } = require('../../utils/db');
 
 
-function findManyCustomers() {
-  return db.customer.findMany();
+function findManyCustomers({ userId }) {
+  return db.customer.findMany({
+    where: { userId }
+  });
 }
 
 function findCustomerById({ id, userId }) {
