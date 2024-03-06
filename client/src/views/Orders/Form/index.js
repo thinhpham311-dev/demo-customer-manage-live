@@ -87,8 +87,8 @@ const OrderForm = forwardRef((props, ref) => {
 				// validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
-					formData.customerName = formData.customerId.label
 					formData.customerId = formData.customerId.value
+					formData.customerName = formData.customerId.label
 					formData.code = uuidv4()
 					formData.products = formData.products.map(product => product.value).toString()
 					formData.active = inputFields.map(active => {
