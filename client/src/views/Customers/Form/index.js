@@ -129,6 +129,7 @@ CustomerForm.defaultProps = {
 	initialData: {
 		name: '',
 		email: '',
+		total_order: 0
 	}
 }
 

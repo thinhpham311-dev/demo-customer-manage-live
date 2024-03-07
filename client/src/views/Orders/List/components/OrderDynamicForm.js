@@ -89,7 +89,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
 
                                     <FieldArray name="active">
                                         {({ form, remove, push }) => (
-                                            <div>
+                                            <div className="grid gap-5">
                                                 {active && active.length > 0
                                                     ? active.map((_, index) => {
                                                         const id_clientFeedBack =
@@ -114,8 +114,9 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                             )
 
                                                         return (
-                                                            <div key={index}>
+                                                            <div key={index} className="border rounded-md p-3 lg:flex items-center">
                                                                 <FormItem
+                                                                    className="mb-0"
                                                                     label="ID"
                                                                     invalid={
                                                                         id_clientFeedBack.invalid
@@ -137,6 +138,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                     />
                                                                 </FormItem>
                                                                 <FormItem
+                                                                    className="mb-0"
                                                                     label="Key Active"
                                                                     invalid={
                                                                         activeFeedBack.invalid
@@ -159,6 +161,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                 </FormItem>
 
                                                                 <FormItem
+                                                                    className="mb-0"
                                                                     label="PC check"
                                                                     invalid={
                                                                         pccheckFeedBack.invalid
@@ -180,6 +183,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                     />
                                                                 </FormItem>
                                                                 <FormItem
+                                                                    className="mb-0"
                                                                     label="Loại key"
                                                                     invalid={
                                                                         key_typeFeedBack.invalid

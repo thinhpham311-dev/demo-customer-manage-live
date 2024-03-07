@@ -42,7 +42,7 @@ const OrderColumnPopup = ({ row }) => {
 				title={`Cập nhật Key Active của khách hàng: ${row.customerName} có email là : ${row.customerEmail}`}
 				isOpen={horizontalOpen}
 				placement="bottom"
-				height={300}
+				height={700}
 				onClose={onDrawerClose}
 				onRequestClose={onDrawerClose}
 			>

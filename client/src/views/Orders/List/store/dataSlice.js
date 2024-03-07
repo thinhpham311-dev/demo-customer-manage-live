@@ -22,7 +22,7 @@ export const initialTableData = {
     query: '',
     sort: {
         order: 'desc',
-        key: ''
+        key: 'createdAt'
     }
 }
 

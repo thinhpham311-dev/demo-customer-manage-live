@@ -20,7 +20,7 @@ const DynamicFormField = ({ active }) => {
 
                 <FieldArray name="active">
                     {({ form, remove, push }) => (
-                        <div>
+                        <div className="grid gap-5 relative">
                             {active && active.length > 0
                                 ? active.map((_, index) => {
                                     const id_clientFeedBack =
@@ -46,8 +46,9 @@ const DynamicFormField = ({ active }) => {
                                         )
 
                                     return (
-                                        <div key={index}>
+                                        <div key={index} className="border rounded-md p-3 lg:flex items-center">
                                             <FormItem
+                                                className="mb-0"
                                                 label="ID"
                                                 invalid={
                                                     id_clientFeedBack.invalid
@@ -69,6 +70,7 @@ const DynamicFormField = ({ active }) => {
                                                 />
                                             </FormItem>
                                             <FormItem
+                                                className="mb-0"
                                                 label="Key Active"
                                                 invalid={
                                                     activeFeedBack.invalid
@@ -90,6 +92,7 @@ const DynamicFormField = ({ active }) => {
                                                 />
                                             </FormItem>
                                             <FormItem
+                                                className="mb-0"
                                                 label="PC check"
                                                 invalid={
                                                     pcCheckFeedBack.invalid
@@ -111,6 +114,7 @@ const DynamicFormField = ({ active }) => {
                                                 />
                                             </FormItem>
                                             <FormItem
+                                                className="mb-0"
                                                 label="Loại Key"
                                                 invalid={
                                                     key_typeFeedBack.invalid
@@ -131,25 +135,30 @@ const DynamicFormField = ({ active }) => {
                                                     }
                                                 />
                                             </FormItem>
-                                            <Button
-                                                shape="circle"
-                                                size="sm"
-                                                type="button"
-                                                icon={
-                                                    <HiMinus />
-                                                }
-                                                onClick={() =>
-                                                    remove(
-                                                        index
-                                                    )
-                                                }
-                                            />
+                                            <FormItem className=" items-center justify-center p-0 mb-0">
+                                                <Button
+                                                    className="mx-auto"
+                                                    shape="circle"
+                                                    size="sm"
+                                                    type="button"
+                                                    icon={
+                                                        <HiMinus />
+                                                    }
+                                                    onClick={() =>
+                                                        remove(
+                                                            index
+                                                        )
+                                                    }
+                                                />
+                                            </FormItem>
+
                                         </div>
                                     )
                                 })
                                 : null}
                             <div className="w-full sticky bottom-0 left-0 bg-white p-5 flex items-center gap-3">
                                 <Button
+                                    className="mx-auto block"
                                     type="button"
                                     size="sm"
                                     icon={<IoIosAddCircleOutline />}
