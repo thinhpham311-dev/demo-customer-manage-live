@@ -26,11 +26,14 @@ function useAuth() {
 			if (resp.data) {
 				const { accessToken } = resp.data
 				dispatch(onSignInSuccess(accessToken))
-				// if (resp.data.user) {
-				// 	dispatch(setUser(resp.data.user.authority || {
-				// 		authority: ['USER'],
-				// 	}))
-				// }
+				if (resp.data.user) {
+					dispatch(setUser(resp.data.user || {
+						avatar: '',
+						username: 'Anonymous',
+						authority: ['USER'],
+						email: ''
+					}))
+				}
 				const redirectUrl = query.get(REDIRECT_URL_KEY)
 				navigate(redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath)
 				return {
@@ -81,8 +84,8 @@ function useAuth() {
 		navigate(appConfig.unAuthenticatedEntryPath)
 	}
 
-	const signOut = async () => {
-		await apiSignOut()
+	const signOut = () => {
+		apiSignOut()
 		handleSignOut()
 	}
 

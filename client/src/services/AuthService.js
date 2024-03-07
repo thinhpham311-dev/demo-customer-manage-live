@@ -16,11 +16,11 @@ export async function apiSignUp(data) {
     })
 }
 
-export async function apiSignOut(data) {
+export async function apiSignOut() {
     return ApiService.fetchData({
         url: '/auth/sign-out',
         method: 'post',
-        data
+        // data
     })
 }
 

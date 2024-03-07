@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Avatar, Dropdown } from 'components/ui'
 import withHeaderItem from 'utils/hoc/withHeaderItem'
 import useAuth from 'utils/hooks/useAuth'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import {
 	HiOutlineLogout
 } from 'react-icons/hi'
-import { getProfileUser } from '../../store/auth/userSlice'
+// import { apiGetUser } from '../../services/UserService'
 import reducer from '../../store'
 import { injectReducer } from '../../store/index'
 
@@ -15,27 +15,15 @@ import { injectReducer } from '../../store/index'
 injectReducer('userSlice', reducer)
 
 export const UserDropdown = ({ className }) => {
-	const dispatch = useDispatch()
 
-	const fetchData = () => {
-		dispatch(getProfileUser())
-	}
-
-	const { username, avatar, authority } = useSelector((state) => state.auth.user.userData)
-	const { signedIn } = useSelector((state) => state.auth.session)
-
-	useEffect(() => {
-		fetchData()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [signedIn])
-
+	const { avatar, username, authority } = useSelector((state) => state.auth.user)
 	const { signOut } = useAuth()
 
 	const UserAvatar = (
 		<div className={classNames(className, 'flex items-center gap-2')}>
 			<Avatar size={32} shape="circle" src={avatar} />
 			<div className="hidden md:block">
-				<div className="text-xs capitalize">{authority[0] || 'guest'}</div>
+				<div className="text-xs capitalize">{authority || 'guest'}</div>
 				<div className="font-bold">{username}</div>
 			</div>
 		</div>
@@ -43,7 +31,7 @@ export const UserDropdown = ({ className }) => {
 
 	return (
 		<div>
-			<Dropdown menuStyle={{ minWidth: 240 }} renderTitle={signedIn && UserAvatar} placement="bottom-end">
+			<Dropdown menuStyle={{ minWidth: 240 }} renderTitle={UserAvatar} placement="bottom-end">
 				{/* <Dropdown.Item variant="header">
 					<div className="py-2 px-3 flex items-center gap-2">
 						<Avatar shape="circle" src={avatar} />

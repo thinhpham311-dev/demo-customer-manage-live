@@ -1,28 +1,18 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiGetUser } from 'services/UserService'
-
-export const getProfileUser = createAsyncThunk('userSlice/data/getProfileUser', async () => {
-    const response = await apiGetUser()
-    return response.data
-})
+import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-    userData: null
+    avatar: '',
+    username: '',
+    authority: []
 }
 
 export const userSlice = createSlice({
-    name: 'userSlice/data',
+    name: 'auth/user',
     initialState,
-    reducers: {},
-    extraReducers: {
-        [getProfileUser.fulfilled]: (state, action) => {
-            state.userData = action.payload
-            state.loading = false
-        },
-        [getProfileUser.pending]: (state) => {
-            state.loading = true
-        },
-    }
+    reducers: {
+        setUser: (_, action) => action.payload,
+        userLoggedOut: () => initialState,
+    },
 })
 
 export const { setUser } = userSlice.actions
