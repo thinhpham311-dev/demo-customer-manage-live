@@ -17,16 +17,17 @@ injectReducer('userSlice', reducer)
 export const UserDropdown = ({ className }) => {
 	const dispatch = useDispatch()
 
-	const { username, avatar, authority } = useSelector((state) => state.auth.user.userData)
-
 	const fetchData = () => {
 		dispatch(getProfileUser())
 	}
 
+	const { username, avatar, authority } = useSelector((state) => state.auth.user.userData)
+	const { signedIn } = useSelector((state) => state.auth.session)
+
 	useEffect(() => {
 		fetchData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [signedIn])
 
 	const { signOut } = useAuth()
 
@@ -42,7 +43,7 @@ export const UserDropdown = ({ className }) => {
 
 	return (
 		<div>
-			<Dropdown menuStyle={{ minWidth: 240 }} renderTitle={UserAvatar} placement="bottom-end">
+			<Dropdown menuStyle={{ minWidth: 240 }} renderTitle={signedIn && UserAvatar} placement="bottom-end">
 				{/* <Dropdown.Item variant="header">
 					<div className="py-2 px-3 flex items-center gap-2">
 						<Avatar shape="circle" src={avatar} />

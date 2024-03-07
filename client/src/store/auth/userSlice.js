@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { apiGetUser } from 'services/UserService'
 
-export const getProfileUser = createAsyncThunk('userSlice/data/getProfileUser', async (data) => {
-    const response = await apiGetUser(data)
+export const getProfileUser = createAsyncThunk('userSlice/data/getProfileUser', async () => {
+    const response = await apiGetUser()
     return response.data
 })
 
