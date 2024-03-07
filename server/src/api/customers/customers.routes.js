@@ -65,7 +65,7 @@ router.post('/list', isAuthenticated, async (req, res, next) => {
     let data = sanitizeCustomers
     let total = customers.length
 
-    if ((key === 'name' || key === 'products' || key === 'email' || key === 'total_order') && order) {
+    if ((key === 'name' || key === 'products' || key === 'email' || key === 'createdAt') && order) {
       data.sort(sortBy(key, order === 'desc', (a) => a.toUpperCase()))
     } else {
       data.sort(sortBy(key, order === 'desc', parseInt))
