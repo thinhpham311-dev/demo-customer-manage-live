@@ -57,7 +57,6 @@ const CustomerTable = () => {
 	const loading = useSelector((state) => state.customerListSlice.data.loading)
 	const data = useSelector((state) => state.customerListSlice.data.customerList)
 
-	console.log(data)
 
 	useEffect(() => {
 		fetchData()
