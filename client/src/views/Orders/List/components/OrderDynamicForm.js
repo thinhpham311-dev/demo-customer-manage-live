@@ -16,7 +16,9 @@ const validationSchema = Yup.object({
     activeList: Yup.array().of(
         Yup.object().shape({
             id_client: Yup.string().required('ID không được để trống'),
-            active: Yup.string().required('Active không được để trống')
+            active: Yup.string().required('Active không được để trống'),
+            pccheck: Yup.string().required('PC check không được để trống'),
+            key_type: Yup.string().required('Loại key không được để trống')
         })
     ),
 })
@@ -32,7 +34,15 @@ const fieldFeedback = (form, name) => {
 
 const OrderDynamicForm = ({ activeStringList, row }) => {
     const navigate = useNavigate()
-    const activeArrList = useMemo(() => activeStringList.map(element => { return { id_client: element.slice(0, element.search("-")), active: element.slice(element.search("-") + 1) } }), [activeStringList])
+    const activeArrList = useMemo(() => activeStringList && activeStringList.map(item => {
+        const activeItem = item.split("-")
+        return {
+            id_client: activeItem[0],
+            active: activeItem[1],
+            pccheck: activeItem[2],
+            key_type: activeItem[3]
+        }
+    }), [activeStringList])
 
     const handleFormSubmit = async (values, setSubmitting) => {
         setSubmitting(true)
@@ -60,37 +70,47 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{
-                    activeList: activeArrList
+                    active: activeArrList
                 }}
                 onSubmit={(values, { setSubmitting }) => {
                     const formData = cloneDeep(values)
-                    formData.active = formData.activeList?.map(active => {
-                        return `${active.id_client}-${active.active}`
+                    formData.active = formData?.active?.map(item => {
+                        return `${item.id_client}-${item.active}-${item.pccheck}-${item.key_type}`
                     }).toString()
                     handleFormSubmit?.(formData, setSubmitting)
                 }}
             >
                 {({ touched, errors, values, isSubmitting }) => {
-                    const activeList = values.activeList
+                    const active = values.active
                     return (
                         <Form>
                             <FormContainer layout="inline" >
                                 <div className="w-full">
 
-                                    <FieldArray name="activeList">
+                                    <FieldArray name="active">
                                         {({ form, remove, push }) => (
                                             <div>
-                                                {activeList && activeList.length > 0
-                                                    ? activeList.map((_, index) => {
+                                                {active && active.length > 0
+                                                    ? active.map((_, index) => {
                                                         const id_clientFeedBack =
                                                             fieldFeedback(
                                                                 form,
-                                                                `activeList[${index}].id_client`
+                                                                `active[${index}].id_client`
                                                             )
                                                         const activeFeedBack =
                                                             fieldFeedback(
                                                                 form,
-                                                                `activeList[${index}].active`
+                                                                `active[${index}].active`
+                                                            )
+                                                        const pccheckFeedBack =
+                                                            fieldFeedback(
+                                                                form,
+                                                                `active[${index}].pccheck`
+                                                            )
+                                                        const key_typeFeedBack =
+                                                            fieldFeedback(
+                                                                form,
+                                                                `active[${index}].key_type`
                                                             )
 
                                                         return (
@@ -109,7 +129,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                             id_clientFeedBack.invalid
                                                                         }
                                                                         placeholder="Nhập ID"
-                                                                        name={`activeList[${index}].id_client`}
+                                                                        name={`active[${index}].id_client`}
                                                                         type="text"
                                                                         component={
                                                                             Input
@@ -130,7 +150,50 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                             activeFeedBack.invalid
                                                                         }
                                                                         placeholder="Nhập Key active"
-                                                                        name={`activeList[${index}].active`}
+                                                                        name={`active[${index}].active`}
+                                                                        type="text"
+                                                                        component={
+                                                                            Input
+                                                                        }
+                                                                    />
+                                                                </FormItem>
+
+                                                                <FormItem
+                                                                    label="PC check"
+                                                                    invalid={
+                                                                        pccheckFeedBack.invalid
+                                                                    }
+                                                                    errorMessage={
+                                                                        pccheckFeedBack.errorMessage
+                                                                    }
+                                                                >
+                                                                    <Field
+                                                                        invalid={
+                                                                            pccheckFeedBack.invalid
+                                                                        }
+                                                                        placeholder="Nhập PC check"
+                                                                        name={`active[${index}].pccheck`}
+                                                                        type="text"
+                                                                        component={
+                                                                            Input
+                                                                        }
+                                                                    />
+                                                                </FormItem>
+                                                                <FormItem
+                                                                    label="Loại key"
+                                                                    invalid={
+                                                                        key_typeFeedBack.invalid
+                                                                    }
+                                                                    errorMessage={
+                                                                        key_typeFeedBack.errorMessage
+                                                                    }
+                                                                >
+                                                                    <Field
+                                                                        invalid={
+                                                                            key_typeFeedBack.invalid
+                                                                        }
+                                                                        placeholder="Nhập loại key"
+                                                                        name={`active[${index}].key_type`}
                                                                         type="text"
                                                                         component={
                                                                             Input
@@ -163,12 +226,14 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                             push({
                                                                 id_client: '',
                                                                 active: '',
+                                                                pccheck: '',
+                                                                key_type: ''
                                                             })
                                                         }}
                                                     >
                                                         Thêm Key Active
                                                     </Button>
-                                                    <Button
+                                                    {active && active?.length > 0 && <Button
                                                         type="submit"
                                                         variant="solid"
                                                         size="sm"
@@ -177,6 +242,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                     >
                                                         Lưu
                                                     </Button>
+                                                    }
                                                 </div>
                                             </div>
                                         )}

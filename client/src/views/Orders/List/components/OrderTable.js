@@ -39,7 +39,7 @@ const OrderColumnPopup = ({ row }) => {
 				Xem Key Active
 			</Button>
 			<Drawer
-				title="Cập nhật Key Active"
+				title={`Cập nhật Key Active của khách hàng: ${row.customerName} có email là : ${row.customerEmail}`}
 				isOpen={horizontalOpen}
 				placement="bottom"
 				height={300}
@@ -47,7 +47,7 @@ const OrderColumnPopup = ({ row }) => {
 				onRequestClose={onDrawerClose}
 			>
 				<OrderDynamicForm activeStringList={activeString} row={row} />
-			</Drawer>
+			</Drawer >
 		</>
 	)
 }
@@ -103,6 +103,11 @@ const OrderTable = () => {
 		{
 			Header: 'Tên khách hàng',
 			accessor: 'customerName',
+			sortable: true,
+		},
+		{
+			Header: 'Email khách hàng',
+			accessor: 'customerEmail',
 			sortable: true,
 		},
 		{

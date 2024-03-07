@@ -4,7 +4,7 @@ const stateSlice = createSlice({
     name: 'productListSlice/state',
     initialState: {
         deleteConfirmation: false,
-        selectedCustomer: '',
+        selectedProduct: '',
         sortedColumn: () => { },
     },
     reducers: {
@@ -15,7 +15,7 @@ const stateSlice = createSlice({
             state.sortedColumn = action.payload
         },
         setSelectedProduct: (state, action) => {
-            state.selectedCustomer = action.payload
+            state.selectedProduct = action.payload
         },
     },
 })

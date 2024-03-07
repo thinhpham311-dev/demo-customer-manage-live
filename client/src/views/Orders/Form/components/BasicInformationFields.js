@@ -3,26 +3,29 @@ import {
 	AdaptableCard,
 	// RichTextEditor
 } from 'components/shared'
-import { Input, FormItem, Select, DatePicker } from 'components/ui'
+import {
+	//  Input,
+	FormItem, Select, DatePicker
+} from 'components/ui'
 import { Field } from 'formik'
 import CreatableSelect from 'react-select/creatable'
-import NumberFormat from 'react-number-format'
+// import NumberFormat from 'react-number-format'
 
-const PriceInput = props => {
-	return <Input {...props} value={props.field.value} prefix="VND" />
-}
+// const PriceInput = props => {
+// 	return <Input {...props} value={props.field.value} prefix="VND" />
+// }
 
-const NumberFormatInput = ({ onValueChange, ...rest }) => {
-	return (
-		<NumberFormat
-			customInput={Input}
-			type="text"
-			onValueChange={onValueChange}
-			autoComplete="off"
-			{...rest}
-		/>
-	)
-}
+// const NumberFormatInput = ({ onValueChange, ...rest }) => {
+// 	return (
+// 		<NumberFormat
+// 			customInput={Input}
+// 			type="text"
+// 			onValueChange={onValueChange}
+// 			autoComplete="off"
+// 			{...rest}
+// 		/>
+// 	)
+// }
 
 const BasicInformationFields = props => {
 
@@ -35,22 +38,21 @@ const BasicInformationFields = props => {
 	const arrProducts = useMemo(() => dataProductList.map(item => {
 		return {
 			label: item.name,
-			value: item.name
+			value: item.price
 		};
 	}), [dataProductList]);
 
 	const arrCustomers = useMemo(() => dataCustomerList.map(item => {
 		return {
 			label: item.name,
-			value: item.id
+			value: `${item.id}-${item.email}`
 		};
 	}), [dataCustomerList]);
 
 	return (
 		<AdaptableCard className="mb-4" divider>
 			<h5 className="mb-3">Thông tin đơn hàng</h5>
-
-			<div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4 sticky left-0 top-0 bg-white py-[1.5rem]">
+			<div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 sticky left-0 top-0 bg-white py-[1.5rem]">
 				<div className="col-span-1">
 					<FormItem
 						label="Sản phẩm"
@@ -76,10 +78,10 @@ const BasicInformationFields = props => {
 				<div className="col-span-1">
 					<FormItem
 						label="Khách hàng"
-						invalid={errors.customerId && touched.customerId}
-						errorMessage={errors.customerId}
+						invalid={errors.customer && touched.customer}
+						errorMessage={errors.customer}
 					>
-						<Field name="customerId">
+						<Field name="customer">
 							{({ field, form }) => (
 								<Select
 									field={field}
@@ -103,31 +105,7 @@ const BasicInformationFields = props => {
 						/>
 					</FormItem>
 				</div>
-				<div className="col-span-1">
-					<FormItem
-						label="Tổng giá bán"
-						invalid={errors.total_price && touched.total_price}
-						errorMessage={errors.total_price}
-					>
-						<Field name="total_price">
-							{({ field, form }) => {
-								return (
-									<NumberFormatInput
-										form={form}
-										field={field}
-										placeholder="Nhập giá bán"
-										customInput={PriceInput}
-										onValueChange={e => {
-											form.setFieldValue(field.name, e.value)
-										}}
-									/>
-								)
-							}}
-						</Field>
-					</FormItem>
-				</div>
 			</div>
-
 		</AdaptableCard>
 	)
 }

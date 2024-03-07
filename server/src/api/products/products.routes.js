@@ -71,8 +71,8 @@ router.put('/update', isAuthenticated, async (req, res, next) => {
 router.delete('/delete', isAuthenticated, async (req, res, next) => {
   try {
     const data = req.body;
-    const { userId } = req.payload
-    const productDelete = await deleteProduct({ data, userId });
+    console.log(data)
+    const productDelete = await deleteProduct({ data });
     res.json(productDelete)
   } catch (err) {
     next(err)

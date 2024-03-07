@@ -1,29 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {
-    apiGetProductList
-    // , apiPutProduct, apiDeleteProduct 
-} from 'services/ProductsService'
+import { apiGetProduct, apiPutProduct, apiDeleteProduct } from 'services/ProductsService'
 
 export const getProduct = createAsyncThunk('productEdit/data/getProduct', async (data) => {
-    const response = await apiGetProductList(data)
+    const response = await apiGetProduct(data)
     return response.data
 })
 
-// export const updateCustomer = async (data) => {
-//     const response = await apiPutProduct(data)
-//     return response.data
-// }
+export const updateProduct = async (data) => {
+    const response = await apiPutProduct(data)
+    return response.data
+}
 
-// export const deleteCustomer = async (data) => {
-//     const response = await apiDeleteProduct(data)
-//     return response.data
-// }
+export const deleteProduct = async (data) => {
+    const response = await apiDeleteProduct(data)
+    return response.data
+}
 
 const dataSlice = createSlice({
     name: 'productEdit/data',
     initialState: {
         loading: false,
-        productData: [],
+        productData: null,
     },
     reducers: {
     },

@@ -11,8 +11,12 @@ function findManyProducts({ userId }) {
 }
 
 function findProductById({ id, userId }) {
+  console.log(id)
   return db.product.findFirst({
-    where: { id, userId },
+    where: {
+      id: Number(id),
+      userId
+    },
   })
 }
 
@@ -41,11 +45,11 @@ function updateProduct({ data, userId }) {
   )
 }
 
-function deleteProduct({ data, userId }) {
+function deleteProduct({ data }) {
   const { id } = data
   return db.product.delete(
     {
-      id
+      where: { id: Number(id) }
     }
   )
 }

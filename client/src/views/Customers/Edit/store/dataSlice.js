@@ -50,7 +50,7 @@ const dataSlice = createSlice({
     initialState: {
         loadingOrder: false,
         loading: false,
-        customerData: [],
+        customerData: null,
         orderList: [],
         productList: [],
         tableData: initialTableData,

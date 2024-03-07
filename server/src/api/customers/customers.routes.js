@@ -114,8 +114,7 @@ router.put('/update', isAuthenticated, async (req, res, next) => {
 router.delete('/delete', isAuthenticated, async (req, res, next) => {
   try {
     const data = req.body;
-    const { userId } = req.payload
-    const customerDelete = await deleteCustomer({ data, userId });
+    const customerDelete = await deleteCustomer({ data });
     const customerDeleteByCustomerId = await deleteOrderByCustomerId({ customerId: data.id })
     res.json({ customerDelete, customerDeleteByCustomerId })
   } catch (err) {

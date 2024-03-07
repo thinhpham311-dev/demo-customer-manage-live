@@ -20,7 +20,6 @@ function createCustomer({ data, userId }) {
       data: {
         ...data,
         userId,
-        total_order: Number(data.total_order)
       }
     }
   )
@@ -36,7 +35,6 @@ function updateCustomer({ data, userId }) {
       data: {
         ...data,
         userId,
-        total_order: Number(data.total_order)
       }
     }
   )

@@ -1,28 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Avatar, Dropdown } from 'components/ui'
 import withHeaderItem from 'utils/hoc/withHeaderItem'
 import useAuth from 'utils/hooks/useAuth'
-import { useSelector } from 'react-redux'
-// import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import {
-	// HiOutlineUser, HiOutlineCog,
 	HiOutlineLogout
 } from 'react-icons/hi'
-// import { FiActivity } from 'react-icons/fi'
+import { getProfileUser } from '../../store/auth/userSlice'
+import reducer from '../../store'
+import { injectReducer } from '../../store/index'
 
-// const dropdownItemList = [
-// 	{ label: 'Profile', path: '/app/account/settings/profile', icon: <HiOutlineUser /> },
-// 	{ label: 'Account Setting', path: '/app/account/settings/profile', icon: <HiOutlineCog /> },
-// 	{ label: 'Activity Log', path: '/app/account/activity-log', icon: <FiActivity /> },
-// ]
+
+injectReducer('userSlice', reducer)
 
 export const UserDropdown = ({ className }) => {
+	const dispatch = useDispatch()
 
-	const { avatar, username, authority,
-		// email
-	} = useSelector((state) => state.auth.user)
+	const { username, avatar, authority } = useSelector((state) => state.auth.user.userData)
 
+	const fetchData = () => {
+		dispatch(getProfileUser())
+	}
+
+	useEffect(() => {
+		fetchData()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const { signOut } = useAuth()
 

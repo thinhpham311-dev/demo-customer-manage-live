@@ -96,7 +96,7 @@ const CustomerForm = forwardRef((props, ref) => {
 								<div>
 									{type === 'edit' && <DeleteCustomerButton onDelete={onDelete} />}
 								</div>
-								<div className="md:flex items-center">
+								<div className="flex items-center">
 									<Button
 										size="sm"
 										className="ltr:mr-3 rtl:ml-3"

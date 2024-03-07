@@ -26,14 +26,11 @@ function useAuth() {
 			if (resp.data) {
 				const { accessToken } = resp.data
 				dispatch(onSignInSuccess(accessToken))
-				if (resp.data.user) {
-					dispatch(setUser(resp.data.user || {
-						avatar: '',
-						username: 'Anonymous',
-						authority: ['USER'],
-						email: ''
-					}))
-				}
+				// if (resp.data.user) {
+				// 	dispatch(setUser(resp.data.user.authority || {
+				// 		authority: ['USER'],
+				// 	}))
+				// }
 				const redirectUrl = query.get(REDIRECT_URL_KEY)
 				navigate(redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath)
 				return {

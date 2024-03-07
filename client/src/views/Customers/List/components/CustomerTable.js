@@ -83,10 +83,6 @@ const CustomerTable = () => {
 			sortable: true,
 		},
 		{
-			Header: 'Đơn hàng',
-			accessor: 'total_order',
-		},
-		{
 			Header: 'Ngày tạo',
 			accessor: 'createdAt',
 			sortable: true,

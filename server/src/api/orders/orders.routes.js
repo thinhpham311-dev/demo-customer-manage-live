@@ -11,9 +11,29 @@ const {
 const wildCardSearch = require('../../utils/wildCardSearch')
 const sortBy = require('../../utils/sortBy')
 const paginate = require('../../utils/paginate')
+// const filterByDate = require('../../utils/filterByDate')
 const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
+
+
+// router.post('/dashboard', isAuthenticated, async (req, res, next) => {
+//   try {
+//     var startDate = new Date("2015-08-04");
+//     var endDate = new Date("2015-08-12");
+//     const { userId } = req.payload
+//     const orders = await findManyOrders({ userId })
+//     const sanitizeOrders = orders.map((item) => Date.parse(item.pay_date))
+//     console.log(sanitizeOrders)
+//     const result = await filterByDate(orders, startDate, endDate)
+//     // res.json({
+
+//     // })
+//   }
+//   catch (err) {
+//     next(err)
+//   }
+// })
 
 router.post('/list', isAuthenticated, async (req, res, next) => {
   try {

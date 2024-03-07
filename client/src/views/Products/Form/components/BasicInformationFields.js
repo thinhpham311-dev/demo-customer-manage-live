@@ -70,11 +70,6 @@ const BasicInformationFields = props => {
 					</FormItem>
 				</div>
 			</div>
-
-
-
-
-
 		</AdaptableCard>
 	)
 }

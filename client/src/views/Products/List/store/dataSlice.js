@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import {
     apiGetProductList,
-    // apiDeleteCustomer
+    apiDeleteProduct
 } from 'services/ProductsService'
 
 export const getProducts = createAsyncThunk('productListSlice/product/getProducts', async (data) => {
@@ -9,10 +9,10 @@ export const getProducts = createAsyncThunk('productListSlice/product/getProduct
     return response.data
 })
 
-// export const deleteCustomer = async (data) => {
-//     const response = await apiDeleteCustomer(data)
-//     return response.data
-// }
+export const deleteProduct = async (data) => {
+    const response = await apiDeleteProduct(data)
+    return response.data
+}
 
 export const initialTableData = {
     total: 0,

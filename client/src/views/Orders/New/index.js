@@ -37,7 +37,21 @@ const OrderNew = () => {
 
 	const handleFormSubmit = async (values, setSubmitting) => {
 		setSubmitting(true)
-		const success = await addOrder(values)
+		const products = values.products.map(product => product.label).toString()
+		const total_price = values.products.map((_pr) => _pr.value).reduce((a, b) => a + b, 0)
+		const customerName = values?.customer?.label
+		const customerId = values?.customer?.value?.slice(0, values?.customer?.value?.search("-"))
+		const customerEmail = values?.customer?.value?.slice(values?.customer?.value?.search("-") + 1)
+		let dataValues = {
+			...values,
+			products,
+			total_price,
+			customerName,
+			customerId: Number(customerId),
+			customerEmail
+		}
+		delete dataValues.customer
+		const success = await addOrder(dataValues)
 		setSubmitting(false)
 		if (success) {
 			toast.push(

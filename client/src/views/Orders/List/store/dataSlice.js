@@ -10,15 +10,10 @@ export const getOrders = createAsyncThunk('orderListSlice/order/getOrders', asyn
 })
 
 export const updateOrder = async (data) => {
-    console.log(data)
     const response = await apiPutOrder(data)
     return response.data
 }
 
-// export const deleteCustomer = async (data) => {
-//     const response = await apiDeleteCustomer(data)
-//     return response.data
-// }
 
 export const initialTableData = {
     total: 0,

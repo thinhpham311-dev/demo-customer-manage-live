@@ -3,14 +3,14 @@ import { toast, Notification } from 'components/ui'
 import { ConfirmDialog } from 'components/shared'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleDeleteConfirmation } from '../store/stateSlice'
-import { deleteCustomer, getCustomers } from '../store/dataSlice'
+import { deleteProduct, getProducts } from '../store/dataSlice'
 
-const CustomerDeleteConfirmation = () => {
+const ProductDeleteConfirmation = () => {
 
 	const dispatch = useDispatch()
-	const dialogOpen = useSelector((state) => state.customerListSlice.state.deleteConfirmation)
-	const selectedCustomer = useSelector((state) => state.customerListSlice.state.selectedCustomer)
-	const tableData = useSelector((state) => state.customerListSlice.data.tableData)
+	const dialogOpen = useSelector((state) => state.productListSlice.state.deleteConfirmation)
+	const selectedProduct = useSelector((state) => state.productListSlice.state.selectedProduct)
+	const tableData = useSelector((state) => state.productListSlice.data.tableData)
 
 	const onDialogClose = () => {
 		dispatch(toggleDeleteConfirmation(false))
@@ -18,13 +18,13 @@ const CustomerDeleteConfirmation = () => {
 
 	const onDelete = async () => {
 		dispatch(toggleDeleteConfirmation(false))
-		const success = await deleteCustomer({ id: selectedCustomer })
+		const success = await deleteProduct({ id: selectedProduct })
 
 		if (success) {
-			dispatch(getCustomers(tableData))
+			dispatch(getProducts(tableData))
 			toast.push(
-				<Notification title={"Successfuly Deleted"} type="success" duration={2500}>
-					Customer successfuly deleted
+				<Notification title={"Đã xoá thành công"} type="success" duration={2500}>
+					Đã xoá sản phẩm thành công
 				</Notification>
 				, {
 					placement: 'top-center'
@@ -39,16 +39,16 @@ const CustomerDeleteConfirmation = () => {
 			onClose={onDialogClose}
 			onRequestClose={onDialogClose}
 			type="danger"
-			title="Xoá Khách hàng"
+			title="Xoá sản phẩm"
 			onCancel={onDialogClose}
 			onConfirm={onDelete}
 			confirmButtonColor="red-600"
 		>
 			<p>
-				Bạn có chắc chắn muốn xóa khách hàng này? Tất cả hồ sơ liên quan đến khách hàng này cũng sẽ bị xóa. Hành động này không thể được hoàn tác.
+				Bạn có chắc chắn muốn xóa sản phẩm này? Tất cả hồ sơ liên quan đến sản phẩm này cũng sẽ bị xóa. Hành động này không thể được hoàn tác.
 			</p>
 		</ConfirmDialog>
 	)
 }
 
-export default CustomerDeleteConfirmation
+export default ProductDeleteConfirmation

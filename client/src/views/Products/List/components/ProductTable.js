@@ -8,7 +8,7 @@ import { getProducts, setTableData } from '../store/dataSlice'
 import { setSortedColumn, setSelectedProduct } from '../store/stateSlice'
 import { toggleDeleteConfirmation } from '../store/stateSlice'
 import useThemeClass from 'utils/hooks/useThemeClass'
-// import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
+import ProductDeleteConfirmation from './ProductDeleteConfirmation'
 import { useNavigate } from 'react-router-dom'
 import cloneDeep from 'lodash/cloneDeep'
 import moment from 'moment'
@@ -140,7 +140,7 @@ const ProductTable = () => {
 				onSelectChange={onSelectChange}
 				onSort={onSort}
 			/>
-			{/* <CustomerDeleteConfirmation /> */}
+			<ProductDeleteConfirmation />
 		</>
 	)
 }

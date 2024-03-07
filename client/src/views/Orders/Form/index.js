@@ -10,11 +10,18 @@ import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
 import { v4 as uuidv4 } from 'uuid';
 import DynamicFormField from './components/DynamicFormField'
-import { HiPlusCircle } from 'react-icons/hi'
+import * as Yup from 'yup'
 
-// const validationSchema = Yup.object().shape({
-// 	name: Yup.string().required('Tên khách hàng không được để trống'),
-// })
+const validationSchema = Yup.object({
+	activeList: Yup.array().of(
+		Yup.object().shape({
+			id_client: Yup.string().required('ID không được để trống'),
+			active: Yup.string().required('Active không được để trống'),
+			pccheck: Yup.string().required('PCcheck không được để trống'),
+			key_type: Yup.string().required('Loại key không được để trống')
+		})
+	),
+})
 
 const DeleteOrderButton = ({ onDelete }) => {
 
@@ -63,16 +70,7 @@ const DeleteOrderButton = ({ onDelete }) => {
 }
 
 const OrderForm = forwardRef((props, ref) => {
-	const [inputFields, setInputFields] = useState([
-		{ id: uuidv4(), id_client: '', active: '' },
-	]);
 	const [payDate, setPayDate] = useState(null)
-
-
-	const handleAddFields = () => {
-		setInputFields([...inputFields, { id: uuidv4(), id_client: '', active: '' }])
-	}
-
 	const { type, initialData, onFormSubmit, onDiscard, onDelete } = props
 
 	return (
@@ -81,76 +79,65 @@ const OrderForm = forwardRef((props, ref) => {
 				innerRef={ref}
 				initialValues={{
 					...initialData,
-					products: initialData?.products ? initialData.products.split().map(value => ({ label: value, value })) : [],
-					active: initialData?.active ? initialData.map(value => ({ label: value, value })) : []
 				}}
-				// validationSchema={validationSchema}
+				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
 					const formData = cloneDeep(values)
-					formData.customerName = formData.customerId.label
-					formData.customerId = formData.customerId.value
 					formData.code = uuidv4()
-					formData.products = formData.products.map(product => product.value).toString()
-					formData.active = inputFields.map(active => {
-						return `${active.id_client}-${active.active}`
+					formData.active = formData?.active?.map(item => {
+						return `${item.id_client}-${item.active}-${item.pccheck}-${item.key_type}`
 					}).toString()
 					formData.pay_date = payDate.toString()
 					onFormSubmit?.(formData, setSubmitting)
 				}}
 			>
-				{({ values, touched, errors, isSubmitting }) => (<Form className="h-full">
-					<FormContainer className="h-full flex flex-col justify-between">
-						<div>
-							<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
-
-							<div className="flex items-center gap-10">
-								<h5>Danh sách ID - Key active</h5>
-
-								<Button
-									type="button"
-									size="sm"
-									variant="twoTone"
-									icon={<HiPlusCircle />}
-									onClick={handleAddFields}
-								>
-									Thêm
-								</Button>
-							</div>
-							<div className="grid grid-cols-1">
-								<DynamicFormField inputFields={inputFields} setInputFields={setInputFields} />
-							</div>
-						</div>
-						<StickyFooter
-							className="px-8 flex items-center justify-between  py-4"
-							stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-						>
+				{({ values, touched, errors, isSubmitting }) => {
+					const active = values.active
+					return (<Form className="h-full">
+						<FormContainer className="h-full flex flex-col justify-between">
 							<div>
-								{type === 'edit' && <DeleteOrderButton onDelete={onDelete} />}
+								<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
+
+								<div className="flex items-center gap-10">
+									<h5>Danh sách ID - Key active</h5>
+								</div>
+								<small>Lưu ý: Vui lòng thêm key active mới lưu dữ liệu</small>
+								<div className="grid grid-cols-1 py-5">
+									<DynamicFormField active={active} />
+								</div>
 							</div>
-							<div className="md:flex items-center">
-								<Button
-									size="sm"
-									className="ltr:mr-3 rtl:ml-3"
-									onClick={() => onDiscard?.()}
-									type="button"
-								>
-									Quay lại
-								</Button>
-								<Button
-									size="sm"
-									variant="solid"
-									loading={isSubmitting}
-									icon={<AiOutlineSave />}
-									type="submit"
-								>
-									Lưu
-								</Button>
-							</div>
-						</StickyFooter>
-					</FormContainer>
-				</Form>
-				)
-				}
+							<StickyFooter
+								className="px-8 flex items-center justify-between  py-4"
+								stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+							>
+								<div>
+									{type === 'edit' && <DeleteOrderButton onDelete={onDelete} />}
+								</div>
+								<div className="flex items-center">
+									<Button
+										size="sm"
+										className="ltr:mr-3 rtl:ml-3"
+										onClick={() => onDiscard?.()}
+										type="button"
+									>
+										Quay lại
+									</Button>
+									{active && active.length > 0 && <Button
+										size="sm"
+										variant="solid"
+										loading={isSubmitting}
+										icon={<AiOutlineSave />}
+										type="submit"
+									>
+										Lưu
+									</Button>
+									}
+								</div>
+							</StickyFooter>
+						</FormContainer>
+					</Form>
+					)
+				}}
 			</Formik>
 		</>
 	)

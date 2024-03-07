@@ -49,7 +49,7 @@ const Statistic = ({ data = {} }) => {
 			<StatisticCard
 				data={data.purchases}
 				valuePrefix="$"
-				label="Mua hàng"
+				label="Khách hàng"
 				tagSuffix="%"
 				date={startDate}
 			/>

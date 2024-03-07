@@ -1,32 +1,13 @@
 import React from 'react'
 import {
 	AdaptableCard,
-	// RichTextEditor
 } from 'components/shared'
 import { Input, FormItem } from 'components/ui'
-import NumberFormat from 'react-number-format'
 import { Field } from 'formik'
 
-const PriceInput = props => {
-	return <Input {...props} value={props.field.value} prefix="VND" />
-}
-
-const NumberFormatInput = ({ onValueChange, ...rest }) => {
-	return (
-		<NumberFormat
-			customInput={Input}
-			type="text"
-			onValueChange={onValueChange}
-			autoComplete="off"
-			{...rest}
-		/>
-	)
-}
 
 const BasicInformationFields = props => {
-	const { touched, errors, type, values } = props
-
-
+	const { touched, errors } = props
 	return (
 		<AdaptableCard className="mb-4" divider>
 			<h5 className="mb-3">Thông tin khách hàng</h5>
@@ -63,7 +44,7 @@ const BasicInformationFields = props => {
 						/>
 					</FormItem>
 				</div>
-				<div className="cols-span-1">
+				{/* <div className="cols-span-1">
 					{type === 'edit' &&
 						<FormItem
 							label="Tổng đơn hàng"
@@ -88,7 +69,7 @@ const BasicInformationFields = props => {
 							</Field>
 						</FormItem>
 					}
-				</div>
+				</div> */}
 			</div>
 
 		</AdaptableCard>
