@@ -86,6 +86,7 @@ const SideNav = () => {
 						<Logo
 							mode={logoMode()}
 							type={sideNavCollapse ? 'streamline' : 'full'}
+							className="p-3"
 							gutter={sideNavCollapse ? SIDE_NAV_CONTENT_GUTTER : LOGO_X_GUTTER}
 						/>
 					</div>

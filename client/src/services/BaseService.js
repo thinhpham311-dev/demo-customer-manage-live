@@ -39,6 +39,7 @@ BaseService.interceptors.request.use(config => {
 BaseService.interceptors.response.use(
     response => response,
     error => {
+        console.log(error)
         const { response } = error
 
         if (response && unauthorizedCode.includes(response.status)) {

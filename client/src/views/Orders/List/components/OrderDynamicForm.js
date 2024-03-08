@@ -13,7 +13,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 
 const validationSchema = Yup.object({
-    activeList: Yup.array().of(
+    active: Yup.array().of(
         Yup.object().shape({
             id_client: Yup.string().required('ID không được để trống'),
             active: Yup.string().required('Active không được để trống'),
@@ -82,6 +82,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
             >
                 {({ touched, errors, values, isSubmitting }) => {
                     const active = values.active
+                    console.log(errors)
                     return (
                         <Form>
                             <FormContainer layout="inline" >

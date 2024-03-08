@@ -17,7 +17,6 @@ const DynamicFormField = ({ active }) => {
 
         <FormContainer layout="inline" >
             <div className="w-full">
-
                 <FieldArray name="active">
                     {({ form, remove, push }) => (
                         <div className="grid gap-5 relative">
