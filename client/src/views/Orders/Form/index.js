@@ -13,9 +13,9 @@ import DynamicFormField from './components/DynamicFormField'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
-	products: Yup.string().required('Khách hàng không được để trống vui lòng chọn sản phẩm'),
+	products: Yup.array().min(0, 'Sản phẩm không được để trống'),
 	customer: Yup.string().required('Khách hàng không được để trống vui lòng chọn sản phẩm'),
-	pay_date: Yup.string().required('Ngày bán không được để trống vui lòng chọn sản phẩm').nullable(),
+	pay_date: Yup.date().required('Ngày bán không được để trống vui lòng chọn sản phẩm').nullable(),
 	active: Yup.array().of(
 		Yup.object().shape({
 			id_client: Yup.string().required('ID không được để trống'),
@@ -150,7 +150,7 @@ OrderForm.defaultProps = {
 	type: 'edit',
 	initialData: {
 		code: '',
-		products: '',
+		products: [],
 		customer: '',
 		pay_date: '',
 		total_price: 0
