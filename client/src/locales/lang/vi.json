@@ -1,6 +1,7 @@
 {
     "nav": {
         "apps": "Apps",
+        "nav.dashboard": "Báo cáo thống kê",
         "appsCustomers": {
             "customerManage": "Quản lý khách hàng",
             "dashboard": "Thống kê",

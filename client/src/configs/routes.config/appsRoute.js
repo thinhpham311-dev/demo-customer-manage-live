@@ -3,11 +3,10 @@ import { APP_PREFIX_PATH } from 'constants/route.constant'
 import { ADMIN, USER } from 'constants/roles.constant'
 
 const appsRoute = [
-
     {
-        key: 'appsCustomers.customerdashboard',
+        key: 'appsReport.dashboard',
         path: `${APP_PREFIX_PATH}/dashboard`,
-        component: React.lazy(() => import('views/Customers/Dashboard')),
+        component: React.lazy(() => import('views/Dashboard')),
         authority: [ADMIN, USER],
     },
     {

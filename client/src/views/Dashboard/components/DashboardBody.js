@@ -1,40 +1,40 @@
 import React, { useEffect } from 'react'
 import { Loading } from 'components/shared'
 import Statistic from './Statistic'
-import CustomersReport from './CustomersReport'
+import DashboardReport from './DashboardReport'
 // import CustomersByCategories from './CustomersByCategories'
 // import LatestOrder from './LatestOrder'
 // import TopProduct from './TopProduct'
-import { getCustomersDashboardData } from '../store/dataSlice'
+import { getDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-const SalesDashboardBody = () => {
+const DashboardBody = () => {
 
 	const dispatch = useDispatch()
 
 	const {
 		statisticData,
-		customersReportData,
+		dashboardReportData,
 		// topcustomersData,
 		// latestOrderData,
 		// salesByCategoriesData
-	} = useSelector((state) => state.customerDashboard.data.dashboardData)
-	const loading = useSelector((state) => state.customerDashboard.data.loading)
-
+	} = useSelector((state) => state.dashboard.data.dashboardData)
+	const loading = useSelector((state) => state.dashboard.data.loading)
+	console.log(statisticData)
 	useEffect(() => {
 		fetchData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const fetchData = () => {
-		dispatch(getCustomersDashboardData())
+		dispatch(getDashboardData())
 	}
 
 	return (
 		<Loading loading={loading}>
 			<Statistic data={statisticData} />
 			{/* <div className="grid"> */}
-			<CustomersReport data={customersReportData} />
+			<DashboardReport data={dashboardReportData} />
 			{/* <CustomersByCategories data={salesByCategoriesData} /> */}
 			{/* </div> */}
 			{/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -45,4 +45,4 @@ const SalesDashboardBody = () => {
 	)
 }
 
-export default SalesDashboardBody
+export default DashboardBody

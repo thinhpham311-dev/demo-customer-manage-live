@@ -4,10 +4,10 @@ import { ADMIN, USER } from 'constants/roles.constant'
 
 const appsNavigationConfig = [
 	{
-		key: 'appsCustomers.customerdashboard',
+		key: 'appsReport.dashboard',
 		path: `${APP_PREFIX_PATH}/dashboard`,
 		title: 'Thống kê',
-		translateKey: 'nav.appsCustomers.dashboard',
+		translateKey: 'nav.dashboard',
 		icon: 'chart',
 		type: NAV_ITEM_TYPE_ITEM,
 		authority: [ADMIN, USER],

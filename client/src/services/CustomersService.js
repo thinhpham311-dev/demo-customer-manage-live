@@ -1,10 +1,9 @@
 import ApiService from "./ApiService"
 
-export async function apiGetCustomerDashboardData(data) {
+export async function apiGetDashboardData() {
     return ApiService.fetchData({
         url: '/customers/dashboard',
         method: 'post',
-        data
     })
 }
 

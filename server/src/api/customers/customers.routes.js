@@ -9,7 +9,7 @@ const paginate = require('../../utils/paginate')
 const router = express.Router();
 
 
-router.post('/dashboard', isAuthenticated, async (req, res, next) => {
+router.post('/dashboard', async (req, res, next) => {
   try {
     res.json({
       statisticData: {
@@ -26,7 +26,7 @@ router.post('/dashboard', isAuthenticated, async (req, res, next) => {
           growShrink: 5.7
         },
       },
-      customersReportData: {
+      dashboardReportData: {
         series: [
           {
             name: "Online Sales",

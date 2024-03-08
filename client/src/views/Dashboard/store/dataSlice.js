@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiGetCustomerDashboardData } from 'services/CustomersService'
+import { apiGetDashboardData } from 'services/CustomersService'
 
-export const getCustomersDashboardData = createAsyncThunk('customersDashboard/data/getCustomersDashboardData', async (data) => {
-    const response = await apiGetCustomerDashboardData(data)
+export const getDashboardData = createAsyncThunk('dashboard/data/getDashboardData', async () => {
+    const response = await apiGetDashboardData()
     return response.data
 })
 
 
 const dataSlice = createSlice({
-    name: 'customerDashboard/data',
+    name: 'dashboard/data',
     initialState: {
         loading: true,
         dashboardData: {},
@@ -16,11 +16,11 @@ const dataSlice = createSlice({
     reducers: {
     },
     extraReducers: {
-        [getCustomersDashboardData.fulfilled]: (state, action) => {
+        [getDashboardData.fulfilled]: (state, action) => {
             state.dashboardData = action.payload
             state.loading = false
         },
-        [getCustomersDashboardData.pending]: (state) => {
+        [getDashboardData.pending]: (state) => {
             state.loading = true
         }
     }

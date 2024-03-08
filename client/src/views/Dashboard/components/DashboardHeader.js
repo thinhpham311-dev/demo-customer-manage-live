@@ -1,7 +1,7 @@
 import React from 'react'
 import { DatePicker, Button } from 'components/ui'
 import { setStartDate, setEndDate } from '../store/stateSlice'
-import { getCustomersDashboardData } from '../store/dataSlice'
+import { getDashboardData } from '../store/dataSlice'
 import { HiOutlineFilter } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,8 +13,8 @@ const SalesDashboardHeader = () => {
 
 	const dispatch = useDispatch()
 
-	const startDate = useSelector((state) => state.customerDashboard.state.startDate)
-	const endDate = useSelector((state) => state.customerDashboard.state.endDate)
+	const startDate = useSelector((state) => state.dashboard.state.startDate)
+	const endDate = useSelector((state) => state.dashboard.state.endDate)
 
 	const handleDateChange = (value) => {
 		dispatch(setStartDate(value[0]))
@@ -22,7 +22,7 @@ const SalesDashboardHeader = () => {
 	}
 
 	const onFilter = () => {
-		dispatch(getCustomersDashboardData())
+		dispatch(getDashboardData())
 	}
 
 	return (

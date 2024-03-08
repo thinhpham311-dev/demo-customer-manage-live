@@ -29,7 +29,7 @@ const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
 
 const Statistic = ({ data = {} }) => {
 
-	const startDate = useSelector((state) => state.customerDashboard.state.startDate)
+	const startDate = useSelector((state) => state.dashboard.state.startDate)
 
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
