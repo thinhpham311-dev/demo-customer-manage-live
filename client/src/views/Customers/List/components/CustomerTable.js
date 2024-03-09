@@ -1,12 +1,18 @@
 import React, { useEffect, useMemo } from 'react'
 // import { Avatar, Badge } from 'components/ui'
 import { DataTable } from 'components/shared'
-import { HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi'
+import {
+	// HiOutlineTrash,
+	HiOutlinePencil
+} from 'react-icons/hi'
 // import { FiPackage } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers, setTableData } from '../store/dataSlice'
-import { setSortedColumn, setSelectedCustomer } from '../store/stateSlice'
-import { toggleDeleteConfirmation } from '../store/stateSlice'
+import {
+	setSortedColumn,
+	// setSelectedCustomer 
+} from '../store/stateSlice'
+// import { toggleDeleteConfirmation } from '../store/stateSlice'
 import useThemeClass from 'utils/hooks/useThemeClass'
 import CustomerDeleteConfirmation from './CustomerDeleteConfirmation'
 import { useNavigate } from 'react-router-dom'
@@ -15,7 +21,7 @@ import moment from 'moment'
 
 const ActionColumn = ({ row }) => {
 
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 	const { textTheme } = useThemeClass()
 	const navigate = useNavigate()
 
@@ -23,19 +29,19 @@ const ActionColumn = ({ row }) => {
 		navigate(`/app/customers/edit/${row.id}`)
 	}
 
-	const onDelete = () => {
-		dispatch(toggleDeleteConfirmation(true))
-		dispatch(setSelectedCustomer(row.id))
-	}
+	// const onDelete = () => {
+	// 	dispatch(toggleDeleteConfirmation(true))
+	// 	dispatch(setSelectedCustomer(row.id))
+	// }
 
 	return (
 		<div className="flex justify-end text-lg">
 			<span className={`cursor-pointer p-2 hover:${textTheme}`} onClick={onEdit}>
 				<HiOutlinePencil />
 			</span>
-			<span className="cursor-pointer p-2 hover:text-red-500" onClick={onDelete}>
+			{/* <span className="cursor-pointer p-2 hover:text-red-500" onClick={onDelete}>
 				<HiOutlineTrash />
-			</span>
+			</span> */}
 		</div>
 	)
 }

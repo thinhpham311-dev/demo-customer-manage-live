@@ -84,7 +84,6 @@ const ProductTable = () => {
 		{
 			Header: 'Ngày tạo',
 			accessor: 'createdAt',
-			sortable: true,
 			Cell: props => {
 				const row = props.row.original
 				return <ProductColumn row={row} />
