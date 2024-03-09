@@ -2,38 +2,84 @@ const express = require('express');
 const { isAuthenticated } = require('../../middlewares');
 const {
   findManyOrders,
-  findManyOrderByCustomerId,
   findOrderById,
   createOrder,
   updateOrder,
   deleteOrder
 } = require('./orders.services');
+const { findManyCustomers } = require('../customers/customers.services')
 const wildCardSearch = require('../../utils/wildCardSearch')
 const sortBy = require('../../utils/sortBy')
 const paginate = require('../../utils/paginate')
-// const filterByDate = require('../../utils/filterByDate')
 const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
+router.post('/report', isAuthenticated, async (req, res, next) => {
+  try {
+    const { startDateStr = "2024-03-05", endDateStr = "2024-03-08" } = req.body
+    const startDate = new Date(startDateStr)
+    const endDate = new Date(endDateStr)
+    const { userId } = req.payload
+    const orders = await findManyOrders({ userId })
+    const customers = await findManyCustomers({ userId })
+    if (orders && orders.length > 0) {
 
-// router.post('/dashboard', isAuthenticated, async (req, res, next) => {
-//   try {
-//     var startDate = new Date("2015-08-04");
-//     var endDate = new Date("2015-08-12");
-//     const { userId } = req.payload
-//     const orders = await findManyOrders({ userId })
-//     const sanitizeOrders = orders.map((item) => Date.parse(item.pay_date))
-//     console.log(sanitizeOrders)
-//     const result = await filterByDate(orders, startDate, endDate)
-//     // res.json({
+      const sumOrderPriceByPayDate = orders?.reduce((accumulator, cur) => {
 
-//     // })
-//   }
-//   catch (err) {
-//     next(err)
-//   }
-// })
+        let pay_date = cur.pay_date, found = accumulator.find(function (elem) {
+          return elem.pay_date == pay_date
+        });
+        if (found) found.total_price += cur.total_price;
+        else accumulator.push(cur);
+
+        return accumulator;
+      }, []);
+
+      const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date)).filter((date) => {
+        return date >= startDate && date <= endDate
+      });
+
+      const priceData = await sumOrderPriceByPayDate?.filter((item) => {
+        return new Date(item.pay_date) >= startDate && new Date(item.pay_date) <= endDate
+      }).map(item => item.total_price);
+
+
+      const totalPrice = await priceData.reduce((a, b) => {
+        return a + b
+      })
+
+      res.json({
+        statisticData: {
+          customers: {
+            value: customers.length
+          },
+          revenue: {
+            value: totalPrice,
+          },
+          orders: {
+            value: dateData.length,
+          },
+
+        },
+        dashboardReportData: {
+          series: [
+            {
+              name: "Online Sales",
+              data: priceData
+            }
+          ],
+          categories: dateData
+        }
+      })
+
+    }
+  }
+
+  catch (err) {
+    next(err)
+  }
+})
 
 router.post('/list', isAuthenticated, async (req, res, next) => {
   try {

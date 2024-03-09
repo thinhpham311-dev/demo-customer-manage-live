@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { apiGetDashboardData } from 'services/CustomersService'
+import { apiGetReport } from 'services/OrdersService'
 
-export const getDashboardData = createAsyncThunk('dashboard/data/getDashboardData', async () => {
-    const response = await apiGetDashboardData()
+export const getDashboardData = createAsyncThunk('dashboard/data/getDashboardData', async (data) => {
+    const response = await apiGetReport(data)
     return response.data
 })
 

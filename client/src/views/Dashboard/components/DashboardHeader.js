@@ -9,7 +9,7 @@ const dateFormat = 'MMM DD, YYYY'
 
 const { DatePickerRange } = DatePicker
 
-const SalesDashboardHeader = () => {
+const DashboardHeader = () => {
 
 	const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ const SalesDashboardHeader = () => {
 	}
 
 	const onFilter = () => {
-		dispatch(getDashboardData())
+		dispatch(getDashboardData({ startDateStr: startDate, endDateStr: endDate }))
 	}
 
 	return (
@@ -49,4 +49,4 @@ const SalesDashboardHeader = () => {
 	)
 }
 
-export default SalesDashboardHeader
+export default DashboardHeader

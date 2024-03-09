@@ -66,7 +66,7 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
     }
 
     return (
-        <div className="p-5">
+        <div className="py-5">
             <Formik
                 validationSchema={validationSchema}
                 initialValues={{
@@ -82,7 +82,6 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
             >
                 {({ touched, errors, values, isSubmitting }) => {
                     const active = values.active
-                    console.log(errors)
                     return (
                         <Form>
                             <FormContainer layout="inline" >
@@ -205,19 +204,21 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
                                                                         }
                                                                     />
                                                                 </FormItem>
-                                                                <Button
-                                                                    shape="circle"
-                                                                    size="sm"
-                                                                    type="button"
-                                                                    icon={
-                                                                        <HiMinus />
-                                                                    }
-                                                                    onClick={() =>
-                                                                        remove(
-                                                                            index
-                                                                        )
-                                                                    }
-                                                                />
+                                                                <FormItem className=" items-center justify-center p-0 mb-0">
+                                                                    <Button
+                                                                        shape="circle"
+                                                                        size="sm"
+                                                                        type="button"
+                                                                        icon={
+                                                                            <HiMinus />
+                                                                        }
+                                                                        onClick={() =>
+                                                                            remove(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                </FormItem>
                                                             </div>
                                                         )
                                                     })

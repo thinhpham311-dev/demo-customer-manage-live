@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import ApexChart from 'react-apexcharts'
-import { 
-	apexLineChartDefaultOption, 
+import {
+	apexLineChartDefaultOption,
 	apexBarChartDefaultOption,
 	apexAreaChartDefaultOption,
 	apexDonutChartDefaultOption,
@@ -11,16 +11,16 @@ import { DIR_RTL } from 'constants/theme.constant'
 
 const notDonut = ['line', 'bar', 'area']
 
-const Chart = props =>  {
+const Chart = props => {
 
-	const { 
-		series, 
-		width, 
-		height, 
-		xAxis, 
-		customOptions, 
-		type, 
-		direction, 
+	const {
+		series,
+		width,
+		height,
+		xAxis,
+		customOptions,
+		type,
+		direction,
 		donutTitle,
 		donutText,
 		className,
@@ -45,12 +45,12 @@ const Chart = props =>  {
 	}, [type])
 
 	let options = JSON.parse(JSON.stringify(chartDefaultOption))
-	const isMobile = window.innerWidth < 768 
+	const isMobile = window.innerWidth < 768
 
 	const setLegendOffset = useCallback(() => {
-		if(chartRef.current) {
+		if (chartRef.current) {
 			const lengend = chartRef.current.querySelectorAll('div.apexcharts-legend')[0]
-			if(direction === DIR_RTL) {
+			if (direction === DIR_RTL) {
 				lengend.style.right = 'auto'
 				lengend.style.left = '0'
 			}
@@ -64,18 +64,18 @@ const Chart = props =>  {
 	}, [direction, isMobile])
 
 	useEffect(() => {
-		if(notDonut.includes(type)) {
+		if (notDonut.includes(type)) {
 			setLegendOffset()
 		}
 	}, [type, setLegendOffset])
-	
-	
+
+
 	if (notDonut.includes(type)) {
 		options.xaxis.categories = xAxis
 	}
 
 	if (customOptions) {
-		options = {...options, ...customOptions }
+		options = { ...options, ...customOptions }
 	}
 
 	if (type === 'donut') {
@@ -88,12 +88,12 @@ const Chart = props =>  {
 	}
 
 	return (
-		<div style={direction === DIR_RTL ? {direction: 'ltr'}: {}} className="chartRef" ref={chartRef}>
-			<ApexChart 
-				options={options} 
-				type={type} 
-				series={series} 
-				width={width} 
+		<div style={direction === DIR_RTL ? { direction: 'ltr' } : {}} className="chartRef" ref={chartRef}>
+			<ApexChart
+				options={options}
+				type={type}
+				series={series}
+				width={width}
 				height={height}
 				className={className}
 				{...rest}

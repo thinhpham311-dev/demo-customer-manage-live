@@ -28,14 +28,12 @@ const StatisticCard = ({ data = {}, label, valuePrefix, date }) => {
 }
 
 const Statistic = ({ data = {} }) => {
-
 	const startDate = useSelector((state) => state.dashboard.state.startDate)
 
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 			<StatisticCard
 				data={data.revenue}
-				valuePrefix="$"
 				label="Doanh thu"
 				tagSuffix="%"
 				date={startDate}
@@ -47,10 +45,9 @@ const Statistic = ({ data = {} }) => {
 				date={startDate}
 			/>
 			<StatisticCard
-				data={data.purchases}
-				valuePrefix="$"
-				label="Khách hàng"
+				data={data.customers}
 				tagSuffix="%"
+				label="Khách hàng"
 				date={startDate}
 			/>
 		</div>

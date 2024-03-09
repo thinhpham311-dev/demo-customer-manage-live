@@ -5,7 +5,7 @@ import {
 } from 'components/ui'
 import { Chart } from 'components/shared'
 
-const CustomersReport = ({ className, data = {} }) => {
+const DashboardReport = ({ className, data = {} }) => {
 
 	return (
 		<Card className={className}>
@@ -16,11 +16,11 @@ const CustomersReport = ({ className, data = {} }) => {
 			<Chart
 				series={data.series}
 				xAxis={data.categories}
-				height="380px"
+				height="500px"
 				customOptions={{ legend: { show: false } }}
 			/>
 		</Card>
 	)
 }
 
-export default CustomersReport
+export default DashboardReport
