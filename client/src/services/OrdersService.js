@@ -1,5 +1,13 @@
 import ApiService from "./ApiService"
 
+export async function apiGetReport(data) {
+    return ApiService.fetchData({
+        url: '/orders/report',
+        method: 'post',
+        data
+    })
+}
+
 export async function apiGetOrderList(data) {
     return ApiService.fetchData({
         url: '/orders/list',
