@@ -27,7 +27,9 @@ const DashboardBody = () => {
 	}, [])
 
 	const fetchData = () => {
-		dispatch(getDashboardData())
+		setTimeout(() => {
+			dispatch(getDashboardData())
+		})
 	}
 
 	return (

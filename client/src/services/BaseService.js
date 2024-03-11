@@ -13,7 +13,7 @@ const host_API = process.env.REACT_APP_API_KEY
 const baseUrl = `${host_API}${appConfig.apiPrefix}${appConfig.apiVersion}`
 
 const BaseService = axios.create({
-    timeout: 60000,
+    timeout: 10000,
     baseURL: baseUrl,
     headers: {
         'Content-Type': 'application/json'
@@ -39,7 +39,6 @@ BaseService.interceptors.request.use(config => {
 BaseService.interceptors.response.use(
     response => response,
     error => {
-        console.log(error)
         const { response } = error
 
         if (response && unauthorizedCode.includes(response.status)) {
