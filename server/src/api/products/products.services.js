@@ -11,7 +11,6 @@ function findManyProducts({ userId }) {
 }
 
 function findProductById({ id, userId }) {
-  console.log(id)
   return db.product.findFirst({
     where: {
       id: Number(id),
