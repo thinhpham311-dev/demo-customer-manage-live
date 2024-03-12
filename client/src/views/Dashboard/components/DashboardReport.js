@@ -7,7 +7,7 @@ import { Chart } from 'components/shared'
 import moment from 'moment'
 
 const DashboardReport = ({ className, data = {} }) => {
-	const dates = useMemo(() => data.categories?.map((item) => moment(item?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)), [data.categories])
+	const dates = data.categories?.map((item) => moment(item?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT))
 	return (
 		<Card className={className}>
 			<div className="flex items-center justify-between">
