@@ -13,7 +13,7 @@ const host_API = process.env.REACT_APP_API_KEY
 const baseUrl = `${host_API}${appConfig.apiPrefix}${appConfig.apiVersion}`
 
 const BaseService = axios.create({
-    timeout: 5000,
+    timeout: 60000,
     baseURL: baseUrl,
     headers: {
         'Content-Type': 'application/json'
