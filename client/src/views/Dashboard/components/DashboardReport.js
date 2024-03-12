@@ -8,12 +8,10 @@ import moment from 'moment'
 
 const DashboardReport = ({ className, data = {} }) => {
 	const dates = useMemo(() => data.categories?.map((item) => moment(item?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)), [data.categories])
-
 	return (
 		<Card className={className}>
 			<div className="flex items-center justify-between">
 				<h4>Báo cáo thống kê</h4>
-				{/* <Button size="sm">Export Report</Button> */}
 			</div>
 			<Chart
 				series={data.series}
