@@ -57,13 +57,13 @@ router.post('/report', isAuthenticated, async (req, res, next) => {
     res.json({
       statisticData: {
         customers: {
-          value: customers.length
+          value: customers?.length
         },
         revenue: {
           value: totalPrice,
         },
         orders: {
-          value: countOrders.length,
+          value: countOrders?.length,
         },
 
       },
