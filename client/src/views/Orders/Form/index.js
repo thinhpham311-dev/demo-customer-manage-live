@@ -8,14 +8,14 @@ import BasicInformationFields from './components/BasicInformationFields'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
+import { IoIosAddCircleOutline } from 'react-icons/io'
 import { v4 as uuidv4 } from 'uuid';
 import DynamicFormField from './components/DynamicFormField'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
 	products: Yup.array().min(0, 'Sản phẩm không được để trống'),
-	customer: Yup.string().required('Khách hàng không được để trống vui lòng chọn sản phẩm'),
-	pay_date: Yup.date().required('Ngày bán không được để trống vui lòng chọn sản phẩm').nullable(),
+	customer: Yup.object().required('Khách hàng không được để trống vui lòng chọn sản phẩm'),
 	active: Yup.array().of(
 		Yup.object().shape({
 			id_client: Yup.string().required('ID không được để trống'),
@@ -101,10 +101,6 @@ const OrderForm = forwardRef((props, ref) => {
 							<div>
 								<BasicInformationFields setPayDate={setPayDate} values={values} touched={touched} errors={errors} {...props} />
 
-								<div className="flex items-center gap-10">
-									<h5>Danh sách ID - Key active</h5>
-								</div>
-								<small>Lưu ý: Vui lòng thêm key active mới lưu dữ liệu</small>
 								<div className="grid grid-cols-1 py-5">
 									<DynamicFormField active={active} />
 								</div>

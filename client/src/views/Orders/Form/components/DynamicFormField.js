@@ -20,6 +20,30 @@ const DynamicFormField = ({ active }) => {
                 <FieldArray name="active">
                     {({ form, remove, push }) => (
                         <div className="grid gap-5 relative">
+
+                            <div className="flex items-center gap-10">
+                                <div>
+                                    <h5>Danh sách ID - Key active</h5>
+                                    <small>Lưu ý: Vui lòng thêm key active mới lưu dữ liệu</small>
+                                </div>
+                                <Button
+
+                                    type="button"
+                                    size="sm"
+                                    icon={<IoIosAddCircleOutline />}
+                                    onClick={() => {
+                                        push({
+                                            id_client: '',
+                                            active: '',
+                                            pccheck: '',
+                                            key_type: '',
+                                        })
+                                    }}
+                                >
+                                    Thêm Key Active
+                                </Button>
+                            </div>
+
                             {active && active.length > 0
                                 ? active.map((_, index) => {
                                     const id_clientFeedBack =
@@ -45,7 +69,7 @@ const DynamicFormField = ({ active }) => {
                                         )
 
                                     return (
-                                        <div key={index} className="border rounded-md p-3 lg:flex items-center">
+                                        <div key={index} className="border rounded-md p-3 lg:flex items-center  relative">
                                             <FormItem
                                                 className="mb-0"
                                                 label="ID"
@@ -155,25 +179,7 @@ const DynamicFormField = ({ active }) => {
                                     )
                                 })
                                 : null}
-                            <div className="w-full sticky bottom-0 left-0 bg-white p-5 flex items-center gap-3">
-                                <Button
-                                    className="mx-auto block"
-                                    type="button"
-                                    size="sm"
-                                    icon={<IoIosAddCircleOutline />}
-                                    onClick={() => {
-                                        push({
-                                            id_client: '',
-                                            active: '',
-                                            pccheck: '',
-                                            key_type: '',
-                                        })
-                                    }}
-                                >
-                                    Thêm Key Active
-                                </Button>
 
-                            </div>
                         </div>
                     )}
                 </FieldArray>

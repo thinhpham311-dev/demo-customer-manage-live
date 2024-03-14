@@ -84,6 +84,7 @@ const BasicInformationFields = props => {
 						<Field name="customer">
 							{({ field, form }) => (
 								<Select
+
 									field={field}
 									placeholder="Chọn khách hàng"
 									options={arrCustomers}
@@ -99,6 +100,7 @@ const BasicInformationFields = props => {
 						errorMessage={errors.pay_date}
 					>
 						<DatePicker
+							className="!z-50"
 							value={payDate}
 							placeholder="Nhập ngày bán"
 							onChange={handleDatePickerChange}

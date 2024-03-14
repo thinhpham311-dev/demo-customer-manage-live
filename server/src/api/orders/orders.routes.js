@@ -17,63 +17,61 @@ const router = express.Router();
 
 router.post('/report', isAuthenticated, async (req, res, next) => {
   try {
-    const { startDateStr = "2024-03-05", endDateStr = "2024-03-08" } = req.body
+    const { startDateStr, endDateStr } = req.body
     const startDate = new Date(startDateStr)
     const endDate = new Date(endDateStr)
     const { userId } = req.payload
     const orders = await findManyOrders({ userId })
     const customers = await findManyCustomers({ userId })
-    if (orders && orders.length > 0) {
 
-      const sumOrderPriceByPayDate = orders?.reduce((accumulator, cur) => {
 
-        let pay_date = cur.pay_date, found = accumulator.find(function (elem) {
-          return elem.pay_date == pay_date
-        });
-        if (found) found.total_price += cur.total_price;
-        else accumulator.push(cur);
+    const sumOrderPriceByPayDate = orders?.reduce((accumulator, cur) => {
 
-        return accumulator;
-      }, []);
-
-      const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date)).filter((date) => {
-        return date >= startDate && date <= endDate
+      let pay_date = cur.pay_date, found = accumulator.find(function (elem) {
+        return elem.pay_date == pay_date
       });
+      if (found) found.total_price += cur.total_price;
+      else accumulator.push(cur);
 
-      const priceData = await sumOrderPriceByPayDate?.filter((item) => {
-        return new Date(item.pay_date) >= startDate && new Date(item.pay_date) <= endDate
-      }).map(item => item.total_price);
+      return accumulator;
+    }, []);
+
+    const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date)).filter((date) => {
+      return date >= startDate && date <= endDate
+    });
+
+    const priceData = await sumOrderPriceByPayDate?.filter((item) => {
+      return new Date(item.pay_date) >= startDate && new Date(item.pay_date) <= endDate
+    }).map(item => item.total_price);
 
 
-      const totalPrice = await priceData.reduce((a, b) => {
-        return a + b
-      })
+    const totalPrice = await priceData.reduce((a, b) => {
+      return a + b
+    }, 0)
 
-      res.json({
-        statisticData: {
-          customers: {
-            value: customers.length
-          },
-          revenue: {
-            value: totalPrice,
-          },
-          orders: {
-            value: dateData.length,
-          },
-
+    res.json({
+      statisticData: {
+        customers: {
+          value: customers.length
         },
-        dashboardReportData: {
-          series: [
-            {
-              name: "Online Sales",
-              data: priceData
-            }
-          ],
-          categories: dateData
-        }
-      })
+        revenue: {
+          value: totalPrice,
+        },
+        orders: {
+          value: dateData.length,
+        },
 
-    }
+      },
+      dashboardReportData: {
+        series: [
+          {
+            name: "Đã bán",
+            data: priceData
+          }
+        ],
+        categories: dateData
+      }
+    })
   }
 
   catch (err) {
