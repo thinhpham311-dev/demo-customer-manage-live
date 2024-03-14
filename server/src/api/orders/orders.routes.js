@@ -35,13 +35,17 @@ router.post('/report', isAuthenticated, async (req, res, next) => {
       else accumulator.push(cur);
 
       return accumulator;
-    }, []);
+    }, []).sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.pay_date) - new Date(b.pay_date);
+    });
 
-    const countOrders = await orders.map((item) => new Date(item.pay_date)).filter((date) => {
+    const countOrders = await orders.map((item) => new Date(item.pay_date))?.filter((date) => {
       return date >= startDate && date <= endDate
     });
 
-    const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date)).filter((date) => {
+    const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date))?.filter((date) => {
       return date >= startDate && date <= endDate
     });
 
