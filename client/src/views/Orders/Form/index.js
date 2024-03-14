@@ -8,7 +8,6 @@ import BasicInformationFields from './components/BasicInformationFields'
 import cloneDeep from 'lodash/cloneDeep'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { AiOutlineSave } from 'react-icons/ai'
-import { IoIosAddCircleOutline } from 'react-icons/io'
 import { v4 as uuidv4 } from 'uuid';
 import DynamicFormField from './components/DynamicFormField'
 import * as Yup from 'yup'

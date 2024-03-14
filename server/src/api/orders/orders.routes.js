@@ -16,7 +16,7 @@ const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 router.post('/report', isAuthenticated, async (req, res, next) => {
-  console.log(req.body)
+
   try {
     const { startDateStr, endDateStr } = req.body
     const startDate = new Date(startDateStr)

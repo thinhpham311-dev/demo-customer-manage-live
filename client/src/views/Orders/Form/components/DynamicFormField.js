@@ -69,7 +69,7 @@ const DynamicFormField = ({ active }) => {
                                         )
 
                                     return (
-                                        <div key={index} className="border rounded-md p-3 lg:flex items-center  relative">
+                                        <div key={index} className="border rounded-md p-3 lg:flex items-center z-0 relative">
                                             <FormItem
                                                 className="mb-0"
                                                 label="ID"

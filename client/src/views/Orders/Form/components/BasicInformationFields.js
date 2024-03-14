@@ -1,31 +1,13 @@
 import React, { useMemo } from 'react'
 import {
-	AdaptableCard,
-	// RichTextEditor
+	AdaptableCard
 } from 'components/shared'
 import {
-	//  Input,
 	FormItem, Select, DatePicker
 } from 'components/ui'
 import { Field } from 'formik'
 import CreatableSelect from 'react-select/creatable'
-// import NumberFormat from 'react-number-format'
 
-// const PriceInput = props => {
-// 	return <Input {...props} value={props.field.value} prefix="VND" />
-// }
-
-// const NumberFormatInput = ({ onValueChange, ...rest }) => {
-// 	return (
-// 		<NumberFormat
-// 			customInput={Input}
-// 			type="text"
-// 			onValueChange={onValueChange}
-// 			autoComplete="off"
-// 			{...rest}
-// 		/>
-// 	)
-// }
 
 const BasicInformationFields = props => {
 
@@ -52,7 +34,7 @@ const BasicInformationFields = props => {
 	return (
 		<AdaptableCard className="mb-4" divider>
 			<h5 className="mb-3">Thông tin đơn hàng</h5>
-			<div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 sticky left-0 top-0 bg-white py-[1.5rem]">
+			<div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4  bg-white py-[1.5rem]">
 				<div className="col-span-1">
 					<FormItem
 						label="Sản phẩm"
