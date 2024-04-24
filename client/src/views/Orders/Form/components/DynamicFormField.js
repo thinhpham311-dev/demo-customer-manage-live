@@ -21,7 +21,7 @@ const DynamicFormField = ({ active }) => {
                     {({ form, remove, push }) => (
                         <div className="grid gap-5 relative">
 
-                            <div className="flex items-center gap-10">
+                            <div className="flex items-center flex-wrap gap-10">
                                 <div>
                                     <h5>Danh sách ID - Key active</h5>
                                     <small>Lưu ý: Vui lòng thêm key active mới lưu dữ liệu</small>
