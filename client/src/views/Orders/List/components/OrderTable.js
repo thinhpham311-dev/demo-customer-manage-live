@@ -13,10 +13,10 @@ import { MdOutlinePreview } from "react-icons/md";
 
 
 
-const OrderColumn = ({ row }) => {
+const OrderDateColumn = ({ date }) => {
 	return (
 		<div className="flex items-center">
-			{moment(row.pay_date?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)}
+			{moment(date?.toString()).format(process.env.REACT_APP_DAY_FORMAT_MOMENT)}
 		</div>
 	)
 }
@@ -59,6 +59,7 @@ const OrderTable = () => {
 	const loading = useSelector((state) => state.orderListSlice.data.loading)
 	const data = useSelector((state) => state.orderListSlice.data.orderList)
 
+
 	useEffect(() => {
 		fetchData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,7 +98,16 @@ const OrderTable = () => {
 			sortable: true,
 			Cell: props => {
 				const row = props.row.original
-				return <OrderColumn row={row} />
+				return <OrderDateColumn date={row.pay_date} />
+			},
+		},
+		{
+			Header: 'Ngày tạo',
+			accessor: 'createAt',
+			sortable: true,
+			Cell: props => {
+				const row = props.row.original
+				return <OrderDateColumn date={row.createAt} />
 			},
 		},
 		{

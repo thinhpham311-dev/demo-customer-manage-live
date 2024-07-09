@@ -1,8 +1,8 @@
 const { db } = require('../../utils/db');
 
-function findManyOrders({ userId }) {
+function findManyOrders(data) {
   return db.order.findMany({
-    where: { userId },
+    where: { ...data }
   });
 }
 

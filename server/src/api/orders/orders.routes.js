@@ -18,41 +18,29 @@ const router = express.Router();
 router.post('/report', isAuthenticated, async (req, res, next) => {
 
   try {
-    const { startDateStr, endDateStr } = req.body
-    const startDate = new Date(startDateStr)
-    const endDate = new Date(endDateStr)
+
+    const { startDate, endDate } = req.body
     const { userId } = req.payload
-    const orders = await findManyOrders({ userId })
+    const orders = await findManyOrders({
+      createdAt: {
+        gte: startDate,
+        lte: endDate
+      },
+    })
+
     const customers = await findManyCustomers({ userId })
 
-
-    const sumOrderPriceByPayDate = orders?.reduce((accumulator, cur) => {
-
-      let pay_date = cur.pay_date, found = accumulator.find(function (elem) {
-        return elem.pay_date == pay_date
+    const sumOrdersByCreatedAt = orders?.reduce((accumulator, cur) => {
+      let createdAt = cur.createdAt, status = cur.status, found = accumulator.find(function (elem) {
+        return elem.createdAt === createdAt && elem.status === status
       });
-      if (found) found.total_price += cur.total_price;
-      else accumulator.push(cur);
-
+      if (found) found.price += cur.price;
+      else accumulator = [cur, ...accumulator];
       return accumulator;
-    }, []).sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(a.pay_date) - new Date(b.pay_date);
-    });
+    }, [])
 
-    const countOrders = await orders.map((item) => new Date(item.pay_date))?.filter((date) => {
-      return date >= startDate && date <= endDate
-    });
-
-    const dateData = await sumOrderPriceByPayDate?.map((item) => new Date(item.pay_date))?.filter((date) => {
-      return date >= startDate && date <= endDate
-    });
-
-    const priceData = await sumOrderPriceByPayDate?.filter((item) => {
-      return new Date(item.pay_date) >= startDate && new Date(item.pay_date) <= endDate
-    }).map(item => item.total_price);
-
+    const createAtData = sumOrdersByCreatedAt.map(item => new Date(item.createdAt))
+    const priceData = sumOrdersByCreatedAt.map(item => item?.total_price)
 
     const totalPrice = await priceData.reduce((a, b) => {
       return a + b
@@ -67,7 +55,7 @@ router.post('/report', isAuthenticated, async (req, res, next) => {
           value: totalPrice,
         },
         orders: {
-          value: countOrders?.length,
+          value: orders?.length,
         },
 
       },
@@ -78,7 +66,7 @@ router.post('/report', isAuthenticated, async (req, res, next) => {
             data: priceData
           }
         ],
-        categories: dateData
+        categories: createAtData
       }
     })
   }

@@ -7,6 +7,7 @@ import DashboardReport from './DashboardReport'
 // import TopProduct from './TopProduct'
 import { getDashboardData } from '../store/dataSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import dayjs from 'dayjs'
 
 const DashboardBody = () => {
 
@@ -15,9 +16,6 @@ const DashboardBody = () => {
 	const {
 		statisticData,
 		dashboardReportData,
-		// topcustomersData,
-		// latestOrderData,
-		// salesByCategoriesData
 	} = useSelector((state) => state.dashboard.data.dashboardData)
 	const loading = useSelector((state) => state.dashboard.data.loading)
 
@@ -28,21 +26,14 @@ const DashboardBody = () => {
 
 	const fetchData = () => {
 		setTimeout(() => {
-			dispatch(getDashboardData())
+			dispatch(getDashboardData({ startDate: dayjs().subtract(4, 'week').toDate(), endDate: new Date() }))
 		})
 	}
 
 	return (
 		<Loading loading={loading}>
 			<Statistic data={statisticData} />
-			{/* <div className="grid"> */}
 			<DashboardReport data={dashboardReportData} />
-			{/* <CustomersByCategories data={salesByCategoriesData} /> */}
-			{/* </div> */}
-			{/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-				<LatestOrder data={latestOrderData} className="lg:col-span-2" />
-				<TopProduct data={topcustomersData} />
-			</div> */}
 		</Loading>
 	)
 }

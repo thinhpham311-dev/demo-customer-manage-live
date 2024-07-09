@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
 
 const stateSlice = createSlice({
 	name: 'customerDashboard/state',
 	initialState: {
-		startDate: new Date(),
+		startDate: dayjs().subtract(4, 'week').toDate(),
 		endDate: new Date(),
 	},
 	reducers: {

@@ -22,7 +22,7 @@ const DashboardHeader = () => {
 	}
 
 	const onFilter = () => {
-		dispatch(getDashboardData({ startDateStr: startDate, endDateStr: endDate }))
+		dispatch(getDashboardData({ startDate: startDate, endDate: endDate }))
 	}
 
 	return (
