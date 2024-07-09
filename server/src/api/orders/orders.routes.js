@@ -28,15 +28,13 @@ router.post('/report', isAuthenticated, async (req, res, next) => {
 
     const customers = await findManyCustomers({ userId })
     const sumOrdersByCreatedAt = orders?.reduce((accumulator, cur) => {
-      let createdAt = cur.createdAt, status = cur.status, found = accumulator.find(function (elem) {
+      let createdAt = cur.createdAt, found = accumulator.find(function (elem) {
         return elem.createdAt === createdAt
       });
       if (found) found.price += cur.price;
       else accumulator = [cur, ...accumulator];
       return accumulator;
     }, [])
-
-
 
     const createAtData = sumOrdersByCreatedAt.map(item => new Date(item.createdAt))
     const priceData = sumOrdersByCreatedAt.map(item => item?.total_price)
