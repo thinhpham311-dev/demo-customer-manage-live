@@ -79,6 +79,7 @@ router.post('/list', isAuthenticated, async (req, res, next) => {
     const { pageIndex, pageSize, sort, query } = req.body
     const { order, key } = sort
     const orders = await findManyOrders({ userId })
+
     const sanitizeOrders = orders.filter(elm => typeof elm !== 'function')
     let dataOrders = sanitizeOrders
     let total = orders.length

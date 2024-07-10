@@ -21,9 +21,20 @@ const OrderDateColumn = ({ date }) => {
 	)
 }
 
+const CustomerColumn = ({ customer }) => {
+	const { name, email } = customer
+	return (
+		<>
+			<span className="font-bold block">{name}</span>
+			<i className="font-thin block">{email}</i>
+
+		</>
+	)
+}
+
 const OrderColumnPopup = ({ row }) => {
 	const [horizontalOpen, setHorizontalOpen] = useState(false)
-
+	const customer = row.Customer
 	const activeString = row.active.split(',')
 
 	const onHorizontalOpen = () => {
@@ -39,7 +50,7 @@ const OrderColumnPopup = ({ row }) => {
 				Xem Key Active
 			</Button>
 			<Drawer
-				title={`Cập nhật Key Active của khách hàng: ${row.customerName} có email là : ${row.customerEmail}`}
+				title={`Cập nhật Key Active của khách hàng: ${customer.name} | email: ${customer.email}`}
 				isOpen={horizontalOpen}
 				placement="bottom"
 				height={700}
@@ -111,14 +122,13 @@ const OrderTable = () => {
 			},
 		},
 		{
-			Header: 'Tên khách hàng',
-			accessor: 'customerName',
+			Header: 'Khách hàng',
+			accessor: 'Customer',
 			sortable: true,
-		},
-		{
-			Header: 'Email khách hàng',
-			accessor: 'customerEmail',
-			sortable: true,
+			Cell: props => {
+				const row = props.row.original
+				return <CustomerColumn customer={row.Customer} />
+			},
 		},
 		{
 			Header: 'Tổng giá bán',

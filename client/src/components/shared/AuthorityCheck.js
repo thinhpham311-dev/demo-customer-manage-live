@@ -12,7 +12,7 @@ const AuthorityCheck = props => {
 }
 
 AuthorityCheck.propTypes = {
-	userAuthority: PropTypes.array,
+	userAuthority: PropTypes.string,
 	authority: PropTypes.array,
 }
 

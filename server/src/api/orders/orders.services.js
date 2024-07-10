@@ -2,7 +2,15 @@ const { db } = require('../../utils/db');
 
 function findManyOrders(data) {
   return db.order.findMany({
-    where: { ...data }
+    where: { ...data },
+    include: {
+      Customer: {
+        select: {
+          name: true,
+          email: true,
+        },
+      }
+    }
   });
 }
 

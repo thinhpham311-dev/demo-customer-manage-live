@@ -46,10 +46,12 @@ const OrderDynamicForm = ({ activeStringList, row }) => {
 
     const handleFormSubmit = async (values, setSubmitting) => {
         setSubmitting(true)
-        const success = await updateOrder({
+        const orderUpdate = {
             ...row,
             active: values.active
-        })
+        }
+        delete orderUpdate.Customer
+        const success = await updateOrder(orderUpdate)
         setSubmitting(false)
         if (success) {
             toast.push(

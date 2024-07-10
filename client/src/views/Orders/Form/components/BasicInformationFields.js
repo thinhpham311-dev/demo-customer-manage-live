@@ -27,7 +27,7 @@ const BasicInformationFields = props => {
 	const arrCustomers = useMemo(() => dataCustomerList.map(item => {
 		return {
 			label: item.name,
-			value: `${item.id}-${item.email}`
+			value: item.id
 		};
 	}), [dataCustomerList]);
 
