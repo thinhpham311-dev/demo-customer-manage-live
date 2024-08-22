@@ -38,6 +38,7 @@ function updateProduct({ data, userId }) {
       where: { id },
       data: {
         ...data,
+        price: Number(data.price),
         userId,
       }
     }
