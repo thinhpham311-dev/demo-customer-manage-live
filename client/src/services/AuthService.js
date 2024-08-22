@@ -25,11 +25,11 @@ export async function apiSignUp(data) {
     })
 }
 
-export async function apiSignOut() {
+export async function apiSignOut(data) {
     return ApiService.fetchData({
-        url: '/auth/sign-out',
+        url: '/auth/revokeRefreshTokens',
         method: 'post',
-        // data
+        data
     })
 }
 

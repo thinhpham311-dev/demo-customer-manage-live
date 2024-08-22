@@ -18,7 +18,7 @@ function useAuth() {
 
 	const query = useQuery()
 
-	const { accessToken, signedIn } = useSelector((state) => state.auth.session)
+	const { id, accessToken, signedIn } = useSelector((state) => state.auth.session)
 
 	const signIn = async (values) => {
 		try {
@@ -83,7 +83,7 @@ function useAuth() {
 	}
 
 	const signOut = () => {
-		apiSignOut()
+		apiSignOut({ userId: id })
 		handleSignOut()
 	}
 
