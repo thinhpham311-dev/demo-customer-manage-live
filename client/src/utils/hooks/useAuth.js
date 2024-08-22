@@ -18,20 +18,18 @@ function useAuth() {
 
 	const query = useQuery()
 
-	const { token, signedIn } = useSelector((state) => state.auth.session)
+	const { accessToken, signedIn } = useSelector((state) => state.auth.session)
 
 	const signIn = async (values) => {
 		try {
 			const resp = await apiSignIn(values)
 			if (resp.data) {
-				const { accessToken } = resp.data
-				dispatch(onSignInSuccess(accessToken))
+				const { accessToken, refreshToken } = resp.data
+				console.log(accessToken, refreshToken)
+				dispatch(onSignInSuccess({ accessToken, refreshToken }))
 				if (resp.data.user) {
 					dispatch(setUser(resp.data.user || {
-						avatar: '',
-						username: 'Anonymous',
-						authority: ['USER'],
-						email: ''
+						authority: 'USER',
 					}))
 				}
 				const redirectUrl = query.get(REDIRECT_URL_KEY)
@@ -90,7 +88,7 @@ function useAuth() {
 	}
 
 	return {
-		authenticated: token && signedIn,
+		authenticated: accessToken && signedIn,
 		signIn,
 		// signUp,
 		signOut

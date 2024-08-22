@@ -50,7 +50,7 @@ const SignInForm = props => {
 			{message && <Alert className="mb-4" type="danger" showIcon>{message}</Alert>}
 			<Formik
 				initialValues={{
-					username: 'admintest',
+					username: 'admin',
 					password: '123Qwe',
 					// rememberMe: true
 				}}

@@ -10,9 +10,15 @@ const api = require('./api');
 
 const app = express();
 
+app.use(cors({
+  origin: [
+    'https://admin.one4allsoft.com.',
+    'https://localhost:3000'
+  ],
+  credentials: true,
+}));
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {

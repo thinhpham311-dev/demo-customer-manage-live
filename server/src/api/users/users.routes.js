@@ -4,7 +4,7 @@ const { findUserById } = require('./users.services');
 
 const router = express.Router();
 
-router.get('/profile', isAuthenticated, async (req, res, next) => {
+router.post('/profile', isAuthenticated, async (req, res, next) => {
   try {
     const { userId } = req.payload;
     const user = await findUserById(userId);

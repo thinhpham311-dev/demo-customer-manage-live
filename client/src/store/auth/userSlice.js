@@ -1,9 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { apiGetAccountSettingData } from 'services/AuthService'
+
+
+export const getProfileUser = createAsyncThunk('auth/user/getProfileUser', async (data) => {
+    const response = await apiGetAccountSettingData(data)
+    return response.data
+})
 
 export const initialState = {
-    avatar: '',
-    username: '',
-    authority: []
+    authority: '',
+    userInfo: null,
+    loading: false
 }
 
 export const userSlice = createSlice({
@@ -13,6 +20,15 @@ export const userSlice = createSlice({
         setUser: (_, action) => action.payload,
         userLoggedOut: () => initialState,
     },
+    extraReducers: {
+        [getProfileUser.fulfilled]: (state, action) => {
+            state.userInfo = action.payload
+            state.loading = false
+        },
+        [getProfileUser.pending]: (state) => {
+            state.loading = true
+        },
+    }
 })
 
 export const { setUser } = userSlice.actions

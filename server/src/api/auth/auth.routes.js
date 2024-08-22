@@ -39,14 +39,12 @@ router.post('/sign-up', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: user.id });
 
     res.json({
-      user: {
-        email,
-        username,
-        avatar,
-        authority,
-      },
       accessToken,
-      refreshToken
+      refreshToken,
+      user: {
+        id: user.id,
+        authority
+      }
     });
   } catch (err) {
     next(err);
@@ -68,7 +66,7 @@ router.post('/sign-in', async (req, res, next) => {
       throw new Error('Invalid login credentials.');
     }
 
-    const { email, avatar, authority } = existingUser
+    const { id, authority } = existingUser
 
     const validPassword = await bcrypt.compare(password, existingUser.password);
     if (!validPassword) {
@@ -81,14 +79,12 @@ router.post('/sign-in', async (req, res, next) => {
     await addRefreshTokenToWhitelist({ jti, refreshToken, userId: existingUser.id });
 
     res.json({
-      user: {
-        email,
-        username,
-        avatar,
-        authority,
-      },
       accessToken,
-      refreshToken
+      refreshToken,
+      user: {
+        id,
+        authority
+      }
     });
   } catch (err) {
     next(err);
